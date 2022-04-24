@@ -1,7 +1,7 @@
-import Vue from "vue";
-import VueI18n from "vue-i18n";
 
-Vue.use(VueI18n);
+import {createI18n} from "vue-i18n"
+
+
 
 // On change of language, switch the /locals/_language_.json file
 function loadLocaleMessages() {
@@ -35,7 +35,7 @@ function detectLanguage() {
   return lang ? lang.replace("./", "").replace(".json", "") : null;
 }
 
-export default new VueI18n({
+export default new createI18n({
   locale:
     localStorage.getItem("lang") ||
     detectLanguage() ||
