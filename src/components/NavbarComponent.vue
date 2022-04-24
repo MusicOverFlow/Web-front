@@ -11,7 +11,7 @@
         <a
             class="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
             href="https://www.creative-tim.com/learning-lab/tailwind-starter-kit#/presentation"
-        >Tailwind Starter Kit</a
+        >{{ $t('navbarcomponent.tailwindStarterKit') }}</a
         ><button
           class="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
           type="button"
@@ -31,8 +31,7 @@
                 href="https://www.creative-tim.com/learning-lab/tailwind-starter-kit#/login"
             ><i
                 class="lg:text-gray-300 text-gray-500 far fa-file-alt text-lg leading-lg mr-2"
-            ></i>
-              Docs</a
+            ></i>{{ $t('navbarcomponent.docs') }}</a
             >
           </li>
         </ul>
@@ -44,7 +43,7 @@
             ><i
                 class="lg:text-gray-300 text-gray-500 fab fa-facebook text-lg leading-lg "
             ></i
-            ><span class="lg:hidden inline-block ml-2">Share</span></a
+            ><span class="lg:hidden inline-block ml-2">{{ $t('navbarcomponent.share') }}</span></a
             >
           </li>
           <li class="flex items-center">
@@ -54,7 +53,7 @@
             ><i
                 class="lg:text-gray-300 text-gray-500 fab fa-twitter text-lg leading-lg "
             ></i
-            ><span class="lg:hidden inline-block ml-2">Tweet</span></a
+            ><span class="lg:hidden inline-block ml-2">{{ $t('navbarcomponent.tweet') }}</span></a
             >
           </li>
           <li class="flex items-center">
@@ -64,7 +63,7 @@
             ><i
                 class="lg:text-gray-300 text-gray-500 fab fa-github text-lg leading-lg "
             ></i
-            ><span class="lg:hidden inline-block ml-2">Star</span></a
+            ><span class="lg:hidden inline-block ml-2">{{ $t('navbarcomponent.star') }}</span></a
             >
           </li>
           <li class="flex items-center">
@@ -73,8 +72,7 @@
                 type="button"
                 style="transition: all 0.15s ease 0s;"
             >
-              <i class="fas fa-arrow-alt-circle-down"></i> Download
-            </button>
+              <i class="fas fa-arrow-alt-circle-down"></i>{{ $t('navbarcomponent.download') }}</button>
           </li>
         </ul>
       </div>

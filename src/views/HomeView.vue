@@ -1,7 +1,5 @@
 <template>
-  <div class="home">
-    W.I.P.
-  </div>
+  <div class="home">{{ $t('views.homeview.wip') }}</div>
 </template>
 
 <script>

@@ -6,12 +6,10 @@
           class="flex flex-wrap items-center md:justify-between justify-center"
       >
         <div class="w-full md:w-4/12 px-4">
-          <div class="text-sm text-white font-semibold py-1">
-            Copyright © {{date}}
-            <a
+          <div class="text-sm text-white font-semibold py-1">{{ $t('footercomponent.copyright', { '1': date }) }}<a
                 href="https://www.creative-tim.com"
                 class="text-white hover:text-gray-400 text-sm font-semibold py-1"
-            >Creative Tim</a
+            >{{ $t('footercomponent.creativeTim') }}</a
             >
           </div>
         </div>
@@ -23,28 +21,28 @@
               <a
                   href="https://www.creative-tim.com"
                   class="text-white hover:text-gray-400 text-sm font-semibold block py-1 px-3"
-              >Creative Tim</a
+              >{{ $t('footercomponent.creativeTim1') }}</a
               >
             </li>
             <li>
               <a
                   href="https://www.creative-tim.com/presentation"
                   class="text-white hover:text-gray-400 text-sm font-semibold block py-1 px-3"
-              >About Us</a
+              >{{ $t('footercomponent.aboutUs') }}</a
               >
             </li>
             <li>
               <a
                   href="http://blog.creative-tim.com"
                   class="text-white hover:text-gray-400 text-sm font-semibold block py-1 px-3"
-              >Blog</a
+              >{{ $t('footercomponent.blog') }}</a
               >
             </li>
             <li>
               <a
                   href="https://github.com/creativetimofficial/argon-design-system/blob/master/LICENSE.md"
                   class="text-white hover:text-gray-400 text-sm font-semibold block py-1 px-3"
-              >MIT License</a
+              >{{ $t('footercomponent.mitLicense') }}</a
               >
             </li>
           </ul>

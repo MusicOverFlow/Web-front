@@ -1,0 +1,34 @@
+{
+  "message": "bonjour i18n !!",
+  "footercomponent": {
+    "copyright": "\n            Copyright © {1}\n            ",
+    "creativeTim": "Creative Tim",
+    "creativeTim1": "Creative Tim",
+    "aboutUs": "About Us",
+    "blog": "Blog",
+    "mitLicense": "MIT License"
+  },
+  "navbarcomponent": {
+    "tailwindStarterKit": "Tailwind Starter Kit",
+    "docs": "\n              Docs",
+    "share": "Share",
+    "tweet": "Tweet",
+    "star": "Star",
+    "download": " Download\n            "
+  },
+  "views": {
+    "homeview": {
+      "wip": "\n    W.I.P.\n  "
+    },
+    "loginview": {
+      "email": "Email",
+      "email1": "Email",
+      "password": "Password",
+      "password1": "Password",
+      "rememberMe": "Remember me",
+      "signIn": "\n                        Sign In\n                      ",
+      "forgotPassword": "Forgot password?",
+      "createNewAccount": "Create new account"
+    }
+  }
+}
