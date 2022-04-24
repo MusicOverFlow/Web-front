@@ -1,98 +1,88 @@
 <template>
-  <div>
-    <navbar-component></navbar-component>
-    <main>
-      <section class="absolute w-full h-full">
-        <div
-            class="absolute top-0 w-full h-full bg-gray-900"
-            style="background-size: 100%; background-repeat: no-repeat;"
-        ></div>
-        <div class="container mx-auto px-4 h-full">
-          <div class="flex content-center items-center justify-center h-full">
-            <div class="w-full lg:w-4/12 px-4">
-              <div
-                  class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0"
-              >
-                <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-                  <form>
-                    <div class="relative w-full mb-3">
-                      <label
-                          class="block uppercase text-gray-700 text-xs font-bold mb-2"
-                          for="grid-password"
-                      >Email</label
-                      ><input
-                        type="email"
-                        class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
-                        placeholder="Email"
-                        style="transition: all 0.15s ease 0s;"
-                    />
-                    </div>
-                    <div class="relative w-full mb-3">
-                      <label
-                          class="block uppercase text-gray-700 text-xs font-bold mb-2"
-                          for="grid-password"
-                      >Password</label
-                      ><input
-                        type="password"
-                        class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
-                        placeholder="Password"
-                        style="transition: all 0.15s ease 0s;"
-                    />
-                    </div>
-                    <div>
-                      <label class="inline-flex items-center cursor-pointer"
-                      ><input
-                          id="customCheckLogin"
-                          type="checkbox"
-                          class="form-checkbox border-0 rounded text-gray-800 ml-1 w-5 h-5"
-                          style="transition: all 0.15s ease 0s;"
-                      /><span class="ml-2 text-sm font-semibold text-gray-700"
-                      >Remember me</span
-                      >
-                      </label
-                      >
-                    </div>
-                    <div class="text-center mt-6">
-                      <button
-                          class="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
-                          type="button"
-                          style="transition: all 0.15s ease 0s;"
-                      >
-                        Sign In
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-              <div class="flex flex-wrap mt-6">
-                <div class="w-1/2">
-                  <a href="#pablo" class="text-gray-300"
-                  ><small>Forgot password?</small></a
-                  >
-                </div>
-                <div class="w-1/2 text-right">
-                  <a href="#pablo" class="text-gray-300"
-                  ><small>Create new account</small></a
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <footer-component></footer-component>
-      </section>
-    </main>
-  </div>
-
+  <main>
+    <div class="mb-4 border-b border-gray-200">
+      <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
+        <li class="mr-2" role="presentation">
+          <button class="inline-block p-4 rounded-t-lg border-b-2" id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+        </li>
+        <li class="mr-2" role="presentation">
+          <button class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">Dashboard</button>
+        </li>
+        <li class="mr-2" role="presentation">
+          <button class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="settings-tab" data-tabs-target="#settings" type="button" role="tab" aria-controls="settings" aria-selected="false">Settings</button>
+        </li>
+        <li role="presentation">
+          <button class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="contacts-tab" data-tabs-target="#contacts" type="button" role="tab" aria-controls="contacts" aria-selected="false">Contacts</button>
+        </li>
+      </ul>
+    </div>
+    <div id="myTabContent">
+      <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <p class="text-sm text-gray-500 dark:text-gray-400"><RegisterComponent/></p>
+      </div>
+      <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+        <p class="text-sm text-gray-500 dark:text-gray-400"><LoginComponent/></p>
+      </div>
+      <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+        <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Settings tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
+      </div>
+      <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
+        <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Contacts tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
+      </div>
+    </div>
+  </main>
 </template>
+
 <script>
-import NavbarComponent from "../components/NavbarComponent.vue";
-import FooterComponent from "../components/FooterComponent.vue";
+import RegisterComponent from "@/components/RegisterComponent";
+import LoginComponent from "@/components/LoginComponent";
+import Tabs;
+
 export default {
-  name: "login-page",
+  name: 'LoginView',
   components: {
-    NavbarComponent,
-    FooterComponent
+    RegisterComponent,
+    LoginComponent
   }
 }
+// create an array of objects with the id, trigger element (eg. button), and the content element
+const tabElements = [
+  {
+    id: 'profile',
+    triggerEl: document.querySelector('#profile-tab-example'),
+    targetEl: document.querySelector('#profile-example')
+  },
+  {
+    id: 'dashboard',
+    triggerEl: document.querySelector('#dashboard-tab-example'),
+    targetEl: document.querySelector('#dashboard-example')
+  },
+  {
+    id: 'settings',
+    triggerEl: document.querySelector('#settings-tab-example'),
+    targetEl: document.querySelector('#settings-example')
+  },
+  {
+    id: 'contacts',
+    triggerEl: document.querySelector('#contacts-tab-example'),
+    targetEl: document.querySelector('#contacts-example')
+  }
+];
+
+// options with default values
+const options = {
+  defaultTabId: 'settings',
+  activeClasses: 'text-blue-600 hover:text-blue-600 dark:text-blue-500 dark:hover:text-blue-400 border-blue-600 dark:border-blue-500',
+  inactiveClasses: 'text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-100 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300',
+  onShow: () => {
+    console.log('tab is shown');
+  }
+};
+
+const tabs = new Tabs(tabElements, options);
+
 </script>
+
+<style scoped>
+
+</style>
