@@ -48,7 +48,8 @@
                           style="transition: all 0.15s ease 0s;"
                       /><span class="ml-2 text-sm font-semibold text-gray-700"
                       >Remember me</span
-                      ></label
+                      >
+                      </label
                       >
                     </div>
                     <div class="text-center mt-6">
@@ -82,6 +83,7 @@
       </section>
     </main>
   </div>
+
 </template>
 <script>
 import NavbarComponent from "../components/NavbarComponent.vue";
