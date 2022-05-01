@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from "axios";
+
 const apiClient: AxiosInstance = axios.create({
     baseURL: "https://musicoverflowapi.azurewebsites.net/musicoverflow",
     headers: {
@@ -11,5 +12,7 @@ const apiClient: AxiosInstance = axios.create({
         return status >= 200 && status < 600;
     },
 });
+
+
 //apiClient.options()
 export default apiClient;

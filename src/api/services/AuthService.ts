@@ -6,11 +6,29 @@ export interface LoginProps {
     password:string
 }
 
+export interface LoginResponse {
+    token:string,
+    expiration:string
+}
+
 class AuthService{
-    async login(userDetails:LoginProps){
+    async login(userDetails:LoginProps):Promise<LoginResponse | undefined>{
         try {
-            const result = await apiClient.post("/authenticate", userDetails)
+            const result:LoginResponse = await apiClient.post("/authenticate", userDetails)
             console.log(result)
+            return result
+        }
+        catch (e) {
+            console.log(e)
+        }
+
+    }
+
+    async logout(userDetails:LoginProps):Promise<LoginResponse | undefined>{
+        try {
+            const result:LoginResponse = await apiClient.post("/authenticate", userDetails)
+            console.log(result)
+            return result
         }
         catch (e) {
             console.log(e)
