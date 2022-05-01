@@ -1,56 +1,18 @@
 <template>
-  <footer class="absolute w-full bottom-0 bg-gray-900 pb-6">
-    <div class="container mx-auto px-4">
-      <hr class="mb-6 border-b-1 border-gray-700" />
-      <div
-          class="flex flex-wrap items-center md:justify-between justify-center"
-      >
-        <div class="w-full md:w-4/12 px-4">
-          <div class="text-sm text-white font-semibold py-1">
-            Copyright © {{date}}
-            <a
-                href="https://www.creative-tim.com"
-                class="text-white hover:text-gray-400 text-sm font-semibold py-1"
-            >Creative Tim</a
-            >
-          </div>
-        </div>
-        <div class="w-full md:w-8/12 px-4">
-          <ul
-              class="flex flex-wrap list-none md:justify-end  justify-center"
-          >
-            <li>
-              <a
-                  href="https://www.creative-tim.com"
-                  class="text-white hover:text-gray-400 text-sm font-semibold block py-1 px-3"
-              >Creative Tim</a
-              >
-            </li>
-            <li>
-              <a
-                  href="https://www.creative-tim.com/presentation"
-                  class="text-white hover:text-gray-400 text-sm font-semibold block py-1 px-3"
-              >About Us</a
-              >
-            </li>
-            <li>
-              <a
-                  href="http://blog.creative-tim.com"
-                  class="text-white hover:text-gray-400 text-sm font-semibold block py-1 px-3"
-              >Blog</a
-              >
-            </li>
-            <li>
-              <a
-                  href="https://github.com/creativetimofficial/argon-design-system/blob/master/LICENSE.md"
-                  class="text-white hover:text-gray-400 text-sm font-semibold block py-1 px-3"
-              >MIT License</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+  <footer class="p-4 bg-white rounded-lg shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800">
+    <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© {{ date }} MusicOverflow™. Tout droits réservés.
+    </span>
+    <ul class="flex flex-wrap items-center mt-3 text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
+      <li>
+        <a href="#" class="mr-4 hover:underline md:mr-6 ">À propos</a>
+      </li>
+      <li>
+        <a href="#" class="mr-4 hover:underline md:mr-6">License</a>
+      </li>
+      <li>
+        <a href="#" class="hover:underline">Contact</a>
+      </li>
+    </ul>
   </footer>
 </template>
 <script>
