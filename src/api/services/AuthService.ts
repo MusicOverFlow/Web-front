@@ -2,11 +2,12 @@ import http from "@/http-common";
 import apiClient from "@/http-common";
 
 export interface LoginProps {
-    mail:string;
+    mailAddress:string;
     password:string
 }
 
 export interface LoginResponse {
+    id:string
     token:string,
     expiration:string
 }
@@ -14,6 +15,7 @@ export interface LoginResponse {
 class AuthService{
     async login(userDetails:LoginProps):Promise<LoginResponse | undefined>{
         try {
+            console.log(userDetails)
             const result:LoginResponse = await apiClient.post("/authenticate", userDetails)
             console.log(result)
             return result

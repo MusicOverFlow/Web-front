@@ -33,7 +33,7 @@ export default defineComponent({
     const onSubmit = () => {
       console.log(form)
       userStore.login({
-        mail:form.username,
+        mailAddress:form.username,
         password: form.password,
       })
 
