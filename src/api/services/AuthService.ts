@@ -15,10 +15,9 @@ export interface LoginResponse {
 class AuthService{
     async login(userDetails:LoginProps):Promise<LoginResponse | undefined>{
         try {
-            console.log(userDetails)
-            const result:LoginResponse = await apiClient.post("/authenticate", userDetails)
+            const result = await apiClient.post("/authenticate", userDetails)
             console.log(result)
-            return result
+            return result.data
         }
         catch (e) {
             console.log(e)

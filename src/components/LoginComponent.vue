@@ -5,10 +5,10 @@
         <h1>Se connecter</h1>
       </div>
       <div class="col-12">
-        <InputText id="email1" placeholder="Adresse mail" type="text" v-model="form.username"/>
+        <InputText id="email1" placeholder="Adresse mail" type="text" v-model="form.username" required/>
       </div>
       <div class="col-12">
-        <Password id="password1" placeholder="Mot de passe" v-model="form.password"/>
+        <Password id="password1" placeholder="Mot de passe" v-model="form.password" required/>
       </div>
       <div class="col-12">
         <Button label="Se connecter" type="submit"/>
