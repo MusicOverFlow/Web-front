@@ -17,20 +17,24 @@
   </main>
 </template>
 
-<script>
-import RegisterComponent from "@/components/RegisterComponent";
-import LoginComponent from "@/components/LoginComponent";
+<script lang="ts">
+import RegisterComponent from "@/components/RegisterComponent.vue";
+import LoginComponent from "@/components/LoginComponent.vue";
 
 import Divider from "primevue/divider";
-
-export default {
+import { defineComponent } from "vue";
+import userStore from "@/store/user"
+export default defineComponent( {
   name: 'LoginView',
   components: {
     RegisterComponent,
     LoginComponent,
     Divider
+  },
+  setup(){
+    return { userStore }
   }
-}
+})
 </script>
 
 <style scoped>
