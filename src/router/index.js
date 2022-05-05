@@ -35,9 +35,13 @@ import userStore from '@/store/user';
 
 router.beforeEach(async (to) => {
   const authenticated = userStore.getters.isLoggedIn;
+  console.log(authenticated);
   // redirect the user to login page if he is not authenticated
   if (!authenticated && to.name !== 'login') {
     return { name: 'login' };
+  }
+  if (authenticated && to.name === 'login') {
+    return { name: 'home' };
   }
 });
 
