@@ -10,6 +10,7 @@ import 'primevue/resources/primevue.min.css'
 import 'primeicons/primeicons.css'
 import 'primeflex/primeflex.css'
 
+
 createApp(App)
     .use(store)
     .use(router)

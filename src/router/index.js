@@ -12,6 +12,11 @@ const routes = [
     path: '/home',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/main',
+    name: 'home',
+    component: MainView
   }
 ]
 
@@ -32,14 +37,17 @@ router.beforeEach(async (to, from) => {
   }
 })*/
 import userStore from '@/store/user';
+import MainView from "@/views/MainView";
 
 router.beforeEach(async (to) => {
   const authenticated = userStore.getters.isLoggedIn;
   console.log(authenticated);
+
   // redirect the user to login page if he is not authenticated
   if (!authenticated && to.name !== 'login') {
     return { name: 'login' };
   }
+
   if (authenticated && to.name === 'login') {
     return { name: 'home' };
   }

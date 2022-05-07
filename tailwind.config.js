@@ -1,4 +1,5 @@
 module.exports = {
+  mode:"jit", // allow fast reload css
   content: [
     "./index.html",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
@@ -8,6 +9,5 @@ module.exports = {
     extend: {},
   },
   plugins: [
-    require('flowbite/plugin')
   ],
 }
