@@ -39,15 +39,38 @@
 import InputText from 'primevue/inputtext';
 import Password from 'primevue/password';
 import Button from 'primevue/button';
+import {defineComponent} from "vue";
+import userStore from "@/store/user";
+import {reactive} from "vue/dist/vue";
+import router from "@/router";
 
-export default {
+export default defineComponent({
   name: "RegisterComponent",
   components: {
     InputText,
     Button,
     Password
+  },
+  setup(){
+    const form = reactive({
+      username: '',
+      password: '',
+    })
+    const onSubmit = () => {
+      console.log(form)
+      userStore.login({
+        mailAddress:form.username,
+        password: form.password,
+      })
+
+      console.log(userStore)
+      form.username = ''
+      form.password = ''
+      router.push('home');
+    }
+    return{ form, userStore, onSubmit}
   }
-}
+})
 </script>
 
 <style scoped>
