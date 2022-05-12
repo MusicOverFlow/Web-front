@@ -8,7 +8,7 @@
         <InputText id="email1" placeholder="Adresse mail" type="text" v-model="form.username" required/>
       </div>
       <div class="col-12">
-        <Password id="password1" placeholder="Mot de passe" v-model="form.password" required/>
+        <Password id="password1" placeholder="Mot de passe" v-model="form.password" :feedback="false" required/>
       </div>
       <div class="col-12">
         <Button label="Se connecter" type="submit"/>
