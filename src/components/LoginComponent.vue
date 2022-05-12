@@ -24,6 +24,7 @@ import Button from 'primevue/button';
 
 import { defineComponent,reactive} from "vue";
 import userStore from "@/store/user"
+import router from '@/router';
 export default defineComponent({
   setup() {
     const form = reactive({
@@ -40,6 +41,7 @@ export default defineComponent({
       console.log(userStore)
       form.username = ''
       form.password = ''
+      router.push('home');
     }
     return{ form, userStore, onSubmit}
   },
