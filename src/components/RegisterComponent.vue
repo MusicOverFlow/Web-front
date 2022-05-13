@@ -1,23 +1,24 @@
 <template>
+  <form  @submit.prevent="onSubmit">
     <div class="grid p-fluid">
       <div class="col-12">
         <h1>S'inscrire</h1>
       </div>
       <div class="col-12 md:col-6">
-        <InputText id="last_name" placeholder="Nom" type="text" v-model="last_name"/>
+        <InputText id="last_name" placeholder="Nom" type="text" v-model="form.lastname"/>
       </div>
       <div class="col-12 md:col-6">
-        <InputText id="first_name" placeholder="Prénom" type="text" v-model="first_name"/>
+        <InputText id="first_name" placeholder="Prénom" type="text" v-model="form.firstname"/>
       </div>
       <div class="col-12">
-        <InputText id="email" placeholder="Adresse mail" type="text" v-model="email"/>
+        <InputText id="email" placeholder="Adresse mail" type="text" v-model="form.email"/>
       </div>
       <div class="col-12">
-        <Password id="password" placeholder="Mot de passe" v-model="password">
+        <Password id="password" placeholder="Mot de passe" v-model="form.password">
           <template #header>
             <h6>Saisissez un mot de passe</h6>
           </template>
-          <template #footer>
+<!--          <template #footer>
             <Divider />
             <p class="mt-2">Suggestions</p>
             <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
@@ -26,22 +27,22 @@
               <li>Au moins un chiffre</li>
               <li>Au moins 8 caractères</li>
             </ul>
-          </template>
+          </template>-->
         </Password>
       </div>
       <div class="col-12">
-        <Button label="S'inscrire"/>
+        <Button label="S'inscrire" type="submit"/>
       </div>
     </div>
+  </form>
 </template>
 
-<script>
+<script lang="ts">
 import InputText from 'primevue/inputtext';
 import Password from 'primevue/password';
 import Button from 'primevue/button';
-import {defineComponent} from "vue";
+import {defineComponent, reactive} from "vue";
 import userStore from "@/store/user";
-import {reactive} from "vue/dist/vue";
 import router from "@/router";
 
 export default defineComponent({
@@ -53,20 +54,21 @@ export default defineComponent({
   },
   setup(){
     const form = reactive({
-      username: '',
+      firstname: '',
+      lastname: '',
+      email: '',
       password: '',
     })
-    const onSubmit = () => {
-      console.log(form)
-      userStore.login({
-        mailAddress:form.username,
+    const onSubmit = async () => {
+      const result = await userStore.register({
+        firstName: form.firstname,
+        lastName: form.lastname,
+        mailAddress: form.email,
         password: form.password,
       })
-
-      console.log(userStore)
-      form.username = ''
-      form.password = ''
-      router.push('home');
+      if (result) {
+        await router.push('/home')
+      }
     }
     return{ form, userStore, onSubmit}
   }

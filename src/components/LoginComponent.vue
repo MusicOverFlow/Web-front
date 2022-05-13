@@ -14,7 +14,7 @@
         <Button label="Se connecter" type="submit"/>
       </div>
     </div>
-    </form>
+  </form>
 </template>
 
 <script lang="ts">
@@ -31,17 +31,20 @@ export default defineComponent({
       username: '',
       password: ''
     })
-    const onSubmit = () => {
+    const onSubmit = async () => {
       console.log(form)
-      userStore.login({
-        mailAddress:form.username,
+      const result = await userStore.login({
+        mailAddress: form.username,
         password: form.password,
       })
 
       console.log(userStore)
-      form.username = ''
-      form.password = ''
-      router.push('home');
+      if (result) {
+        form.username = ''
+        form.password = ''
+        //router.push({name:"home"})
+        await router.push("/home")
+      }
     }
     return{ form, userStore, onSubmit}
   },

@@ -1,7 +1,15 @@
 import http from "@/http-common";
 import apiClient from "@/http-common";
+import {RegisterResponse} from "@/api/services/AccountService";
 
 export interface LoginProps {
+    mailAddress:string;
+    password:string
+}
+
+export interface RegisterProps {
+    firstName:string;
+    lastName:string;
     mailAddress:string;
     password:string
 }
@@ -30,6 +38,18 @@ class AuthService{
             const result:LoginResponse = await apiClient.post("/authenticate", userDetails)
             console.log(result)
             return result
+        }
+        catch (e) {
+            console.log(e)
+        }
+
+    }
+
+    async register(userDetails:RegisterProps):Promise<RegisterResponse | undefined>{
+        try {
+            const result = await apiClient.post("/accounts", userDetails)
+            console.log(result)
+            return result.data
         }
         catch (e) {
             console.log(e)

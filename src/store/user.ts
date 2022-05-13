@@ -1,5 +1,6 @@
 import { computed, reactive } from 'vue'
-import AuthService, {LoginProps, LoginResponse} from "@/api/services/AuthService";
+import AuthService, {LoginProps, LoginResponse, RegisterProps} from "@/api/services/AuthService";
+import {RegisterResponse} from "@/api/services/AccountService";
 
 const state = reactive({
     name: '',
@@ -29,19 +30,16 @@ const actions = {
         console.log(state)
         return true
     },
-    async register(userDetails:LoginProps) {
-        const user:LoginResponse|undefined = await AuthService.login(userDetails)
+    async register(userDetails:RegisterProps) {
+        const user:RegisterResponse|undefined = await AuthService.register(userDetails)
 
-        console.log("dd" + user)
         if (user == undefined) {
-            state.error = 'Could not find user.'
+            state.error = 'error'
             return false
         }
 
-        state.id = user.id
-        state.token = user.token
-        state.error = ''
-        console.log(state)
+        await this.login(userDetails)
+
         return true
     },
     async logout() {
