@@ -67,7 +67,7 @@ export default defineComponent({
         password: form.password,
       })
       if (result) {
-        await router.push('/home')
+        await router.push({name:"home"})
       }
     }
     return{ form, userStore, onSubmit}
