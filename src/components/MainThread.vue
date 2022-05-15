@@ -1,26 +1,18 @@
 <template>
-  <div>
+  <div class="container">
     <Card>
-      <template #header>
-        <img src="https://www.primefaces.org/wp-content/uploads/2020/02/primefacesorg-primevue-2020.png"
-             style="height: 300px;width: 300px"/>
-      </template>
-      <template #title>
-        {{ post.name }}
-        Advanced Card
-      </template>
-      <template #subtitle>
-        Card subtitle
-      </template>
       <template #content>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae
-          numquam deserunt
-          quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
-          quas!</p>
+        <div class="flex">
+          <img id="userIcon" src="https://soccerpointeclaire.com/wp-content/uploads/2021/06/default-profile-pic-e1513291410505.jpg"/>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae
+            numquam deserunt
+            quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
+            quas!</p>
+        </div>
       </template>
       <template #footer>
-        <Button icon="pi pi-check" label="Save"/>
-        <Button icon="pi pi-times" label="Cancel" class="p-button-secondary" style="margin-left: .5em"/>
+        <Button icon="pi pi-heart" class="p-button-text" label="Like" disabled="disabled"/>
+        <Button icon="pi pi-comment" class="p-button-text" label="Commenter" disabled="disabled" @click/>
       </template>
     </Card>
   </div>
@@ -29,7 +21,7 @@
 <script lang="ts">
 import Button from "primevue/button";
 import Card from "primevue/card";
-
+import router from '@/router';
 
 export default{
   props: ['post'],
@@ -37,10 +29,24 @@ export default{
   components: {
     Button,
     Card,
+  },
+  Methods: {
+    comment() {
+      router.push({name:"home"})
+    }
   }
 }
 </script>
 
 <style scoped>
+.container {
+  margin: 1em;
+}
 
+#userIcon {
+  width: 3em;
+  height: 3em;
+  margin-right: 1em;
+  border-radius: 50%;
+}
 </style>

@@ -6,7 +6,7 @@ const state = reactive({
     name: '',
     username: '',
     id: '',
-    token:'',
+    token: '',
     error: ''
 })
 
