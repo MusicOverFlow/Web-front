@@ -11,6 +11,11 @@ const routes = [
     path: '/main',
     name: 'home',
     component: MainView
+  },
+  {
+    path: '/post',
+    name: 'post',
+    component: PostView
   }
 ]
 
@@ -32,6 +37,7 @@ router.beforeEach(async (to, from) => {
 })*/
 import userStore from '@/store/user';
 import MainView from "@/views/MainView";
+import PostView from "@/views/PostView";
 
 router.beforeEach(async (to) => {
   const authenticated = userStore.getters.isLoggedIn;

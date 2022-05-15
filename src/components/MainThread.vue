@@ -12,7 +12,7 @@
       </template>
       <template #footer>
         <Button icon="pi pi-heart" class="p-button-text" label="Like" disabled="disabled"/>
-        <Button icon="pi pi-comment" class="p-button-text" label="Commenter" disabled="disabled" @click/>
+        <Button icon="pi pi-comment" class="p-button-text" label="Commenter" @click="comment"/>
       </template>
     </Card>
   </div>
@@ -32,7 +32,8 @@ export default{
   },
   Methods: {
     comment() {
-      router.push({name:"home"})
+      console.log("comment");
+      router.push({name:"post"})
     }
   }
 }
