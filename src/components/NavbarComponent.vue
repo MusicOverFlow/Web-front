@@ -3,7 +3,7 @@
     <div class="container flex flex-wrap justify-between items-center mx-auto">
       <div class="flex items-center">
         <img src="@/assets/logo.png" class="mr-3 h-6 sm:h-9" alt="MusicOverflow Logo">
-        <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">MusicOverflow</span>
+        <span class="self-center text-xl font-semibold whitespace-nowrap">MusicOverflow</span>
       </div>
       <button data-collapse-toggle="mobile-menu" type="button" class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu" aria-expanded="false">
         <span class="sr-only">Ouvrir</span>
