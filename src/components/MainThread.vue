@@ -3,7 +3,7 @@
     <Card>
       <template #content>
         <div class="flex">
-          <img id="userIcon" src="https://soccerpointeclaire.com/wp-content/uploads/2021/06/default-profile-pic-e1513291410505.jpg"/>
+          <UserIconComponent/>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae
             numquam deserunt
             quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
@@ -22,15 +22,17 @@
 import Button from "primevue/button";
 import Card from "primevue/card";
 import router from '@/router';
+import UserIconComponent from "@/components/UserIconComponent.vue";
 
 export default{
   props: ['post'],
   name: "MainThread",
   components: {
+    UserIconComponent,
     Button,
     Card,
   },
-  Methods: {
+  methods: {
     comment() {
       console.log("comment");
       router.push({name:"post"})
@@ -42,12 +44,5 @@ export default{
 <style scoped>
 .container {
   margin: 1em;
-}
-
-#userIcon {
-  width: 3em;
-  height: 3em;
-  margin-right: 1em;
-  border-radius: 50%;
 }
 </style>

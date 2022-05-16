@@ -2,7 +2,7 @@
   <div id="container">
     <div class="align-items-center justify-content-center">
       <div id="createPost">
-        <Textarea v-model="value" :autoResize="true" rows="5" cols="100" maxlength="400"/>
+        <Textarea v-model="value" :autoResize="true" rows="5" cols="100" maxlength="400" placeholder="Quoi de neuf ?"/>
         <Button icon="pi pi-send" class="p-button" label="Envoyer"/>
       </div>
       <template v-if="refPosts">
@@ -53,5 +53,6 @@ export default defineComponent({
 
 #createPost{
   box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+  padding: 1em;
 }
 </style>
