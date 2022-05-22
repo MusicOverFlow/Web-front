@@ -3,15 +3,12 @@ import AuthService, {LoginProps, LoginResponse, RegisterProps} from "@/api/servi
 import {RegisterResponse} from "@/api/services/AccountService";
 
 const state = reactive({
-    name: '',
-    username: '',
-    id: '',
-    token: '',
+    jwt: '',
     error: ''
 })
 
 const getters = reactive({
-    isLoggedIn: computed(() => state.id !== '')
+    isLoggedIn: computed(() => state.jwt !== '')
 })
 
 const actions = {
@@ -23,9 +20,7 @@ const actions = {
             state.error = 'Could not find user.'
             return false
         }
-
-        state.id = user.id
-        state.token = user.token
+        state.jwt = user.jwt
         state.error = ''
         console.log(state)
         return true
@@ -41,10 +36,6 @@ const actions = {
         await this.login(userDetails)
 
         return true
-    },
-    async logout() {
-        state.name = ''
-        state.username = ''
     }
 }
 

@@ -1,10 +1,10 @@
 import {Post} from "@/api/types/Post";
 
 export interface Account {
-    MailAddress:string,
-    Firstname:string,
-    Lastname:string,
-    CreatedAt:string,
-    Posts:Post[]
-    Commentaries:Post[]
+    mailAddress:string,
+    firstname:string,
+    lastname:string,
+    createdAt:string,
+    posts:Post[]
+    commentaries:Post[]
 }

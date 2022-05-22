@@ -1,6 +1,6 @@
 import apiClient from "@/http-common";
 import {Post} from "@/api/types/Post";
-import userStore from "@/store/user";
+import {Account} from "@/api/types/Account";
 
 export interface PostCreateProps {
     title:string,
@@ -8,16 +8,11 @@ export interface PostCreateProps {
 }
 
 class PostService {
-    async create(createPost: PostCreateProps): Promise<Post | undefined> {
+    async create(createPost: PostCreateProps,token:string): Promise<Post | undefined> {
         try {
-            console.log(userStore)
             const result = await apiClient.post("/posts", createPost,{
                 headers: {
-                    'Authorization': userStore.state.token,
-                    "Content-type": "application/json",
-                    "Access-Control-Allow-Origin": "*",
-                    "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
-                    "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Requested-With"
+                    'Authorization': `Bearer ${token}`
                 }
             })
             console.log(result)
@@ -27,6 +22,21 @@ class PostService {
         }
 
     }
+    async getByAccount(token:string): Promise<Account | undefined> {
+        try {
+            const result = await apiClient.get("/posts/byAccount",{
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            console.log(result)
+            return result.data
+        } catch (e) {
+            console.log(e)
+        }
+
+    }
+
 
 }
 

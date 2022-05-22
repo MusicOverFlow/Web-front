@@ -1,12 +1,15 @@
 import {Account} from "@/api/types/Account";
+import {Commentary} from "@/api/types/Commentary";
+import {Group} from "@/api/types/Group";
 
 export interface Post {
 
-    Id:string,
-    Title:string,
-    Content:string,
-    CreatedAt: string,
-    Account:Account
-
+    id:string,
+    title:string,
+    content:string,
+    createdAt: string,
+    account:Account
+    commentaries:Commentary[]
+    group:Group
 }
 

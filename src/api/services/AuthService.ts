@@ -15,9 +15,7 @@ export interface RegisterProps {
 }
 
 export interface LoginResponse {
-    id:string
-    token:string,
-    expiration:string
+    jwt:string
 }
 
 class AuthService{

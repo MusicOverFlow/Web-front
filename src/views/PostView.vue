@@ -19,19 +19,22 @@
         <Textarea v-model="value" :autoResize="true" rows="3" cols="100" maxlength="400" placeholder="Rédigez votre réponse"/>
         <Button icon="pi pi-send" class="p-button" label="Envoyer"/>
       </div>
+      <Suspense>
       <template v-if="refComments">
         <MainThread
             v-for="(item) in refComments"
             :post="item"
             :key="item.name"
         ></MainThread>
+
       </template>
+        </Suspense>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import MainThread from "@/components/MainThread.vue";
+import MainThread from "@/components/MainThread/MainThread.vue";
 import {defineComponent} from "vue";
 import {Post} from "@/api/types/Post"
 import {ref} from 'vue'
