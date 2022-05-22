@@ -22,21 +22,35 @@ import {defineComponent} from "vue";
 import {Post} from "@/api/types/Post"
 import {ref} from 'vue'
 import Button from "primevue/button";
+import postService, {PostCreateProps} from "@/api/services/PostService";
 
 export default defineComponent({
-  setup() {
-   /*const posts: Post[] = [
-      {name: "Post1"},
-      {name: "Post2"}]*/
-    let posts: Post[] = []
-    posts.push({name: "Post1"});
-    posts.push({name: "Post1"});
-    posts.push({name: "Post1"});
-    posts.push({name: "Post1"});
-    posts.push({name: "Post1"});
-    const refPosts = ref(posts)
+  async setup() {
+    const xx:Post = null
+    console.log(xx)
+    /*const posts: Post[] = [
+       {name: "Post1"},
+       {name: "Post2"}]*/
+    const refPosts = ref(null)
+    let postProps: PostCreateProps = {
+      title: 'postyyy1',
+      content: 'postyyycontent1'
+    }
+    refPosts.value = await postService.create(postProps);
+    console.log(refPosts.value)
+   /* let posts: Post[] = []
 
-    return { refPosts }
+    let requestedPost = await postService.create(postProps)
+    posts.push(requestedPost);
+    console.log(requestedPost)*/
+    /*posts.push({name: "Post1"});
+    posts.push({name: "Post1"});
+    posts.push({name: "Post1"});
+    posts.push({name: "Post1"});
+    posts.push({name: "Post1"});*/
+    //const refPosts = ref(posts)
+
+    return {refPosts}
   },
   name: "MainView",
   components: {

@@ -1,4 +1,12 @@
+import {Account} from "@/api/types/Account";
+
 export interface Post {
-    name:string
+
+    Id:string,
+    Title:string,
+    Content:string,
+    CreatedAt: string,
+    Account:Account
+
 }
 

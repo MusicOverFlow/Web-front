@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 
 const apiClient: AxiosInstance = axios.create({
-    baseURL: "https://musicoverflow.azurewebsites.net/api",
+    baseURL: "http://localhost:8081/api",
     headers: {
         "Content-type": "application/json",
         "Access-Control-Allow-Origin": "*",

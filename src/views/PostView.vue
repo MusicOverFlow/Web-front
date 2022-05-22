@@ -45,11 +45,11 @@ export default defineComponent({
        {name: "Comment1"},
        {name: "Comment2"}]*/
     let comments: Post[] = []
+  /*  comments.push({name: "Comment1"});
     comments.push({name: "Comment1"});
     comments.push({name: "Comment1"});
     comments.push({name: "Comment1"});
-    comments.push({name: "Comment1"});
-    comments.push({name: "Comment1"});
+    comments.push({name: "Comment1"});*/
     const refComments = ref(comments)
 
     return { refComments }
