@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import LoginView from '@/views/LoginView';
+import MainViewR from "@/views/MainViewR";
 
 const routes = [
   {
@@ -10,7 +11,7 @@ const routes = [
   {
     path: '/main',
     name: 'home',
-    component: MainView
+    component: MainViewR
   },
   {
     path: '/post',
@@ -36,7 +37,6 @@ router.beforeEach(async (to, from) => {
   }
 })*/
 import userStore from '@/store/user';
-import MainView from "@/views/MainView";
 import PostView from "@/views/PostView";
 
 router.beforeEach(async (to) => {
