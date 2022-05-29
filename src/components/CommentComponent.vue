@@ -8,7 +8,7 @@
         </div>
       </template>
       <template #footer>
-        <Button icon="pi pi-heart" class="p-button-text" label="Like" disabled="disabled"/>
+        <Button icon="pi pi-heart" class="p-button-text" label="Like" @click="like"/>
       </template>
     </Card>
   </div>
@@ -22,9 +22,18 @@ import Button from "primevue/button";
 </script>
 
 <script lang="ts">
+import accountService from "@/api/services/AccountService";
+import userStore from "@/store/user";
+
 export default {
   props: ['comment'],
-  inheritAttrs: false
+  inheritAttrs: false,
+  methods:{
+    async like(){
+      const likeResponse = await accountService.like(this.$props.post.id,userStore.state.jwt)
+      console.log(likeResponse)
+    }
+  }
 }
 </script>
 <style scoped>
