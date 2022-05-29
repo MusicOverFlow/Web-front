@@ -6,5 +6,4 @@ export interface Account {
     lastname:string,
     createdAt:string,
     posts:Post[]
-    commentaries:Post[]
 }

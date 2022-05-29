@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import LoginView from '@/views/LoginView';
 import MainViewR from "@/views/MainViewR";
+import PostView from '@/views/PostView'
 
 const routes = [
   {
@@ -14,9 +15,10 @@ const routes = [
     component: MainViewR
   },
   {
-    path: '/post',
+    path: '/post/:id',
     name: 'post',
-    component: PostView
+    component: PostView,
+    props: true
   }
 ]
 
@@ -37,7 +39,6 @@ router.beforeEach(async (to, from) => {
   }
 })*/
 import userStore from '@/store/user';
-import PostView from "@/views/PostView";
 
 router.beforeEach(async (to) => {
   const authenticated = userStore.getters.isLoggedIn;

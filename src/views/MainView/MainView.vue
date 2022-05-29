@@ -1,26 +1,54 @@
-
 <template>
 
   <div id="container">
-    <div class="align-items-center justify-content-center">
-      <!--<div id="createPost">
-        <Textarea v-model="value" :autoResize="true" rows="5" cols="100" maxlength="400" placeholder="Quoi de neuf ?"/>
-        <Button icon="pi pi-send" class="p-button" label="Envoyer"/>
-      </div>-->
 
-         <!-- <MainThread
-              v-for="(item) in refPosts.posts"
-              :post="item"
-              :key="item.id"
-          ></MainThread> -->
-          <div>
-          <MainThread
-              v-for="(item) in refPosts"
-              :post="item"
-              :key="item.id"
-          ></MainThread>
-          </div>
+
+    <Card style="width: 25em">
+      <template #title>
+        <span class="p-float-label">
+	<InputText id="title" type="text" v-model="title"/>
+	<label for="title">Title</label>
+</span>
+
+      </template>
+      <template #content>
+        <Textarea id ="content" v-model="content" :autoResize="true" rows="5" cols="50" maxlength="400" placeholder="Quoi de neuf ?"/>
+      </template>
+      <template #footer>
+        <Button icon="pi pi-check" label="Publish" @click="publishPost"/>
+        <Button icon="pi pi-times" label="Cancel" class="p-button-secondary" style="margin-left: .5em" @click="clearContent"
+                />
+      </template>
+    </Card>
+
+    <div>
+      <MainThread
+          v-for="(item) in refPosts"
+          :post="item"
+          :key="item.id"
+      ></MainThread>
     </div>
+<!--
+    <div class="block">
+              <span class="p-float-label">
+             <InputText id="title" type="text" v-model="title" />
+             <label for="title">Title</label>
+          </span>
+    </div>
+     <div class="align-items-center justify-content-center">
+       <div id="createPost" class="">
+
+         <Textarea v-model="value" :autoResize="true" rows="5" cols="50" maxlength="400" placeholder="Quoi de neuf ?"/>
+         <Button icon="pi pi-send" class="p-button" label="Envoyer" @submit="publishPost"/>
+       </div>
+           <div>
+           <MainThread
+               v-for="(item) in refPosts"
+               :post="item"
+               :key="item.id"
+           ></MainThread>
+           </div>
+     </div> -->
   </div>
 
 </template>
@@ -62,14 +90,30 @@ import {onMounted, ref} from "vue";
 import postService from "@/api/services/PostService";
 import userStore from "@/store/user"
 import MainThread from "@/components/MainThread/MainThread.vue";
-
+import Textarea from "primevue/textarea";
+import Button from "primevue/button";
+import InputText from "primevue/inputtext";
 const refPosts = ref(null)
+const title = ref(null);
+const content = ref(null);
+import Card from "primevue/card";
 
-onMounted( async () => {
+onMounted(async () => {
   refPosts.value = await postService.getByAccount(userStore.state.jwt);
-  refPosts.value = refPosts.value.posts
+  console.log(refPosts.value)
+  refPosts.value = refPosts.value.ownedPosts
   console.log(refPosts.value)
 })
+
+const publishPost = async () => {
+  const postPublished = await postService.create({Title: title.value, Content: content.value}, userStore.state.jwt);
+  refPosts.value.push(postPublished)
+}
+
+const clearContent = async () => {
+  title.value = "";
+  content.value = "";
+}
 </script>
 <style scoped>
 #container {

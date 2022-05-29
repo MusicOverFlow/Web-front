@@ -12,39 +12,24 @@
       </template>
       <template #footer>
         <Button icon="pi pi-heart" class="p-button-text" label="Like" disabled="disabled"/>
-        <Button icon="pi pi-comment" class="p-button-text" label="Commenter" @click="comment"/>
       </template>
     </Card>
   </div>
 </template>
 
-<script lang="ts">
-import Button from "primevue/button";
+<script setup lang="ts">
 import Card from "primevue/card";
 import UserIconComponent from "@/components/UserIconComponent.vue";
-import router from '@/router';
-
-export default{
-  props: ['post'],
-  name: "MainThread",
-  inheritAttrs: false,
-  components: {
-    UserIconComponent,
-    Button,
-    Card,
-  },
-  methods: {
-    comment() {
-      console.log("comment");
-      router.push({name:"post",params: { id : this.post.id }})
-    }
-  }
-}
+import Button from "primevue/button";
 
 </script>
 
-<style scoped>
-.container {
-  margin: 1em;
+<script lang="ts">
+export default {
+  props: ['post'],
+  inheritAttrs: false
 }
+</script>
+<style scoped>
+
 </style>
