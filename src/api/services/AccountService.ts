@@ -1,6 +1,8 @@
 import apiClient from "@/http-common";
 import {Post} from "@/api/types/Post";
 import {PostCreateProps} from "@/api/services/PostService";
+import {Account} from "@/api/types/Account";
+import {AccountWithPostsAndGroups} from "@/api/types/AccountWithPostsAndGroups";
 
 export interface RegisterProps {
     mail:string;
@@ -41,6 +43,38 @@ class AccountService {
         }
 
     }
+
+    async getCurrent(token:string): Promise<AccountWithPostsAndGroups | undefined> {
+        try {
+            const result = await apiClient.get("/accounts/self",{
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            console.log(result)
+            return result.data
+        } catch (e) {
+            console.log(e)
+        }
+
+    }
+    async getByMail(mail:string,token:string): Promise< AccountWithPostsAndGroups | undefined> {
+        try {
+            const result = await apiClient.get("/accounts",{
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                params : {mailAddress : mail}
+            })
+            console.log(result)
+            return result.data
+        } catch (e) {
+            console.log(e)
+        }
+
+    }
+
+
 }
 
 export default new AccountService()

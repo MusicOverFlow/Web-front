@@ -1,7 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import LoginView from '@/views/LoginView';
 import MainViewR from "@/views/MainViewR";
-import PostView from '@/views/PostView'
+import PostView from '@/views/PostView';
+import ProfileView from "@/views/ProfileView";
 
 const routes = [
   {
@@ -19,7 +20,13 @@ const routes = [
     name: 'post',
     component: PostView,
     props: true
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: ProfileView
   }
+
 ]
 
 const router = createRouter({

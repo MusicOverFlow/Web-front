@@ -1,8 +1,7 @@
 <template>
-  <div>
-  <MainView>
-  </MainView>
-  </div>
+<ProfileComponent>
+
+</ProfileComponent>
 </template>
 
 <script lang="ts">
@@ -15,10 +14,11 @@ export default {
 
   inheritAttrs: false,
   components:{
-    MainView:defineAsyncComponent(() => import('../views/MainView') )
+    ProfileComponent:defineAsyncComponent(() => import('../components/ProfileComponent') )
   }
 }
 </script>
+
 
 <style scoped>
 
