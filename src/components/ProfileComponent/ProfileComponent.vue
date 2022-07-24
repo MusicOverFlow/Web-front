@@ -6,8 +6,10 @@
     </div>
     <div class="flex">
       <div class="flex-1 flex align-items-center flex-column ">
-        <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="250"
-               preview/>
+     <!--   <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="250"
+               preview/> -->
+        <Image :src="userInfos.picUrl" alt="Image" width="250"
+          preview/>
         <b>Pseudo</b>
         <b>Ichai</b>
         <small>Email</small>
@@ -50,64 +52,7 @@
         </div>
       </form>
       <div class="flex-1"></div>
-      <!--    <div class="flex-auto">
-            <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="250" preview />
-          </div>-->
-      <!--      <form @submit.prevent="onSubmit">-->
-      <!--        <div class="grid p-fluid">-->
 
-      <!--          <div class="col-12 md:col-3 m-12">-->
-      <!--            <h5>Informations</h5>-->
-      <!--            <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Image" width="250"-->
-      <!--                   preview/>-->
-      <!--          </div>-->
-      <!--          &lt;!&ndash; <form> &ndash;&gt;-->
-      <!--          <div class="col-12 md:col-3">-->
-
-      <!--            <div class="flex flex-row-reverse ">-->
-      <!--              <div>-->
-      <!--                <div class="p-inputgroup">-->
-      <!--                     <span class="p-inputgroup-addon">-->
-      <!--                         <i class="pi pi-user"></i>-->
-      <!--                     </span>-->
-      <!--                  <InputText placeholder="Username" disabled></InputText>-->
-
-      <!--                </div>-->
-      <!--                <div class="p-inputgroup">-->
-      <!--                     <span class="p-inputgroup-addon">-->
-      <!--                         <i class="pi pi-user"></i>-->
-      <!--                     </span>-->
-      <!--                  &lt;!&ndash;<InputText  placeholder="Mail" disabled></InputText>&ndash;&gt;-->
-      <!--                  <InputText v-model="userInfos.mailAddress" placeholder="Mail" disabled></InputText>-->
-      <!--                </div>-->
-      <!--              </div>-->
-      <!--            </div>-->
-      <!--          </div>-->
-      <!--          <div class="col-12 md:col-2">-->
-      <!--            <div class="flex flex-row-reverse ">-->
-      <!--              <div class="p-inputgroup">-->
-      <!--                    <span class="p-inputgroup-addon">-->
-      <!--                        <i class="pi pi-user"></i>-->
-      <!--                    </span>-->
-      <!--                <InputText v-model="userInfos.firstname" placeholder="Prenom" disabled/>-->
-      <!--                &lt;!&ndash;<InputText placeholder="Prenom" disabled/>&ndash;&gt;-->
-      <!--              </div>-->
-      <!--            </div>-->
-      <!--            <div class="p-inputgroup">-->
-      <!--                     <span class="p-inputgroup-addon">-->
-      <!--                         <i class="pi pi-user"></i>-->
-      <!--                     </span>-->
-      <!--              <InputText v-model="userInfos.lastname" placeholder="Nom" disabled/>-->
-      <!--              &lt;!&ndash; <InputText placeholder="Nom" disabled/>&ndash;&gt;-->
-      <!--            </div>-->
-      <!--          </div>-->
-      <!--          <div class="col-12 md:col-3">-->
-      <!--            <Button label="Modifier" type="submit"/>-->
-
-      <!--          </div>-->
-      <!--        </div>-->
-
-      <!--      </form>-->
     </div>
 
   </div>
@@ -142,7 +87,7 @@ let emptyAccount: AccountWithPostsAndGroups = {
   likedCommentaries: [],
   groups: [],
   Pseudonym: "",
-  ProfilPicUrl: ""
+  picUrl: ""
 }
 const userInfos = ref(emptyAccount)
 const currentUser = await accountService.getCurrent(userStore.state.jwt)
@@ -153,7 +98,7 @@ console.log("pouet1")
 console.log(userInfos.value.mailAddress)
 console.log(userInfos.value.firstname)
 console.log(userInfos.value.lastname)
-
+console.log(userInfos.value.picUrl)
 const setInitalProfileValues = () => {
   console.log(initialUser)
   userInfos.value = initialUser

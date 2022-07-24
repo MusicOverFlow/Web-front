@@ -1,8 +1,10 @@
 <template>
   <div class="flex">
-    <div>image</div>
+    <div class=" flex 1">
+      <Image :src="refGroup.picUrl" alt="Image" width="250"
+        preview/>
+    </div>
     <div class="flex-1 card">
-      <h5>Custom Headers</h5>
       <TabView class="tabview-custom" ref="tabview4">
         <TabPanel>
           <template #header>
@@ -37,7 +39,7 @@ import userStore from "@/store/user";
 import TabView from "primevue/tabview";
 import TabPanel from "primevue/tabpanel";
 import groupService from "@/api/services/GroupService";
-
+import Image from "primevue/image";
 
 const refGroup = ref()
 const props = defineProps({
@@ -46,6 +48,7 @@ const props = defineProps({
 
 const getGroup = async () => {
   refGroup.value = await groupService.getById(userStore.state.jwt, props.id);
+  console.log(refGroup.value.picUrl);
   console.log(refGroup.value)
 }
 await getGroup();
@@ -59,6 +62,7 @@ const leave = async () => {
   var resLeave = await groupService.leave(refGroup.value.id, userStore.state.jwt);
   console.log(resLeave);
 }
+
 
 </script>
 

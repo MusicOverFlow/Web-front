@@ -45,12 +45,12 @@ const content = ref("");
 
 onMounted(async () => {
   const posts: AccountWithPosts = await postService.getByAccount(userStore.state.jwt);
-  console.log(posts.ownedPosts)
   posts.ownedPosts = posts.ownedPosts.sort((firstPost, secondPost) => {
     return new Date(secondPost.createdAt).getDate() - new Date(firstPost.createdAt).getDate();
   })
   console.log(posts.ownedPosts)
   refPosts.value = posts.ownedPosts;
+  console.log(refPosts.value);
 
 })
 

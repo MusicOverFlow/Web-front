@@ -5,6 +5,6 @@ export interface Account {
     firstname:string,
     lastname:string,
     Pseudonym:string,
-    ProfilPicUrl:string,
+    picUrl:string,
     createdAt:string
 }

@@ -74,7 +74,20 @@ class AccountService {
 
     }
 
+    async getCurrentPostFromGroups(token:string): Promise<Post[] | undefined> {
+        try {
+            const result = await apiClient.get("/accounts/groupPosts",{
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            console.log(result)
+            return result.data
+        } catch (e) {
+            console.log(e)
+        }
 
+    }
 }
 
 export default new AccountService()
