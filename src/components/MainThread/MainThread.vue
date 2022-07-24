@@ -43,6 +43,7 @@ export default{
     async like(){
       const likeResponse = await accountService.like(this.$props.post.id,userStore.state.jwt)
       console.log(likeResponse)
+
     }
   }
 }

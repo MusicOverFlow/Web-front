@@ -3,7 +3,6 @@ import LoginView from '@/views/LoginView';
 import MainViewR from "@/views/MainViewR";
 import PostView from '@/views/PostView';
 import ProfileView from "@/views/ProfileView";
-
 const routes = [
   {
     path: '/',
@@ -25,7 +24,23 @@ const routes = [
     path: '/profile',
     name: 'profile',
     component: ProfileView
+  },
+  {
+    path: '/codeInput',
+    name: 'codeInput',
+    component: CodeInputView
+  },
+  {
+    path: '/groups',
+    name: 'groups',
+    component: GroupsView
+  },
+  {
+    path: '/group/:id',
+    name: 'group',
+    component: SingleGroupView
   }
+
 
 ]
 
@@ -46,6 +61,9 @@ router.beforeEach(async (to, from) => {
   }
 })*/
 import userStore from '@/store/user';
+import CodeInputView from "@/views/CodeInputView";
+import GroupsView from "@/views/GroupsView";
+import SingleGroupView from "@/views/SingleGroupView";
 
 router.beforeEach(async (to) => {
   const authenticated = userStore.getters.isLoggedIn;

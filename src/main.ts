@@ -9,6 +9,13 @@ import 'primevue/resources/themes/saga-blue/theme.css'
 import 'primevue/resources/primevue.min.css'
 import 'primeicons/primeicons.css'
 import 'primeflex/primeflex.css'
+import ace from "ace-builds"
+ace.config.set(
+    "basePath",
+    "https://cdn.jsdelivr.net/npm/ace-builds@" +
+    require("ace-builds").version +
+    "/src-noconflict/"
+);
 
 
 createApp(App)

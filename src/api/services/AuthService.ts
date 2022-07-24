@@ -21,7 +21,9 @@ export interface LoginResponse {
 class AuthService{
     async login(userDetails:LoginProps):Promise<LoginResponse | undefined>{
         try {
-            const result = await apiClient.post("/authenticate", userDetails)
+            const result = await apiClient.post("/authenticate",
+                userDetails)
+
             console.log(result)
             return result.data
         }

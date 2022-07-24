@@ -39,9 +39,9 @@ import Button from "primevue/button";
 import InputText from "primevue/inputtext";
 import {AccountWithPosts} from "@/api/types/AccountWithPosts";
 
-const refPosts = ref(null)
-const title = ref(null);
-const content = ref(null);
+const refPosts = ref([])
+const title = ref("");
+const content = ref("");
 
 onMounted(async () => {
   const posts: AccountWithPosts = await postService.getByAccount(userStore.state.jwt);
