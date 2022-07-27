@@ -1,12 +1,18 @@
 import apiClient from "@/http-common";
 import {Post} from "@/api/types/Post";
-import {PostCreateProps} from "@/api/services/PostService";
-import {Account} from "@/api/types/Account";
 import {AccountWithPostsAndGroups} from "@/api/types/AccountWithPostsAndGroups";
+import {Account} from "@/api/types/Account";
+import {stringify} from "postcss";
 
 export interface RegisterProps {
     mail:string;
     password:string
+}
+
+export interface UpdateProps {
+    firstname:string,
+    lastname:string,
+    pseudonym:string,
 }
 
 export interface RegisterResponse {
@@ -58,6 +64,23 @@ class AccountService {
         }
 
     }
+    async follow(token:string,mailAddress:string): Promise<any | undefined> {
+        try {
+            const result = await apiClient.put("/accounts/follow",{},{
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                params : {mailAddress : mailAddress}
+            })
+            console.log(result)
+            return result
+        } catch (e) {
+            console.log(e)
+        }
+
+    }
+
+
     async getByMail(mail:string,token:string): Promise< AccountWithPostsAndGroups | undefined> {
         try {
             const result = await apiClient.get("/accounts",{
@@ -67,7 +90,7 @@ class AccountService {
                 params : {mailAddress : mail}
             })
             console.log(result)
-            return result.data
+            return result.data[0]
         } catch (e) {
             console.log(e)
         }
@@ -81,6 +104,36 @@ class AccountService {
                     'Authorization': `Bearer ${token}`
                 }
             })
+            console.log(result)
+            return result.data
+        } catch (e) {
+            console.log(e)
+        }
+
+    }
+    async update(update:UpdateProps,token:string): Promise<number | undefined> {
+        try {
+            const result = await apiClient.put("/accounts/profil",JSON.stringify(update),{
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            console.log(result)
+            return result.status
+        } catch (e) {
+            console.log(e)
+        }
+
+    }
+    async updatePic(bodyFormData:any,token:string): Promise<Account | undefined> {
+        try {
+            const result = await apiClient.put("/accounts/profilpic",  bodyFormData,
+                {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    "Content-Type": "multipart/form-data" }
+                })
+
             console.log(result)
             return result.data
         } catch (e) {

@@ -10,8 +10,9 @@ export interface Post {
     createdAt: string,
     owner:Account,
     group:Group,
-    commentaries:Commentary[],
     likes:Account[],
-    likesCount:number
+    likesCount:number,
+
+    commentaries:Commentary[],
 }
 

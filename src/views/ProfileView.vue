@@ -1,7 +1,10 @@
 <template>
-<ProfileComponent>
+  <div>
+
+<ProfileComponent :props="id">
 
 </ProfileComponent>
+  </div>
 </template>
 
 <script lang="ts">
@@ -10,6 +13,9 @@ import {defineAsyncComponent} from "vue";
 export default {
   setup(){
     return(userStore)
+  },
+  props: {
+    id: String,
   },
 
   inheritAttrs: false,

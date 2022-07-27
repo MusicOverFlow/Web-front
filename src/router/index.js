@@ -21,8 +21,14 @@ const routes = [
     props: true
   },
   {
-    path: '/profile',
+    path: '/profile/:id',
     name: 'profile',
+    component: ProfileView,
+    props: true
+  },
+  {
+    path: '/profile',
+    name: 'profileCurrent',
     component: ProfileView
   },
   {

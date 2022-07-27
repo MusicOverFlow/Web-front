@@ -37,19 +37,16 @@ import MainThread from "@/components/MainThread/MainThread.vue";
 import Textarea from "primevue/textarea";
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
-import {AccountWithPosts} from "@/api/types/AccountWithPosts";
+import {Post} from "@/api/types/Post";
 
 const refPosts = ref([])
 const title = ref("");
 const content = ref("");
 
 onMounted(async () => {
-  const posts: AccountWithPosts = await postService.getByAccount(userStore.state.jwt);
-  posts.ownedPosts = posts.ownedPosts.sort((firstPost, secondPost) => {
-    return new Date(secondPost.createdAt).getDate() - new Date(firstPost.createdAt).getDate();
-  })
-  console.log(posts.ownedPosts)
-  refPosts.value = posts.ownedPosts;
+  const posts: Post[] = await postService.getHomePage(userStore.state.jwt);
+  console.log(posts)
+  refPosts.value = posts;
   console.log(refPosts.value);
 
 })

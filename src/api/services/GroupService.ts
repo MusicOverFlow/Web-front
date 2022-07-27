@@ -2,7 +2,7 @@ import apiClient from "@/http-common";
 
 import {AccountWithPostsAndGroups} from "@/api/types/AccountWithPostsAndGroups";
 import {Account} from "../types/Account";
-import {Group, GroupWithMembers} from "@/api/types/Group";
+import {Group, GroupWithMembers, GroupWithPosts} from "@/api/types/Group";
 import {Post} from "@/api/types/Post";
 
 export interface RegisterProps {
@@ -64,9 +64,9 @@ class GroupService {
         }
 
     }
-    async getById(token:string,id:string): Promise<Group[] | undefined> {
+    async getById(token:string,id:string): Promise<GroupWithMembers | undefined> {
         try {
-            const result = await apiClient.get("/groups/",{
+            const result = await apiClient.get("/groups",{
                 headers: {
                     'Authorization': `Bearer ${token}`
                 },
@@ -88,6 +88,37 @@ class GroupService {
                     'Authorization': `Bearer ${token}`
                 },
                 params : {groupId : groupId}
+            })
+            console.log(result)
+            return result.data
+        } catch (e) {
+            console.log(e)
+        }
+
+    }
+
+    async getPosts(groupId:string,token:string): Promise<Post[] | undefined> {
+        try {
+            const result = await apiClient.get("/groups/posts",{
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                params : {groupId : groupId}
+            })
+            console.log(result)
+            return result.data
+        } catch (e) {
+            console.log(e)
+        }
+
+    }
+
+    async getHomePage(token:string): Promise<Post[] | undefined> {
+        try {
+            const result = await apiClient.get("/groups/homepage",{
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
             })
             console.log(result)
             return result.data

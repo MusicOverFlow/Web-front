@@ -7,4 +7,5 @@ export interface Account {
     Pseudonym:string,
     picUrl:string,
     createdAt:string
+    follows:Account[],
 }

@@ -125,11 +125,12 @@ const refPosts = ref([])
 const posts: Post[] = await accountService.getCurrentPostFromGroups(userStore.state.jwt);
 console.log(posts);
 
+
 refPosts.value = posts;
-console.log(posts[0].owner.picUrl);
+/*console.log(posts[0].owner.picUrl);
 console.log(refPosts.value[0].owner.picUrl);
 console.log(refPosts.value)
-console.log(refPosts.value[0]);
+console.log(refPosts.value[0]);*/
 </script>
 
 <style scoped>

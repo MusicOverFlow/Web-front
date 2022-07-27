@@ -47,7 +47,7 @@ const props = defineProps({
 const value = ref(null)
 
 onMounted( async () => {
-  console.log(props)
+  console.log("prop : " + props.id)
   refPosts.value = await postService.getById(userStore.state.jwt, props.id);
   console.log(refPosts.value)
  // refPosts.value = refPosts.value.
@@ -57,8 +57,8 @@ onMounted( async () => {
 
 const publishComment = async () => {
   const comment = await commentService.create(value.value,props.id,userStore.state.jwt)
-  if(comment.Id != null) {
-    refPosts.value[0].commentaries.push(comment)
+  if(comment.id != null) {
+    refPosts.value[0].commentaries.push(comment.commentaries[comment.commentaries.length -1])
   }
   console.log(comment)
 
