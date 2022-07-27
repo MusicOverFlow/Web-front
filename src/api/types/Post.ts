@@ -14,5 +14,6 @@ export interface Post {
     likesCount:number,
 
     commentaries:Commentary[],
+    musicUrl?:string,
 }
 

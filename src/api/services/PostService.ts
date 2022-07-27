@@ -72,6 +72,22 @@ class PostService {
         }
 
     }
+    async updateMusic(bodyFormData:any,token:string,id:string): Promise<Post | undefined> {
+        try {
+            const result = await apiClient.put("/posts/addmusic",  bodyFormData,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        "Content-Type": "multipart/form-data" }
+                ,params : {id : id}})
+
+            console.log(result)
+            return result.data
+        } catch (e) {
+            console.log(e)
+        }
+
+    }
 
 
 }

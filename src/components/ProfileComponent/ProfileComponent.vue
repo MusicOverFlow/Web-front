@@ -2,7 +2,6 @@
   <div id="main">
     <Toast />
     <div id="profil" style="background-color: #aaaaaa" class="flex-auto m-10 col-start-1">
-      Profile
     </div>
     <div class="flex">
       <div class="flex-1 flex align-items-center flex-column ">
