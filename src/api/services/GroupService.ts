@@ -19,7 +19,7 @@ export interface RegisterResponse {
 }
 
 class GroupService {
-    async create(groupDetails: RegisterProps,token:string): Promise<Group | undefined> {
+   /* async create(groupDetails: RegisterProps,token:string): Promise<Group | undefined> {
         try {
             const result: Group = await apiClient.post("/groups",
                 JSON.stringify(groupDetails),{
@@ -33,7 +33,30 @@ class GroupService {
             console.log(e)
         }
 
+    }*/
+
+    async create(bodyFormData:any,token:string,name:string,description:string): Promise<number | undefined> {
+        const formData = new FormData();
+
+        formData.append('name', name);
+        formData.append('description', description);
+        formData.append('groupPic', bodyFormData);
+        try {
+            const result = await apiClient.post("/groups",  formData,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        "Content-Type": "multipart/form-data" }
+                })
+
+            console.log(result)
+            return result.status
+        } catch (e) {
+            console.log(e)
+        }
+
     }
+
     async join(groupId:string,token:string): Promise< any | undefined> {
         try {
             const result = await apiClient.post("/groups/join",{},{

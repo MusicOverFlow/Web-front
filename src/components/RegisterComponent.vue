@@ -1,6 +1,7 @@
 <template>
-  <form  @submit.prevent="onSubmit">
+  <form @submit.prevent="onSubmit">
     <div class="grid p-fluid">
+      <Toast />
       <div class="col-12">
         <h1>S'inscrire</h1>
       </div>
@@ -9,8 +10,12 @@
       </div>
       <div class="col-12 md:col-6">
         <InputText id="first_name" placeholder="Prénom" type="text" v-model="form.firstname"/>
+
       </div>
-      <div class="col-12">
+      <div class="col-12 md:col-6">
+        <InputText id="pseudo" placeholder="Pseudo" type="text" v-model="form.pseudonym"/>
+      </div>
+      <div class="col-12 ">
         <InputText id="email" placeholder="Adresse mail" type="text" v-model="form.email"/>
       </div>
       <div class="col-12">
@@ -18,19 +23,20 @@
           <template #header>
             <h6>Saisissez un mot de passe</h6>
           </template>
-<!--          <template #footer>
-            <Divider />
-            <p class="mt-2">Suggestions</p>
-            <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
-              <li>Au moins une minuscule</li>
-              <li>Au moins une majuscule</li>
-              <li>Au moins un chiffre</li>
-              <li>Au moins 8 caractères</li>
-            </ul>
-          </template>-->
+          <!--          <template #footer>
+                      <Divider />
+                      <p class="mt-2">Suggestions</p>
+                      <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+                        <li>Au moins une minuscule</li>
+                        <li>Au moins une majuscule</li>
+                        <li>Au moins un chiffre</li>
+                        <li>Au moins 8 caractères</li>
+                      </ul>
+                    </template>-->
         </Password>
       </div>
-      <div class="col-12">
+      <input type="file" @change="onFileChanged">
+      <div class="col-12 md:col-6">
         <Button label="S'inscrire" type="submit"/>
       </div>
     </div>
@@ -41,9 +47,11 @@
 import InputText from 'primevue/inputtext';
 import Password from 'primevue/password';
 import Button from 'primevue/button';
-import {defineComponent, reactive} from "vue";
+import {defineComponent, reactive, ref} from "vue";
 import userStore from "@/store/user";
-import router from "@/router";
+import accountService from "@/api/services/AccountService";
+import {useToast} from "primevue/usetoast";
+import Toast from "primevue/toast";
 
 export default defineComponent({
   name: "RegisterComponent",
@@ -52,25 +60,41 @@ export default defineComponent({
     Button,
     Password
   },
-  setup(){
+  setup() {
     const form = reactive({
       firstname: '',
       lastname: '',
       email: '',
       password: '',
+      pseudonym: ''
     })
+    const toast = useToast();
+
+    const selectedFile = ref<File>();
+
+    const onFileChanged = (event: Event) => {
+      const file = (event.target as HTMLInputElement).files[0];
+      selectedFile.value = file;
+    };
     const onSubmit = async () => {
-      const result = await userStore.register({
-        firstName: form.firstname,
-        lastName: form.lastname,
+      const result = await accountService.register({
+        firstname: form.firstname,
+        lastname: form.lastname,
         mailAddress: form.email,
         password: form.password,
-      })
-      if (result) {
-        await router.push({name:"home"})
+        pseudonym: form.pseudonym,
+        picture: selectedFile.value
+      });
+      if(result < 300){
+        showSuccess()
       }
     }
-    return{ form, userStore, onSubmit}
+
+    const showSuccess = () => {
+      toast.add({severity:'success', summary: 'Success', detail:'Changes saved', life: 3000});
+    }
+
+    return {form, userStore, onSubmit, onFileChanged, selectedFile, toast,Toast}
   }
 })
 </script>

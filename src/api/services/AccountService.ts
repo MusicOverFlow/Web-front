@@ -5,8 +5,12 @@ import {Account} from "@/api/types/Account";
 import {stringify} from "postcss";
 
 export interface RegisterProps {
-    mail:string;
-    password:string
+    mailAddress: string,
+    password: string,
+    firstname : string,
+    lastname : string,
+    pseudonym : string,
+    picture : File,
 }
 
 export interface UpdateProps {
@@ -16,19 +20,44 @@ export interface UpdateProps {
 }
 
 export interface RegisterResponse {
-    Id: string,
-    MailAddress: string,
-    Role : string,
-    Firstname : string,
-    Lastname : string,
+    id: string,
+    mailAddress: string,
+    role : string,
+    firstname : string,
+    lastname : string,
 }
 
 class AccountService {
-    async register(userDetails: RegisterProps): Promise<RegisterResponse | undefined> {
+   /* async register(userDetails: RegisterProps): Promise<RegisterResponse | undefined> {
         try {
             const result: RegisterResponse = await apiClient.post("/accounts", userDetails)
             console.log(result)
             return result
+        } catch (e) {
+            console.log(e)
+        }
+
+    }*/
+
+    async register(userDetails: RegisterProps): Promise<number | undefined> {
+        try {
+            const formData = new FormData();
+
+            formData.append('mailAddress', userDetails.mailAddress);
+            formData.append('password', userDetails.password);
+            formData.append('firstname', userDetails.firstname);
+            formData.append('lastname', userDetails.lastname);
+            formData.append('pseudonym', userDetails.pseudonym);
+            formData.append('profilePic', userDetails.picture);
+
+            const result = await apiClient.post("/accounts",  formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data" }
+                })
+
+            console.log(result)
+            return result.status
         } catch (e) {
             console.log(e)
         }
