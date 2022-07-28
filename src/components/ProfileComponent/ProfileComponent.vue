@@ -10,11 +10,11 @@
         <Image :src="userInfos.picUrl" alt="Image" width="250"
                preview/>
         <input type="file" @change="onFileChanged">
-        <Button @click="onUpload">Upload!</Button>
+        <Button @click="onUpload">Upload</Button>
         <b>{{ userInfos.pseudonym }}</b>
 
-        <Button type="button" v-if="userCurrentInfo.mailAddress !== userInfos.mailAddress" :label="isFollowing ? 'Unfollow' : 'Follow'"
-                v-bind:class="isFollowing ? 'pi pi-user-minus p-button-danger ':'pi pi-user-plus p-button-help'"
+        <Button type="button" v-if="userCurrentInfo.mailAddress !== userInfos.mailAddress" :label="isFollowing ? 'Follow' : 'Unfollow'"
+                v-bind:class="isFollowing ? 'pi pi-user-plus p-button-help' : 'pi pi-user-minus p-button-danger '"
                 @click="follow_unfollow"/>
         <small> {{ userInfos.follows.length }} Followers</small>
       </div>

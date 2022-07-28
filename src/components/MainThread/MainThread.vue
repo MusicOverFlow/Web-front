@@ -50,7 +50,6 @@
 
 
 import postService from "@/api/services/PostService";
-
 const selectedFile = ref<File>();
 
 const onFileChanged = (event: Event) => {
