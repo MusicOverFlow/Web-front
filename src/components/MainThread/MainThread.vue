@@ -31,7 +31,7 @@
           <div v-if="post.musicUrl">
             <AudioPlayer :option="{
         src: post.musicUrl,
-        title: 'your-audio-title',
+        title: post.musicUrl.split('.').reverse()[1],
    }"
             />
           </div>
