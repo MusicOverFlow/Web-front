@@ -6,9 +6,6 @@
         <RegisterComponent/>
       </div>
       <div class="col-2">
-        <Divider layout="vertical">
-          <h1>OU</h1>
-        </Divider>
       </div>
       <div class="col-5 flex align-items-center justify-content-center">
         <LoginComponent/>
@@ -21,7 +18,6 @@
 import RegisterComponent from "@/components/RegisterComponent.vue";
 import LoginComponent from "@/components/LoginComponent.vue";
 
-import Divider from "primevue/divider";
 import { defineComponent } from "vue";
 import userStore from "@/store/user"
 export default defineComponent( {
@@ -29,7 +25,7 @@ export default defineComponent( {
   components: {
     RegisterComponent,
     LoginComponent,
-    Divider
+    // Divider
   },
   setup(){
     return { userStore }

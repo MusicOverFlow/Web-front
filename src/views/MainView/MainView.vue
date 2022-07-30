@@ -1,13 +1,13 @@
 <template>
 
-  <div id="container">
+  <div class="MainView" id="container">
     <form id=createPost
           @submit="publishPost">
         <span class="p-float-label">
-	<InputText id="title" type="text" v-model="title" required="true"/>
+          <InputText id="title" type="text" v-model="title" required="true"/>
 
-	<label for="title">Title</label>
-</span>
+          <label for="title">Title</label>
+        </span>
       <Textarea id="content" v-model="content" :autoResize="true" rows="5" cols="50" maxlength="400"
                 placeholder="Quoi de neuf ?" required="true"/>
       <div class="col-start-1">
@@ -18,7 +18,7 @@
         />
       </div>
     </form>
-    <div>
+    <div class="MainView">
       <MainThread
           v-for="(item) in refPosts"
           :post="item"
@@ -66,6 +66,12 @@ const clearContent = async () => {
 
 </script>
 <style scoped>
+.MainView {
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
 #container {
   margin: 1em 20em 5em 20em;
 }
