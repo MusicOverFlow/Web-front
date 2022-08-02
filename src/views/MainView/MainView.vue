@@ -7,8 +7,7 @@
       <MainThread
           v-for="(item) in refPosts"
           :post="item"
-          :key="item.id"
-      ></MainThread>
+          :key="item.id"/>
     </div>
   </div>
 
@@ -30,7 +29,6 @@ onMounted(async () => {
   console.log(posts)
   refPosts.value = posts;
   console.log(refPosts.value);
-
 })
 
 
