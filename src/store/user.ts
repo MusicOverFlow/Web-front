@@ -15,11 +15,11 @@ const actions = {
     async login(userDetails:LoginProps) {
         const user:LoginResponse|undefined = await AuthService.login(userDetails)
 
-        console.log("dd" + user)
-        if (user == undefined) {
+        if (user == undefined || user.jwt == undefined) {
             state.error = 'Could not find user.'
             return false
         }
+
         state.jwt = user.jwt
         state.error = ''
         console.log(state)

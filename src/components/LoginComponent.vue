@@ -25,26 +25,35 @@ import Button from 'primevue/button';
 import { defineComponent,reactive} from "vue";
 import userStore from "@/store/user"
 import router from '@/router';
+import {useToast} from "primevue/usetoast";
 export default defineComponent({
   setup() {
     const form = reactive({
       username: '',
       password: ''
     })
+
+    const toast = useToast();
+
     const onSubmit = async () => {
       console.log(form)
-      const result = await userStore.login({
+      const loggedIn = await userStore.login({
         mailAddress: form.username,
         password: form.password,
       })
 
-      console.log(userStore)
-      if (result) {
-        form.username = ''
-        form.password = ''
-        await router.push({name:"home"})
+      if (loggedIn) {
+        await router.push({name:"home"});
+      }
+      else {
+        showWrongCredentials(); // TODO gtouchet: toast not showing
       }
     }
+
+    const showWrongCredentials = () => {
+      toast.add({severity:'error', summary: 'Wrong credentials', detail:'Try again', life: 3000});
+    }
+
     return{ form, userStore, onSubmit}
   },
   name: "LoginComponent",
