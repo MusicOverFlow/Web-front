@@ -12,7 +12,7 @@
         <InputText id="first_name" placeholder="Prénom" type="text" v-model="form.firstname"/>
 
       </div>
-      <div class="col-12 md:col-6">
+      <div class="col-12">
         <InputText id="pseudo" placeholder="Pseudo" type="text" v-model="form.pseudonym"/>
       </div>
       <div class="col-12 ">
@@ -35,8 +35,8 @@
                     </template>-->
         </Password>
       </div>
-      <input type="file" @change="onFileChanged">
-      <div class="col-12 md:col-6">
+      <input type="file" accept="image/x-png,image/gif,image/jpeg" @change="onFileChanged">
+      <div class="col-12">
         <Button label="S'inscrire" type="submit"/>
       </div>
     </div>
