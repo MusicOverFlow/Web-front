@@ -38,7 +38,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 10em;
+  margin: 1em 10em 10em;
 }
 
 #container {
