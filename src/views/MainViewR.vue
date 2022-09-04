@@ -1,7 +1,15 @@
 <template>
-  <div>
-  <MainView>
-  </MainView>
+  <div class="flex">
+    <div class="flex-1">
+      <NavbarComponent/>
+    </div>
+    <div class="flex-1">
+      <MainView>
+      </MainView>
+    </div>
+    <div class="flex-1">
+      <p>IDE</p>
+    </div>
   </div>
 </template>
 
@@ -15,7 +23,8 @@ export default {
 
   inheritAttrs: false,
   components:{
-    MainView:defineAsyncComponent(() => import('../views/MainView') )
+    MainView:defineAsyncComponent(() => import('../views/MainView') ),
+    NavbarComponent:defineAsyncComponent(() => import('../components/Navbar') ),
   }
 }
 </script>

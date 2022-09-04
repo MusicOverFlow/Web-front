@@ -5,6 +5,10 @@
 
         <img src="@/assets/logo.png" class="mr-3 h-6 sm:h-9" alt="MusicOverflow Logo">
         <span class="self-center text-xl font-semibold whitespace-nowrap">MusicOverflow</span>
+        <Image :src="userInfos.picUrl"
+            style="width: 100px; height: 100px;"
+            v-if="!!userInfos.picUrl"
+        />
         </router-link>
       </div>
       <button data-collapse-toggle="mobile-menu" type="button" class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu" aria-expanded="false">
@@ -24,10 +28,15 @@
             <span class="block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Profile</span>
           </li>
           </router-link>
-          <router-link to="/codeInput">
-            <li>
-              <span class="block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">IDE</span>
-            </li>
+          <router-link to="/pipeline" >
+          <li>
+            <span class="block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Pipelines</span>
+          </li>
+          </router-link>
+          <router-link to="/createProfile" >
+          <li>
+            <span class="block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Créer un poste</span>
+          </li>
           </router-link>
         </ul>
       </div>
@@ -35,8 +44,38 @@
   </nav>
 </template>
 <script setup lang="ts">
+import {AccountWithPostsAndGroups} from "@/api/types/AccountWithPostsAndGroups";
+import {ref} from "vue";
+import accountService from "@/api/services/AccountService";
+import userStore from "@/store/user";
+import Image from "primevue/image";
+
+let emptyAccount: AccountWithPostsAndGroups = {
+  mailAddress: "",
+  firstname: "",
+  lastname: "",
+  createdAt: "",
+  ownedPosts: [],
+  likedPosts: [],
+  likedCommentaries: [],
+  groups: [],
+  Pseudonym: "",
+  picUrl: "",
+  follows: [],
+}
+const userInfos = ref(emptyAccount)
+let currentUser: AccountWithPostsAndGroups;
 
 
+const getAccount = async () => {
+  currentUser = await accountService.getCurrent(userStore.state.jwt)
+}
+await getAccount()
+
+userInfos.value = currentUser
+
+console.log("header")
+console.log(userInfos.value.picUrl)
 
 </script>
 <!--<script>
