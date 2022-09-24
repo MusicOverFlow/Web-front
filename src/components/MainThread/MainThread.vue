@@ -1,23 +1,19 @@
 <template>
   <div>
     <Card class="MainThread__card">
-      <template #title>
-        <p>{{ post.title }}</p>
-      </template>
       <template #content>
         <div class="flex">
           <div class="mr-4 flex flex-column gap-1">
             <img
-                class="card__image"
+                class="card_image"
                 @click="goToProfile(post.owner.mailAddress)"
                 :src="post.owner.picUrl"
                 alt="imgPost"
             >
-            <b>{{ post.owner.pseudonym }}</b>
-            <small v-if="post.group">{{ post.group.name }}</small>
           </div>
           <div class="flex-1 flex flex-column">
-
+            <b class="card_owner" @click="goToProfile(post.owner.mailAddress)">{{ post.owner.pseudonym }}</b>
+            <small v-if="post.group">{{ post.group.name }}</small>
             <!-- <UserIconComponent/> -->
             <p>{{ post.content }}</p>
           </div>
@@ -26,7 +22,7 @@
       </template>
       <template #footer>
         <div class="flex">
-          <Button v-bind:class="liked ? 'pi pi-heart-fill ':'pi pi-heart'" class="p-button-text" label=" Like"
+          <Button v-bind:class="liked ? 'pi pi-heart-fill ':'pi pi-heart'" class="p-button-text" label="Like"
                   @click="like"/>
           <Button icon="pi pi-comment" class="p-button-text" label="Commenter" @click="comment"/>
           <div v-if="post.musicUrl">
@@ -132,15 +128,20 @@ export default {
 </script>
 
 <style scoped>
-.card__image {
-  width: 100px;
-  height: 100px;
-  border-radius:6px;
+.card_image {
+  width: 50px;
+  height: 50px;
+  border-radius:50%;
   object-fit: cover;
+  cursor: pointer;
+}
+
+.card_owner {
+  cursor: pointer;
 }
 
 .MainThread__card {
-  background-color: ghostwhite;
+  box-shadow: white !important;
 }
 
 .container {
