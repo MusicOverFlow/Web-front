@@ -35,7 +35,7 @@ onMounted(async () => {
 
 const publishPost = async (title,content) => {
 
-  const postPublished = await postService.create({Title: title, Content: content}, userStore.state.jwt);
+  const postPublished = await postService.create({Content: content}, userStore.state.jwt);
   refPosts.value.unshift(postPublished)
 
 }
@@ -50,7 +50,7 @@ const publishPost = async (title,content) => {
 }
 
 #container {
-  margin: 1em 20em 5em 20em;
+  margin: 1em;
 }
 
 #createPost {

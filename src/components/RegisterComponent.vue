@@ -6,21 +6,21 @@
         <h1>S'inscrire</h1>
       </div>
       <div class="col-12 md:col-6">
-        <InputText id="last_name" placeholder="Nom" type="text" v-model="form.lastname"/>
+        <InputText id="last_name" placeholder="Nom" type="text" v-model="form.lastname" required/>
       </div>
       <div class="col-12 md:col-6">
-        <InputText id="first_name" placeholder="Prénom" type="text" v-model="form.firstname"/>
+        <InputText id="first_name" placeholder="Prénom" type="text" v-model="form.firstname" required/>
 
       </div>
-      <div class="col-12 md:col-6">
-        <InputText id="pseudo" placeholder="Pseudo" type="text" v-model="form.pseudonym"/>
+      <div class="col-12">
+        <InputText id="pseudo" placeholder="Pseudo" type="text" v-model="form.pseudonym" required/>
       </div>
       <div class="col-12 ">
-        <InputText id="email" placeholder="Adresse mail" type="text" v-model="form.email"/>
+        <InputText id="email" placeholder="Adresse mail" type="text" v-model="form.email" required/>
       </div>
       <div class="col-12">
-        <Password id="password" placeholder="Mot de passe" v-model="form.password">
-          <template #header>
+        <Password id="password" placeholder="Mot de passe" v-model="form.password" required>
+          <template>
             <h6>Saisissez un mot de passe</h6>
           </template>
           <!--          <template #footer>
@@ -35,9 +35,9 @@
                     </template>-->
         </Password>
       </div>
-      <input type="file" @change="onFileChanged">
-      <div class="col-12 md:col-6">
-        <Button label="S'inscrire" type="submit"/>
+      <input type="file" accept="image/x-png,image/gif,image/jpeg" @change="onFileChanged">
+      <div class="col-12">
+        <Button label="S'inscrire" type="submit" :loading="isLoading"/>
       </div>
     </div>
   </form>
@@ -62,6 +62,7 @@ export default defineComponent({
     Password
   },
   setup() {
+    const isLoading = ref(false);
     const form = reactive({
       firstname: '',
       lastname: '',
@@ -74,10 +75,10 @@ export default defineComponent({
     const selectedFile = ref<File>();
 
     const onFileChanged = (event: Event) => {
-      const file = (event.target as HTMLInputElement).files[0];
-      selectedFile.value = file;
+      selectedFile.value = (event.target as HTMLInputElement).files[0];
     };
     const onSubmit = async () => {
+      isLoading.value = true;
       const result = await accountService.register({
         firstname: form.firstname,
         lastname: form.lastname,
@@ -98,13 +99,14 @@ export default defineComponent({
           await router.push({name:"home"});
         }
       }
+      isLoading.value = true;
     }
 
     const showSuccess = () => {
       toast.add({severity:'success', summary: 'Success', detail:'Changes saved', life: 3000});
     }
 
-    return {form, userStore, onSubmit, onFileChanged, selectedFile, toast,Toast}
+    return {form, userStore, onSubmit, onFileChanged, selectedFile, toast,Toast, isLoading}
   }
 })
 </script>

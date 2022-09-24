@@ -1,4 +1,5 @@
 <template>
+  <NavbarComponent/>
   <div id="container">
     <div class="align-items-center justify-content-center">
       <div id="createComment" v-if="refPosts">
@@ -39,6 +40,7 @@ import Textarea from "primevue/textarea";
 import PostReadOnly from "@/components/PostReadOnly.vue";
 import commentService from "@/api/services/CommentService";
 import CommentComponent from "@/components/CommentComponent.vue";
+import NavbarComponent from "@/components/Navbar/NavbarComponent.vue";
 const refPosts = ref(null)
 const props = defineProps({
   id: String,

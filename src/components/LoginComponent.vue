@@ -11,7 +11,7 @@
         <Password id="password1" placeholder="Mot de passe" v-model="form.password" :feedback="false" required/>
       </div>
       <div class="col-12">
-        <Button label="Se connecter" type="submit"/>
+        <Button label="Se connecter" type="submit" :loading="isLoading"/>
       </div>
     </div>
   </form>
@@ -22,12 +22,13 @@ import InputText from 'primevue/inputtext';
 import Password from 'primevue/password';
 import Button from 'primevue/button';
 
-import { defineComponent,reactive} from "vue";
+import {defineComponent,reactive, ref} from "vue";
 import userStore from "@/store/user"
 import router from '@/router';
 import {useToast} from "primevue/usetoast";
 export default defineComponent({
   setup() {
+    const isLoading = ref(false);
     const form = reactive({
       username: '',
       password: ''
@@ -36,7 +37,7 @@ export default defineComponent({
     const toast = useToast();
 
     const onSubmit = async () => {
-      console.log(form)
+      isLoading.value = true;
       const loggedIn = await userStore.login({
         mailAddress: form.username,
         password: form.password,
@@ -48,13 +49,14 @@ export default defineComponent({
       else {
         showWrongCredentials(); // TODO gtouchet: toast not showing
       }
+      isLoading.value = false;
     }
 
     const showWrongCredentials = () => {
       toast.add({severity:'error', summary: 'Wrong credentials', detail:'Try again', life: 3000});
     }
 
-    return{ form, userStore, onSubmit}
+    return{form, userStore, isLoading, onSubmit}
   },
   name: "LoginComponent",
   components: {

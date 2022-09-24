@@ -1,5 +1,6 @@
 <template>
 <div>
+  <NavbarComponent/>
   <GroupsComponent>
 
   </GroupsComponent>
@@ -8,6 +9,7 @@
 
 <script lang="ts">
 import userStore from "@/store/user"
+import NavbarComponent from "@/components/Navbar/NavbarComponent.vue";
 
 import {defineAsyncComponent} from "vue";
 export default {
@@ -15,7 +17,8 @@ export default {
   setup(){
     return(userStore)
   },  components:{
-    GroupsComponent:defineAsyncComponent(() => import('../components/GroupsComponent') )
+    GroupsComponent:defineAsyncComponent(() => import('../components/GroupsComponent') ),
+    NavbarComponent
   },
   inheritAttrs: false,
 
