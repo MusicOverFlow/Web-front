@@ -1,10 +1,7 @@
 import apiClient from "@/http-common";
 import {Post} from "@/api/types/Post";
-import {Account} from "@/api/types/Account";
-import {AccountWithPosts} from "@/api/types/AccountWithPosts";
 
 export interface PostCreateProps {
-    Title: string,
     Content: string
 }
 

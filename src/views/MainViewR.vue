@@ -1,13 +1,13 @@
 <template>
-  <div class="flex">
-    <div class="flex-1">
+  <div class="flex" id="main">
+    <div id="navbar">
       <NavbarComponent/>
     </div>
-    <div class="flex-1">
+    <div id="mainThread">
       <MainView>
       </MainView>
     </div>
-    <div class="flex-1">
+    <div id="ide">
       <p>IDE</p>
     </div>
   </div>
@@ -30,5 +30,20 @@ export default {
 </script>
 
 <style scoped>
-
+#navbar{
+  flex: 1;
+  overflow: hidden;
+}
+#mainThread{
+  flex: 4;
+  overflow: auto;
+}
+#ide{
+  flex: 4;
+  overflow: hidden;
+}
+#main {
+  height: 100vh;
+  width: 100vw;
+}
 </style>
