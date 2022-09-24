@@ -10,8 +10,9 @@ import 'primeicons/primeicons.css'
 import 'primeflex/primeflex.css'
 import ace from "ace-builds"
 import ToastService from 'primevue/toastservice';
-import { VueSignalR } from '@dreamonkey/vue-signalr';
+import {useSignalR, VueSignalR} from '@dreamonkey/vue-signalr';
 import { HubConnectionBuilder } from '@microsoft/signalr';
+const signalR = require("@microsoft/signalr");
 ace.config.set(
     "basePath",
     "https://cdn.jsdelivr.net/npm/ace-builds@" +
@@ -23,18 +24,15 @@ ace.config.set(
     .withUrl("/livecoding")//'https://musicoverflowapi.azurewebsites.net/livecoding')
     .build();*/
 
-const connection = new HubConnectionBuilder().withUrl("https://localhost:7143/livecoding").build();
+const connection = new HubConnectionBuilder().withUrl("https://localhost:7143/livecoding",{
+    skipNegotiation: true,
+    transport: signalR.HttpTransportType.WebSockets}).build();
 connection.start().then(() => {
-    connection.invoke("JoinGroup").catch(function (err) {
+    connection.invoke("JoinGroup",null).then(r => console.log(r)).catch(function (err) {
         return console.error(err.toString());
     });
 })
-/*
-connection.start().then(r => console.log("connected : " + r)).catch(e => console.log(e));
-connection.send("", "{\n" +
-    "    \"protocol\": \"json\",\n" +
-    "    \"version\": 1\n" +
-    "}\n").then(r => console.log("joined : " + r)).catch(e => console.log(e));*/
+
 createApp(App)
     .use(store)
     .use(router)
