@@ -31,12 +31,15 @@
       </div>
     </div>
   </div>
+  <Button label="Connect" @click="connect" icon="pi pi-play" class="p-button-text"/>
 </template>
 
 <script setup lang="ts">
 import Dropdown from 'primevue/dropdown';
 import {VAceEditor} from 'vue3-ace-editor';
 import Button from "primevue/button";
+import { useSignalR } from '@dreamonkey/vue-signalr';
+
 
 import {ref} from 'vue';
 import CodeExecutionService from "@/api/services/CodeExecutionService";
@@ -47,6 +50,21 @@ const languages = ref([
   {name: 'Python', code: 'python'},
   {name: 'C     ', code: 'c'}
 ]);
+const signalr = useSignalR();
+
+const messageReceivedCallback = (message) => console.log(message.prop);
+console.log(messageReceivedCallback('test'));
+const connect = () => {
+
+  signalr.invoke('SendMessage', 'Hello World');
+
+  signalr.on('MessageReceived', (messageReceivedCallback) => {
+    /* do stuff */
+    console.log(messageReceivedCallback);
+  });
+}
+
+
 
 const run = async () => {
   const resultCode = await CodeExecutionService.execute(content.value, selectedLanguage.value);
