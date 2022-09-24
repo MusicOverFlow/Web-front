@@ -1,13 +1,13 @@
 <template>
   <nav class="shadow bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
     <div class="container justify-between items-center mx-auto">
-      <div class="items-center">
+      <div class="items-center" id="header-headline">
         <router-link to="/main">
-          <img src="@/assets/logo.png" class="h-6 sm:h-9" alt="MusicOverflow Logo">
-          <span class="self-center text-xl font-semibold whitespace-nowrap">MusicOverflow</span>
+          <img src="@/assets/logo.png" id="header-logo" alt="MusicOverflow Logo">
+          <span class="self-center text-xl font-semibold whitespace-nowrap" id="header-title">MusicOverflow</span>
         </router-link>
         <Image :src="userInfos.picUrl"
-               style="width: 90px; height: 90px;"
+               id="header-profile-pic"
                v-if="!!userInfos.picUrl"
         />
       </div>
@@ -118,6 +118,15 @@ ul li {
   margin-bottom: 10px;
 }
 
+#header-logo{
+  height: 2.25rem;
+}
+
+#header-profile-pic{
+  width: 90px;
+  height: 90px;
+}
+
 #mobile-menu{
   margin-top: 1em;
   height: 82%;
@@ -126,5 +135,26 @@ ul li {
   align-items: stretch;
   flex-direction: column;
   justify-content: space-between;
+}
+
+@media (max-width: 1510px) {
+  #header-headline{
+    display: flex;
+  }
+  #header-title{
+    display: none;
+  }
+  #header-logo{
+    height: 1.5rem;
+  }
+  #header-profile-pic{
+    margin-left: 1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  #mobile-menu{
+    height: 91%;
+    margin-top: 3em;
+  }
 }
 </style>
