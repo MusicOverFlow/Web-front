@@ -45,9 +45,33 @@ import connection from "@/main";
 
 import {ref} from 'vue';
 import CodeExecutionService from "@/api/services/CodeExecutionService";
+import {useRoute} from "vue-router";
+
 const result = ref('');
 const selectedLanguage = ref();
 let content = ref();
+
+const params = useRoute().params as { id: string };
+
+console.log(params.id)
+if(params.id == "new"){
+  params.id = null
+}
+
+connection.invoke("JoinGroup", params.id).then(r => {
+  if (params.id) {
+    userStore.state.connection = params.id
+    content.value = r
+  } else {
+    userStore.state.connection = r
+  }
+  console.log(r)
+
+}).catch(function (err) {
+  return console.error(err.toString());
+});
+
+
 const editorChange = (e) => {
   console.log(e)
   console.log(content.value)
@@ -70,7 +94,8 @@ const onChangeSignalR = () => {
   /*console.log(userStore.state.connection)
   console.log("connected : " + signalr.connected.value)
  // signalr.invoke('UpdateContent', [userStore.state.connection,content]);*/
-  connection.invoke('UpdateContent', userStore.state.connection ,content.value).then((res) => {
+  console.log(userStore.state.connection)
+  connection.invoke('UpdateContent', userStore.state.connection, content.value).then((res) => {
     console.log("t")
     console.log(res)
 
@@ -79,13 +104,14 @@ const onChangeSignalR = () => {
   });
 
 
-
 }
-
 
 
 connection.on('ReceiveContent', (message) => {
   /* do stuff */
+  if(message != content.value) {
+    content.value = message
+  }
 
   console.log(message);
 });
@@ -148,7 +174,6 @@ const themes = ref([
 const editorInit = () => {
   return "init";
 }
-
 
 
 </script>

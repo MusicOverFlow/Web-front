@@ -1,6 +1,6 @@
 <template>
   <div>
-    <CodeInputComponent>
+    <CodeInputComponent :props="id">
 
     </CodeInputComponent>
   </div>
@@ -13,6 +13,9 @@ export default {
   components: {CodeInputComponent},
   setup(){
     return(userStore)
+  },
+  props: {
+    id: String,
   },
 
   inheritAttrs: false,

@@ -45,7 +45,13 @@ const routes = [
     path: '/group/:id',
     name: 'group',
     component: SingleGroupView
-  }
+  },
+  {
+    path: '/ide/:id',
+    name: 'ide',
+    component: CodeInputView,
+    props: true
+  },
 
 
 ]
