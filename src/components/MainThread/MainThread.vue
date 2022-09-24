@@ -1,17 +1,18 @@
 <template>
-  <div class="container">
-    <Card>
+  <div>
+    <Card class="MainThread__card">
       <template #title>
         <p>{{ post.title }}</p>
       </template>
       <template #content>
         <div class="flex">
-          <div class="flex-1 flex flex-column gap-5">
-            <Image
+          <div class="mr-4 flex flex-column gap-1">
+            <img
+                class="card__image"
+                @click="goToProfile(post.owner.mailAddress)"
                 :src="post.owner.picUrl"
-                style="width: 100px; height: 100px;"
-                @click="goToProfile(post.owner.mailAddress)">
-            </Image>
+                alt="imgPost"
+            >
             <b>{{ post.owner.pseudonym }}</b>
             <small v-if="post.group">{{ post.group.name }}</small>
           </div>
@@ -31,7 +32,7 @@
           <div v-if="post.musicUrl">
             <AudioPlayer :option="{
         src: post.musicUrl,
-        title: 'your-audio-title',
+        title: post.musicUrl.split('.').reverse()[1],
    }"
             />
           </div>
@@ -50,7 +51,6 @@
 
 
 import postService from "@/api/services/PostService";
-
 const selectedFile = ref<File>();
 
 const onFileChanged = (event: Event) => {
@@ -77,7 +77,6 @@ import Card from "primevue/card";
 import router from '@/router';
 import accountService from "@/api/services/AccountService";
 import userStore from "@/store/user";
-import Image from "primevue/image";
 import {ref} from "vue";
 
 export default {
@@ -93,7 +92,6 @@ export default {
   },
   components: {
     // UserIconComponent,
-    Image,
     Button,
     Card,
     AudioPlayer
@@ -134,6 +132,17 @@ export default {
 </script>
 
 <style scoped>
+.card__image {
+  width: 100px;
+  height: 100px;
+  border-radius:6px;
+  object-fit: cover;
+}
+
+.MainThread__card {
+  background-color: ghostwhite;
+}
+
 .container {
   margin: 1em;
 }

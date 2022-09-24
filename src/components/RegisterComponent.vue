@@ -52,6 +52,7 @@ import userStore from "@/store/user";
 import accountService from "@/api/services/AccountService";
 import {useToast} from "primevue/usetoast";
 import Toast from "primevue/toast";
+import router from '@/router';
 
 export default defineComponent({
   name: "RegisterComponent",
@@ -85,8 +86,17 @@ export default defineComponent({
         pseudonym: form.pseudonym,
         picture: selectedFile.value
       });
+
       if(result < 300){
         showSuccess()
+        // Auto connect after account register
+        const loggedIn = await userStore.login({
+          mailAddress: form.email,
+          password: form.password,
+        })
+        if (loggedIn) {
+          await router.push({name:"home"});
+        }
       }
     }
 

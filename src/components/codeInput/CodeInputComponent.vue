@@ -6,6 +6,7 @@
         <v-ace-editor
             v-model:value="content"
             @init="editorInit"
+            @change="editorChange"
             :lang=selectedLanguage
             :theme=selectedTheme
             style="height: 300px"
@@ -31,22 +32,64 @@
       </div>
     </div>
   </div>
+  <Button label="Connect" @click="connect" icon="pi pi-play" class="p-button-text"/>
 </template>
 
 <script setup lang="ts">
 import Dropdown from 'primevue/dropdown';
 import {VAceEditor} from 'vue3-ace-editor';
 import Button from "primevue/button";
+//import { useSignalR } from '@dreamonkey/vue-signalr';
+import userStore from "@/store/user"
+import connection from "@/main";
 
 import {ref} from 'vue';
 import CodeExecutionService from "@/api/services/CodeExecutionService";
 const result = ref('');
 const selectedLanguage = ref();
 let content = ref();
+const editorChange = (e) => {
+  console.log(e)
+  console.log(content.value)
+  onChangeSignalR();
+  //content.value = e;
+}
 const languages = ref([
   {name: 'Python', code: 'python'},
   {name: 'C     ', code: 'c'}
 ]);
+//const signalr = useSignalR();
+
+const connect = () => {
+
+}
+
+const messageReceivedCallback = (message) => console.log(message.prop);
+console.log(messageReceivedCallback('test'));
+const onChangeSignalR = () => {
+  /*console.log(userStore.state.connection)
+  console.log("connected : " + signalr.connected.value)
+ // signalr.invoke('UpdateContent', [userStore.state.connection,content]);*/
+  connection.invoke('UpdateContent', userStore.state.connection ,content.value).then((res) => {
+    console.log("t")
+    console.log(res)
+
+  }).catch((err) => {
+    console.log(err)
+  });
+
+
+
+}
+
+
+
+connection.on('ReceiveContent', (message) => {
+  /* do stuff */
+
+  console.log(message);
+});
+
 
 const run = async () => {
   const resultCode = await CodeExecutionService.execute(content.value, selectedLanguage.value);
@@ -105,6 +148,8 @@ const themes = ref([
 const editorInit = () => {
   return "init";
 }
+
+
 
 </script>
 

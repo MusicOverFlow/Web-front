@@ -17,14 +17,14 @@
     </div>
     <div class="flex-1">
       <div>
+        <div class="MainView">
         <MainThread
             v-for="(item) in refPosts"
             :post="item"
             :key="item.id"
         ></MainThread>
+        </div>
       </div>
-      <!--<GroupComponent>
-      </GroupComponent> -->
     </div>
     <div class="flex-1">
       <Button label="create" icon="pi pi-plus" class="p-button-text" @click="openResponsiveCreate"/>
@@ -60,7 +60,6 @@ import {ref} from "vue";
 import GroupService from "@/api/services/GroupService";
 import userStore from "@/store/user";
 import Listbox from "primevue/listbox";
-//import GroupComponent from "@/components/GroupsComponent/GroupComponent.vue";
 import router from '@/router';
 import accountService from "@/api/services/AccountService";
 import {Post} from "@/api/types/Post";
@@ -98,20 +97,7 @@ const onFileChanged = (event: Event) => {
   const file = (event.target as HTMLInputElement).files[0];
   selectedFile.value = file;
 };
-/*
-const onUpload = async () => {
-  /*if (selectedFile.value) {
-    const formData = new FormData();
-    formData.append('file', selectedFile.value);
-    const response = await groupService.cr(formData, userStore.state.jwt);*/
-  /*  if (response.picUrl) {
-      userInfos.value.picUrl = response.picUrl;
-      console.log(response.picUrl);
-      showSuccess();
-    }
-  }
-};
-*/
+
 const showSuccess = () => {
   toast.add({severity:'success', summary: 'Success', detail:'Changes saved', life: 3000});
 }
@@ -160,12 +146,13 @@ console.log(posts);
 
 
 refPosts.value = posts;
-/*console.log(posts[0].owner.picUrl);
-console.log(refPosts.value[0].owner.picUrl);
-console.log(refPosts.value)
-console.log(refPosts.value[0]);*/
+
 </script>
 
 <style scoped>
-
+.MainView {
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}
 </style>r
