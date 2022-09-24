@@ -1,10 +1,12 @@
 import { computed, reactive } from 'vue'
 import AuthService, {LoginProps, LoginResponse, RegisterProps} from "@/api/services/AuthService";
 import {RegisterResponse} from "@/api/services/AccountService";
+import {HubConnection} from '@microsoft/signalr';
 
 const state = reactive({
     jwt: '',
-    error: ''
+    error: '',
+    connection: '',
 })
 
 const getters = reactive({
