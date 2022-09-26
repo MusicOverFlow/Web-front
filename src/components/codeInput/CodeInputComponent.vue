@@ -53,8 +53,7 @@ let content = ref();
 
 const params = useRoute().params as { id: string };
 
-console.log(params.id)
-if(params.id == "new"){
+if(params.id == "new") {
   params.id = null
 }
 
@@ -64,65 +63,45 @@ connection.invoke("JoinGroup", params.id).then(r => {
     content.value = r
   } else {
     userStore.state.connection = r
+    console.log(r)
   }
-  console.log(r)
-
 }).catch(function (err) {
   return console.error(err.toString());
 });
 
 
-const editorChange = (e) => {
-  console.log(e)
-  console.log(content.value)
+const editorChange = () => {
   onChangeSignalR();
-  //content.value = e;
 }
 const languages = ref([
   {name: 'Python', code: 'python'},
   {name: 'C     ', code: 'c'}
 ]);
-//const signalr = useSignalR();
 
 const connect = () => {
 
 }
 
-const messageReceivedCallback = (message) => console.log(message.prop);
-console.log(messageReceivedCallback('test'));
 const onChangeSignalR = () => {
-  /*console.log(userStore.state.connection)
-  console.log("connected : " + signalr.connected.value)
- // signalr.invoke('UpdateContent', [userStore.state.connection,content]);*/
-  console.log(userStore.state.connection)
-  connection.invoke('UpdateContent', userStore.state.connection, content.value).then((res) => {
-    console.log("t")
-    console.log(res)
-
+  connection.invoke('UpdateContent', userStore.state.connection, content.value).then(() => {
   }).catch((err) => {
     console.log(err)
   });
-
-
 }
 
+connection.on('Execute', () => runCommandFromServer())
+connection.on('ReceiveContent', (message) => content.value = message)
 
-connection.on('ReceiveContent', (message) => {
-  /* do stuff */
-  if(message != content.value) {
-    content.value = message
-  }
-
-  console.log(message);
-});
-
+// Does not call back the server to avoid the execution loop
+const runCommandFromServer = async () => {
+  const resultCode = await CodeExecutionService.execute(content.value, selectedLanguage.value);
+  result.value = resultCode.data.toString();
+}
 
 const run = async () => {
   const resultCode = await CodeExecutionService.execute(content.value, selectedLanguage.value);
-  console.log(resultCode);
-  console.log(resultCode.data);
   result.value = resultCode.data.toString();
-  console.log(result.value);
+  await connection.invoke('RunCode', userStore.state.connection)
 }
 
 const selectedTheme = ref('chrome');
