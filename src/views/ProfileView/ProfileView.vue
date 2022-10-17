@@ -1,10 +1,7 @@
 <template>
   <NavbarComponent/>
   <div>
-
-<ProfileComponent :props="id">
-
-</ProfileComponent>
+    <ProfileComponent :props="id"/>
   </div>
 </template>
 
@@ -19,10 +16,9 @@ export default {
   props: {
     id: String,
   },
-
   inheritAttrs: false,
   components:{
-    ProfileComponent:defineAsyncComponent(() => import('../components/ProfileComponent') ),
+    ProfileComponent:defineAsyncComponent(() => import('../../components/ProfileComponent') ),
     NavbarComponent
   }
 }

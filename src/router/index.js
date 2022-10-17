@@ -2,7 +2,8 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import LoginView from '@/views/LoginView';
 import MainViewR from "@/views/MainViewR";
 import PostView from '@/views/PostView';
-import ProfileView from "@/views/ProfileView";
+import ProfileView from "@/views/ProfileView/ProfileView";
+import EditProfileView from "@/views/ProfileView/EditProfileView";
 const routes = [
   {
     path: '/',
@@ -30,6 +31,11 @@ const routes = [
     path: '/profile',
     name: 'profileCurrent',
     component: ProfileView
+  },
+  {
+    path: '/profile/edit',
+    name: 'editProfileView',
+    component: EditProfileView
   },
   {
     path: '/codeInput',
