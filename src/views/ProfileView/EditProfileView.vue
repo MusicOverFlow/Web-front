@@ -1,14 +1,10 @@
 <template>
-  <NavbarComponent/>
-  <div>
-    <EditProfileComponent/>
-  </div>
+  <EditProfileComponent/>
 </template>
 
 <script lang="ts">
 import userStore from "@/store/user"
 import {defineAsyncComponent} from "vue";
-import NavbarComponent from "@/components/Navbar/NavbarComponent.vue";
 export default {
   setup(){
     return(userStore)
@@ -18,8 +14,7 @@ export default {
   },
   inheritAttrs: false,
   components:{
-    EditProfileComponent:defineAsyncComponent(() => import('../../components/ProfileComponent/EditProfileComponent.vue') ),
-    NavbarComponent
+    EditProfileComponent:defineAsyncComponent(() => import('../../components/ProfileComponent/EditComponent') )
   }
 }
 </script>
