@@ -8,7 +8,7 @@
         <NavbarComponent/>
       </div>
       <div id="profil">
-        <div class="flex-1 flex align-items-center flex-column">
+        <div id="profilPic">
           <Image :src="userInfos.picUrl" alt="Image" width="250"
                  preview/>
           <input type="file" @change="onFileChanged">
@@ -18,9 +18,8 @@
                   v-bind:class="isFollowing ? 'pi pi-user-plus p-button-help' : 'pi pi-user-minus p-button-danger '"
                   @click="follow_unfollow"/>
         </div>
-        <form @submit.prevent="onSubmit">
-          <div class="flex-1 flex flex-column gap-5">
-            <h2>Profil</h2>
+        <div id="profilInfos">
+          <form @submit.prevent="onSubmit">
             <div class="p-inputgroup">
                              <span class="p-inputgroup-addon">
                                  <i class="pi pi-user"></i>
@@ -45,12 +44,12 @@
                              </span>
               <InputText v-model="userInfos.pseudonym" placeholder="Pseudo"/>
             </div>
-            <div class="flex gap-5">
+            <div id="confirmButtons">
               <Button label="Sauvegarder" type="submit" :loading="isLoading"/>
               <Button label="Annuler" class="p-button-text" @click="FuckGoBack"/>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
 
     </div>
@@ -212,6 +211,31 @@ const editPic = async () => {
 #profil{
   flex: 8;
   overflow: auto;
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+#profilPic{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+
+  margin-bottom: 2em;
+}
+#profilInfos > form {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  gap: 1em;
+  width: 30em;
+}
+#confirmButtons{
+  display: flex;
+  gap: 1em;
 }
 NavbarComponent{
   min-height: 100%;
