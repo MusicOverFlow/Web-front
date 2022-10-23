@@ -28,15 +28,24 @@
                   @click="follow_unfollow"/>
         </div>
         <div id="second_line">
-          <TabView lazy>
+          <TabView>
             <TabPanel header="Publications">
-              <PostsComponent/>
+              <MainThread
+                  v-for="(item) in userInfos.ownedPosts"
+                  :post="item"
+                  :key="item.id"/>
             </TabPanel>
             <TabPanel header="Posts aimés">
-              <LikedPostsComponent/>
+              <MainThread
+                  v-for="(item) in userInfos.likedPosts"
+                  :post="item"
+                  :key="item.id"/>
             </TabPanel>
             <TabPanel header="Commentaires aimés">
-              <LikedCommentsComponent/>
+              <MainThread
+                  v-for="(item) in userInfos.likedCommentaries"
+                  :post="item"
+                  :key="item.id"/>
             </TabPanel>
           </TabView>
         </div>
@@ -53,10 +62,8 @@ import {ref} from "vue";
 import accountService from "@/api/services/AccountService";
 import NavbarComponent from "@/components/Navbar";
 import {AccountWithPostsAndGroups} from "@/api/types/AccountWithPostsAndGroups";
+import MainThread from "@/components/MainThread/MainThread.vue";
 import {useRoute} from "vue-router";
-import PostsComponent from "@/components/ProfileComponent/PostsComponent.vue";
-import LikedPostsComponent from "@/components/ProfileComponent/LikedPostsComponent.vue";
-import LikedCommentsComponent from "@/components/ProfileComponent/LikedCommentsComponent.vue";
 import TabView from 'primevue/tabview';
 import TabPanel from 'primevue/tabpanel';
 
@@ -77,7 +84,7 @@ let emptyAccount: AccountWithPostsAndGroups = {
   likedPosts: [],
   likedCommentaries: [],
   groups: [],
-  Pseudonym: "",
+  pseudonym: "",
   picUrl: "",
   follows: [],
 }
@@ -117,6 +124,13 @@ const isFollowingIcon = () => {
 }
 
 isFollowingIcon();
+
+const setOwnerPosts = async () => {
+  userInfos.value.ownedPosts.forEach((post) => {
+    post.owner = userInfos.value;
+  });
+}
+setOwnerPosts();
 
 const follow_unfollow = async () => {
   const res = await accountService.follow(userStore.state.jwt, userInfos.value.mailAddress)
@@ -172,5 +186,9 @@ Image {
 
 #first_line > div {
   margin-right: 5em;
+}
+
+MainThread {
+  margin: 1em;
 }
 </style>
