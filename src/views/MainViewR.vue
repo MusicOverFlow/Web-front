@@ -8,7 +8,9 @@
       </MainView>
     </div>
     <div id="ide">
-      <p>IDE</p>
+      <CodeInputComponent>
+
+      </CodeInputComponent>
     </div>
   </div>
 </template>
@@ -16,6 +18,7 @@
 <script lang="ts">
 import userStore from "@/store/user"
 import {defineAsyncComponent} from "vue";
+import CodeInputComponent from "@/components/codeInput/CodeInputComponent.vue";
 export default {
   setup(){
     return(userStore)
@@ -23,6 +26,7 @@ export default {
 
   inheritAttrs: false,
   components:{
+    CodeInputComponent,
     MainView:defineAsyncComponent(() => import('../views/MainView') ),
     NavbarComponent:defineAsyncComponent(() => import('../components/Navbar') ),
   }

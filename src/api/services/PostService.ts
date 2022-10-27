@@ -2,7 +2,9 @@ import apiClient from "@/http-common";
 import {Post} from "@/api/types/Post";
 
 export interface PostCreateProps {
-    Content: string
+    Content: string,
+    ScriptLanguage: string,
+    Script: string,
 }
 
 class PostService {

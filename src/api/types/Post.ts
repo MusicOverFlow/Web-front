@@ -12,6 +12,8 @@ export interface Post {
     group:Group,
     likes:Account[],
     likesCount:number,
+    scriptLanguage:string,
+    script:string,
 
     commentaries:Commentary[],
     musicUrl?:string,

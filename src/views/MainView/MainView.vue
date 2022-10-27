@@ -3,6 +3,7 @@
   <CreatePost @publishPost="publishPost"></CreatePost>
 
   <div class="MainView" id="container">
+
     <div class="MainView">
       <MainThread
           v-for="(item) in refPosts"
@@ -33,9 +34,9 @@ onMounted(async () => {
 
 
 
-const publishPost = async (title,content) => {
+const publishPost = async (title,content,scriptLanguage,script) => {
 
-  const postPublished = await postService.create({Content: content}, userStore.state.jwt);
+  const postPublished = await postService.create({Content: content,ScriptLanguage:scriptLanguage,Script:script}, userStore.state.jwt);
   refPosts.value.unshift(postPublished)
 
 }

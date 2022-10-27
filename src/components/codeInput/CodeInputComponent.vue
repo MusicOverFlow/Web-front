@@ -1,7 +1,7 @@
 <template>
   <div id="app">
 
-    <div class="flex">
+    <div class="flex flex-col my-4">
       <div id="editor" class="flex-1">
         <v-ace-editor
             v-model:value="content"
@@ -12,30 +12,35 @@
             style="height: 300px"
         />
       </div>
-      <div id="run" class="flex-1 pl-10 pr-10 flex-col flex-none">
+      <div id="run" class="flex-1 pr-10  flex-row flex-none mb-4">
         <Dropdown v-model="selectedLanguage" :options="languages" optionLabel="name" optionValue="code"
                   placeholder="Select language"/>
         <Dropdown v-model="selectedTheme" :options="themes" optionLabel="name" optionValue="code"
                   placeholder="Select theme"/>
 
-        <Button label="Run" @click="run" icon="pi pi-play" class="p-button-text"/>
+        <Button label="Run" @click="run" icon="pi pi-play" class="p-button-info"/>
       </div>
       <div id="output" class="flex-1 flex-grow">
-        <v-ace-editor
-            v-model:value="result"
-            @init="editorInit"
-            :lang=selectedLanguage
-            :theme=selectedTheme
-            style="height: 300px"
-            readonly
-        />
+
+        <Panel header="Result">
+          <p>{{result }}</p>
+        </Panel>
+        <!--        <v-ace-editor-->
+        <!--            v-model:value="result"-->
+        <!--            @init="editorInit"-->
+        <!--            :lang=selectedLanguage-->
+        <!--            :theme=selectedTheme-->
+        <!--            style="height: 300px"-->
+        <!--            readonly-->
+        <!--        />-->
       </div>
     </div>
   </div>
-  <Button label="Connect" @click="connect" icon="pi pi-play" class="p-button-text"/>
+  <Button label="Connect" @click="connect" icon="pi pi-play" class="p-button-info"/>
 </template>
 
 <script setup lang="ts">
+import Panel from 'primevue/panel';
 import Dropdown from 'primevue/dropdown';
 import {VAceEditor} from 'vue3-ace-editor';
 import Button from "primevue/button";
@@ -48,13 +53,14 @@ import CodeExecutionService from "@/api/services/CodeExecutionService";
 import {useRoute} from "vue-router";
 
 const result = ref('');
-const selectedLanguage = ref();
+let selectedLanguage = ref();
 let content = ref();
-
+userStore.state.codeInput = content;
+userStore.state.codeType = selectedLanguage;
 const params = useRoute().params as { id: string };
 
 console.log(params.id)
-if(params.id == "new"){
+if (params.id == "new") {
   params.id = null
 }
 
@@ -96,7 +102,6 @@ const onChangeSignalR = () => {
  // signalr.invoke('UpdateContent', [userStore.state.connection,content]);*/
   console.log(userStore.state.connection)
   connection.invoke('UpdateContent', userStore.state.connection, content.value).then((res) => {
-    console.log("t")
     console.log(res)
 
   }).catch((err) => {
@@ -109,7 +114,7 @@ const onChangeSignalR = () => {
 
 connection.on('ReceiveContent', (message) => {
   /* do stuff */
-  if(message != content.value) {
+  if (message != content.value) {
     content.value = message
   }
 

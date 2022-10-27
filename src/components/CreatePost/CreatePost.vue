@@ -1,25 +1,40 @@
 <template>
   <div class="MainView" id="container">
     <form id=createPost
-          @submit="$emit('publishPost',localProps.title,localProps.content); clearContent(localProps) ">
-      <Textarea id="content" v-model="localProps.content" :autoResize="true" rows="5" cols="50" maxlength="400"
-                placeholder="Quoi de neuf ?" required="true"/>
-      <div class="col-start-1">
-        <Button icon="pi pi-check" label="Publier" type="submit"/>
+          @submit="$emit('publishPost',localProps.title,localProps.content,userStore.state.codeType,userStore.state.codeInput); clearContent(localProps);clear(codeContent) ">
 
-<!--        <Button icon="pi pi-times" label="Cancel" class="p-button-secondary" style="margin-left: .5em"
-                @click="clearContent"
-        />-->
+      <div class="flex flex-row">
+        <div class="flex flex-1 flex-col">
+      <Textarea id="content" v-model="localProps.content" :autoResize="true" rows="5" cols="30"
+                maxlength="4000"
+                placeholder="Quoi de neuf ?" required="true"/>
+          <Button class="flex w-4" icon="pi pi-check" label="Publier" type="submit"/>
+          <div class="field-checkbox">
+            <Checkbox inputId="binary" v-model="checked" :binary="true"/>
+            <label for="binary">Envoyer le code</label>
+          </div>
+        </div>
+        <!--        <div class="flex flex-1 flex-col">-->
+        <!--        <Textarea id="content" v-model="userStore.state.codeType" :autoResize="true" rows="5" cols="30"-->
+        <!--                  maxlength="4000"-->
+        <!--                  placeholder="Insert ton code !" required="true" @change="printBoth()"/>-->
+        <!--          <Dropdown class="flex w-6" v-model="selectedLanguage" :options="languages" optionLabel="name" optionValue="code"-->
+        <!--                    placeholder="Select language"/>-->
+        <!--        </div>-->
       </div>
+
+
     </form>
-    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
 import Button from "primevue/button";
 import Textarea from "primevue/textarea";
 import {ref} from "vue";
-
+//import Dropdown from "primevue/dropdown";
+import userStore from "@/store/user"
+import Checkbox from 'primevue/checkbox';
 // eslint-disable-next-line no-undef
 const props = defineProps({
   content: {
@@ -27,12 +42,30 @@ const props = defineProps({
     default: "",
   },
 })
-
+//const selectedLanguage = ref();
 let localProps = ref({...props});
+const checked = ref(false);
 
 const clearContent = async (localProps) => {
   localProps.content = "";
 }
+
+const clear = async (codeContent: string) => {
+  console.log(codeContent)
+  codeContent = "";
+  console.log(codeContent)
+}
+
+// const languages = ref([
+//   {name: 'Python', code: 'python'},
+//   {name: 'C     ', code: 'c'}
+// ]);
+
+let codeContent = ref();
+codeContent = userStore.state.codeInput
+// const printBoth = () => {
+//   console.log(codeContent)
+//   console.log(userStore.state.codeInput)}
 </script>
 
 <style scoped>

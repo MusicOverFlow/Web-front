@@ -1,4 +1,4 @@
-import { computed, reactive } from 'vue'
+import {computed, reactive, ref} from 'vue'
 import AuthService, {LoginProps, LoginResponse, RegisterProps} from "@/api/services/AuthService";
 import {RegisterResponse} from "@/api/services/AccountService";
 import {HubConnection} from '@microsoft/signalr';
@@ -7,10 +7,12 @@ const state = reactive({
     jwt: '',
     error: '',
     connection: '',
+    codeInput: ref(),
+    codeType: ref(),
 })
 
 const getters = reactive({
-    isLoggedIn: computed(() => state.jwt !== '')
+    isLoggedIn: computed(() => state.jwt !== ''),
 })
 
 const actions = {

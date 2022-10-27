@@ -16,7 +16,12 @@
             <small v-if="post.group">{{ post.group.name }}</small>
             <!-- <UserIconComponent/> -->
             <p>{{ post.content }}</p>
+            <Panel header="Code" :toggleable="true">
+
+              <p>{{ post.script }}</p>
+            </Panel>
           </div>
+
         </div>
 
       </template>
@@ -33,9 +38,11 @@
             />
           </div>
           <div v-else>
-            <input type="file" @change="onFileChanged">
-            <Button @click="onUpload(post.id)">Add music</Button>
+            <input type="file" name="file" id="file" class="inputfile"
+                   @change="onFileChanged($event);onUpload(post.id,post)">
+            <label for="file" class="p-button ">Add music</label>
           </div>
+
         </div>
       </template>
     </Card>
@@ -47,19 +54,25 @@
 
 
 import postService from "@/api/services/PostService";
+import Panel from "primevue/panel";
+
 const selectedFile = ref<File>();
+let code = ref<string>();
+code.value = userStore.state.codeInput
 
 const onFileChanged = (event: Event) => {
   const file = (event.target as HTMLInputElement).files[0];
   selectedFile.value = file;
 };
 
-const onUpload = async (id:string) => {
+
+const onUpload = async (id: string, post: Post) => {
   if (selectedFile.value) {
     const formData = new FormData();
     formData.append('file', selectedFile.value);
-    const music = await postService.updateMusic(formData,userStore.state.jwt,id);
+    const music = await postService.updateMusic(formData, userStore.state.jwt, id);
     console.log(music)
+    post.musicUrl = music.musicUrl;
   }
 };
 
@@ -74,6 +87,8 @@ import router from '@/router';
 import accountService from "@/api/services/AccountService";
 import userStore from "@/store/user";
 import {ref} from "vue";
+import {Post} from "@/api/types/Post";
+
 
 export default {
   props: ['post'],
@@ -83,7 +98,8 @@ export default {
     return {
       liked: false,
       commented: false,
-      selectedFile : ref<File>()
+      selectedFile: ref<File>(),
+      postCopy: this.post,
     }
   },
   components: {
@@ -104,6 +120,11 @@ export default {
     },
     goToProfile(mailAddress) {
       router.push({name: "profile", params: {id: mailAddress}});
+    },
+    getScriptUrl() {
+      return fetch(this.post.scriptUrl).then((r) => {
+        r.text()
+      });
     },
     /* onFileChanged(event: Event) {
       const file = (event.target as HTMLInputElement).files[0];
@@ -131,10 +152,20 @@ export default {
 .card_image {
   width: 50px;
   height: 50px;
-  border-radius:50%;
+  border-radius: 50%;
   object-fit: cover;
   cursor: pointer;
 }
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
 
 .card_owner {
   cursor: pointer;
