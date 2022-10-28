@@ -1,17 +1,19 @@
 <template>
   <div class="MainView" id="container">
     <form id=createPost
-          @submit="$emit('publishPost',localProps.title,localProps.content,userStore.state.codeType,userStore.state.codeInput); clearContent(localProps);clear(codeContent) ">
+          @submit="$emit('publishPost',localProps.title,localProps.content,checked? userStore.state.codeType : '',checked?userStore.state.codeInput : ''); clearContent(localProps);clear(codeContent) ">
 
       <div class="flex flex-row">
         <div class="flex flex-1 flex-col">
       <Textarea id="content" v-model="localProps.content" :autoResize="true" rows="5" cols="30"
                 maxlength="4000"
                 placeholder="Quoi de neuf ?" required="true"/>
-          <Button class="flex w-4" icon="pi pi-check" label="Publier" type="submit"/>
-          <div class="field-checkbox">
-            <Checkbox inputId="binary" v-model="checked" :binary="true"/>
-            <label for="binary">Envoyer le code</label>
+          <div class="flex flex-row">
+            <Button class="flex w-4" icon="pi pi-check" label="Publier" type="submit"/>
+            <div class="field-checkbox">
+              <Checkbox inputId="binary" v-model="checked" :binary="true"/>
+              <label for="binary">Envoyer le code</label>
+            </div>
           </div>
         </div>
         <!--        <div class="flex flex-1 flex-col">-->

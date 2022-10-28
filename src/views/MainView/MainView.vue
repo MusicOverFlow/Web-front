@@ -35,7 +35,7 @@ onMounted(async () => {
 
 
 const publishPost = async (title,content,scriptLanguage,script) => {
-
+  console.log(scriptLanguage,script)
   const postPublished = await postService.create({Content: content,ScriptLanguage:scriptLanguage,Script:script}, userStore.state.jwt);
   refPosts.value.unshift(postPublished)
 

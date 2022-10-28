@@ -16,7 +16,7 @@
             <small v-if="post.group">{{ post.group.name }}</small>
             <!-- <UserIconComponent/> -->
             <p>{{ post.content }}</p>
-            <Panel header="Code" :toggleable="true">
+            <Panel v-if="post.script" header="Code" :toggleable="true">
 
               <p>{{ post.script }}</p>
             </Panel>
