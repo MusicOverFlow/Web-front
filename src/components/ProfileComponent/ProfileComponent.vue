@@ -9,7 +9,7 @@
     <div id="profil">
       <div id="content">
         <div id="first_line">
-          <Image :src="userInfos.picUrl" alt="Image" width="100"/>
+          <img id="profilPic" :src="userInfos.picUrl" alt="ProfilPic"/>
           <div>
             <b>{{ userInfos.pseudonym }}</b>
             <br/>
@@ -55,7 +55,6 @@
 </template>
 
 <script lang="ts" setup>
-import Image from "primevue/image";
 import Button from "primevue/button";
 import userStore from "@/store/user"
 import {ref} from "vue";
@@ -151,7 +150,7 @@ const editPic = async () => {
 }*/
 </script>
 <style scoped>
-Image {
+#profilPic {
   width: 100px;
   height: 100px;
   border-radius: 50%;

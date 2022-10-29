@@ -197,6 +197,7 @@ ul li {
 #header-profile-pic {
   width: 90px;
   height: 90px;
+  border-radius: 50%;
 }
 
 #mobile-menu {
