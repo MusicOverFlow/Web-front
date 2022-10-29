@@ -1,13 +1,13 @@
 <template>
   <nav class="shadow bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
     <div class="container justify-between items-center mx-auto">
-      <div class="items-center">
+      <div class="items-center" id="header-headline">
         <router-link to="/main">
-          <img src="@/assets/logo.png" class="h-6 sm:h-9" alt="MusicOverflow Logo">
-          <span class="self-center text-xl font-semibold whitespace-nowrap">MusicOverflow</span>
+          <img src="@/assets/logo.png" id="header-logo" alt="MusicOverflow Logo">
+          <span class="self-center text-xl font-semibold whitespace-nowrap" id="header-title">MusicOverflow</span>
         </router-link>
         <Image :src="userInfos.picUrl"
-               style="width: 90px; height: 90px;"
+               id="header-profile-pic"
                v-if="!!userInfos.picUrl"
         />
       </div>
@@ -29,6 +29,14 @@
       <div class="w-full md:block md:w-auto" id="mobile-menu">
         <div>
           <ul class="md:space-x-8 md:mt-0 md:text-sm md:font-medium">
+            <router-link to="/main">
+            <li>
+              <div class="navButton">
+                <i class="pi pi-home"></i>
+                <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Accueil</a>
+              </div>
+            </li>
+            </router-link>
             <router-link to="/groups">
               <li>
                 <div class="navButton">
@@ -38,14 +46,13 @@
                 </div>
               </li>
             </router-link>
-            <router-link to="/profile">
-              <li>
-                <div class="navButton">
-                  <i class="pi pi-user"></i>
-                  <span
-                      class="block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Profile</span>
-                </div>
-              </li>
+            <router-link to="/profile" >
+            <li>
+              <div class="navButton">
+                <i class="pi pi-user"></i>
+                <span class="block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Profil</span>
+              </div>
+            </li>
             </router-link>
             <router-link to="/pipeline">
               <li>
@@ -176,7 +183,16 @@ ul li {
   margin-bottom: 10px;
 }
 
-#mobile-menu {
+#header-logo{
+  height: 2.25rem;
+}
+
+#header-profile-pic{
+  width: 90px;
+  height: 90px;
+}
+
+#mobile-menu{
   margin-top: 1em;
   height: 82%;
   overflow: scroll;
@@ -184,5 +200,26 @@ ul li {
   align-items: stretch;
   flex-direction: column;
   justify-content: space-between;
+}
+
+@media (max-width: 1510px) {
+  #header-headline{
+    display: flex;
+  }
+  #header-title{
+    display: none;
+  }
+  #header-logo{
+    height: 1.5rem;
+  }
+  #header-profile-pic{
+    margin-left: 1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  #mobile-menu{
+    height: 91%;
+    margin-top: 3em;
+  }
 }
 </style>

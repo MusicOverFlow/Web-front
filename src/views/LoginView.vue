@@ -1,5 +1,6 @@
 <template>
   <main>
+    <img src="@/assets/logo.png" id="login-logo" alt="MusicOverflow Logo">
     <h1>Bienvenue sur MusicOverflow</h1>
     <div id="container" class="flex">
       <div class="col-5 flex align-items-center justify-content-center">
@@ -44,6 +45,12 @@ main {
 #container {
   margin-left: 10em;
   margin-right: 10em;
+}
+
+#login-logo {
+  width: 5em;
+  height: 5em;
+  margin-top: 2em;
 }
 
 h1 {

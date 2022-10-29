@@ -27,14 +27,13 @@
       </template>
       <template #footer>
         <div class="flex">
-          <Button v-bind:class="liked ? 'pi pi-heart-fill ':'pi pi-heart'" class="p-button-text" label="Like"
-                  @click="like"/>
+          <Button :icon="liked ? 'pi pi-heart-fill ':'pi pi-heart'" class="p-button-text" label="Like" @click="like"/>
           <Button icon="pi pi-comment" class="p-button-text" label="Commenter" @click="comment"/>
           <div v-if="post.musicUrl">
             <AudioPlayer :option="{
-        src: post.musicUrl,
-        title: post.musicUrl.split('.').reverse()[1],
-   }"
+                src: post.musicUrl,
+                title: post.musicUrl.split('.').reverse()[1],
+             }"
             />
           </div>
           <div v-else>

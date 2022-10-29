@@ -2,7 +2,10 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import LoginView from '@/views/LoginView';
 import MainViewR from "@/views/MainViewR";
 import PostView from '@/views/PostView';
-import ProfileView from "@/views/ProfileView";
+import ProfileView from "@/views/ProfileView/ProfileView";
+import EditProfileView from "@/views/ProfileView/EditProfileView";
+import PipelineView from "@/views/PipelineView";
+
 const routes = [
   {
     path: '/',
@@ -32,6 +35,11 @@ const routes = [
     component: ProfileView
   },
   {
+    path: '/profile/edit',
+    name: 'editProfileView',
+    component: EditProfileView
+  },
+  {
     path: '/codeInput',
     name: 'codeInput',
     component: CodeInputView
@@ -47,11 +55,16 @@ const routes = [
     component: SingleGroupView
   },
   {
+    path: '/pipeline',
+    name: 'pipeline',
+    component: PipelineView
+  },
+  {
     path: '/ide/:id',
     name: 'ide',
     component: CodeInputView,
     props: true
-  },
+  }
 
 
 ]

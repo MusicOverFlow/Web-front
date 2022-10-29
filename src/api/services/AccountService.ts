@@ -142,11 +142,14 @@ class AccountService {
     }
     async update(update:UpdateProps,token:string): Promise<number | undefined> {
         try {
+            console.log("try to update")
+            console.log(update)
             const result = await apiClient.put("/accounts/profil",JSON.stringify(update),{
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
             })
+            console.log("updated")
             console.log(result)
             return result.status
         } catch (e) {
