@@ -5,13 +5,13 @@
         <h1>Se connecter</h1>
       </div>
       <div class="col-12">
-        <InputText id="email1" placeholder="Adresse mail" type="text" v-model="form.username" required/>
+        <InputText id="email1" v-model="form.username" placeholder="Adresse mail" required type="text"/>
       </div>
       <div class="col-12">
-        <Password id="password1" placeholder="Mot de passe" v-model="form.password" :feedback="false" required/>
+        <Password id="password1" v-model="form.password" :feedback="false" placeholder="Mot de passe" required/>
       </div>
       <div class="col-12">
-        <Button label="Se connecter" type="submit" :loading="isLoading"/>
+        <Button :loading="isLoading" label="Se connecter" type="submit"/>
       </div>
     </div>
   </form>
@@ -22,10 +22,11 @@ import InputText from 'primevue/inputtext';
 import Password from 'primevue/password';
 import Button from 'primevue/button';
 
-import {defineComponent,reactive, ref} from "vue";
+import {defineComponent, reactive, ref} from "vue";
 import userStore from "@/store/user"
 import router from '@/router';
 import {useToast} from "primevue/usetoast";
+
 export default defineComponent({
   setup() {
     const isLoading = ref(false);
@@ -44,19 +45,18 @@ export default defineComponent({
       })
 
       if (loggedIn) {
-        await router.push({name:"home"});
-      }
-      else {
+        await router.push({name: "home"});
+      } else {
         showWrongCredentials(); // TODO gtouchet: toast not showing
       }
       isLoading.value = false;
     }
 
     const showWrongCredentials = () => {
-      toast.add({severity:'error', summary: 'Wrong credentials', detail:'Try again', life: 3000});
+      toast.add({severity: 'error', summary: 'Wrong credentials', detail: 'Try again', life: 3000});
     }
 
-    return{form, userStore, isLoading, onSubmit}
+    return {form, userStore, isLoading, onSubmit}
   },
   name: "LoginComponent",
   components: {

@@ -1,7 +1,6 @@
 import {computed, reactive, ref} from 'vue'
 import AuthService, {LoginProps, LoginResponse, RegisterProps} from "@/api/services/AuthService";
 import {RegisterResponse} from "@/api/services/AccountService";
-import {HubConnection} from '@microsoft/signalr';
 
 const state = reactive({
     jwt: '',
@@ -16,8 +15,8 @@ const getters = reactive({
 })
 
 const actions = {
-    async login(userDetails:LoginProps) {
-        const user:LoginResponse|undefined = await AuthService.login(userDetails)
+    async login(userDetails: LoginProps) {
+        const user: LoginResponse | undefined = await AuthService.login(userDetails)
 
         if (user == undefined || user.jwt == undefined) {
             state.error = 'Could not find user.'
@@ -29,8 +28,8 @@ const actions = {
         console.log(state)
         return true
     },
-    async register(userDetails:RegisterProps) {
-        const user:RegisterResponse|undefined = await AuthService.register(userDetails)
+    async register(userDetails: RegisterProps) {
+        const user: RegisterResponse | undefined = await AuthService.register(userDetails)
 
         if (user == undefined) {
             state.error = 'error'
@@ -43,4 +42,4 @@ const actions = {
     }
 }
 
-export default { state, getters, ...actions }
+export default {state, getters, ...actions}

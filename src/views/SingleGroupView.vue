@@ -1,21 +1,22 @@
 <template>
-<div>
-  <SingleGroupComponent>
+  <div>
+    <SingleGroupComponent>
 
-  </SingleGroupComponent>
-</div>
+    </SingleGroupComponent>
+  </div>
 </template>
 
 <script lang="ts">
 import userStore from "@/store/user"
 
 import {defineAsyncComponent} from "vue";
+
 export default {
 
-  setup(){
-    return(userStore)
-  },  components:{
-    SingleGroupComponent:defineAsyncComponent(() => import('../components/SingleGroupComponent') )
+  setup() {
+    return (userStore)
+  }, components: {
+    SingleGroupComponent: defineAsyncComponent(() => import('../components/SingleGroupComponent'))
   },
   inheritAttrs: false,
 

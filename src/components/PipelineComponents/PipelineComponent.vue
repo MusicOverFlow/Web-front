@@ -2,153 +2,153 @@
   <div id="mainDiv">
     <div id="headline">
       <div id="allwaysDisplayed">
-        <h1>{{headingSentence}}</h1>
+        <h1>{{ headingSentence }}</h1>
         <input type="file" @change="onFileChanged">
       </div>
-      <div class="contextuallyDisplayed" v-if="isPicture()">
+      <div v-if="isPicture()" class="contextuallyDisplayed">
         <img :src="getImage()" alt="Image" width="200"/>
-        <Button label="Télécharger l'image modifiée"
+        <Button class="p-button"
                 icon="pi pi-download"
-                class="p-button"
+                label="Télécharger l'image modifiée"
                 @click="downloadPicture"/>
       </div>
-      <div class="contextuallyDisplayed" v-if="isAudio()">
-        <Button label="Télécharger le son modifié"
+      <div v-if="isAudio()" class="contextuallyDisplayed">
+        <Button class="p-button"
                 icon="pi pi-download"
-                class="p-button"
+                label="Télécharger le son modifié"
                 @click="downloadAudio"/>
       </div>
     </div>
     <div id="content">
-      <div class="optionList" v-if="isPicture()">
-          <label class="optionSelect" for="grayscale">
-            <img class="optionIllustration" src="@/assets/grayscale.png" alt="grayscale"/>
-            <p>Noir et blanc</p>
-            <input
-                type="checkbox"
-                id="grayscale"
-                class="optionCheckbox"
-                value="Grayscale"
-                v-model="checkedImageOptions">
-          </label>
-          <label class="optionSelect" for="invert">
-            <img class="optionIllustration" src="@/assets/invert.png" alt="invert"/>
-            <p>Inversion des couleurs</p>
-            <input
-                type="checkbox"
-                id="invert"
-                class="optionCheckbox"
-                value="Invert"
-                v-model="checkedImageOptions">
-          </label>
-          <label class="optionSelect" for="blur">
-            <img class="optionIllustration" src="@/assets/blur.jpg" alt="blur"/>
-            <p>Flou</p>
-            <input
-                type="checkbox"
-                id="blur"
-                class="optionCheckbox"
-                value="Blur"
-                v-model="checkedImageOptions">
-          </label>
-          <label class="optionSelect" for="flipHorizontal">
-            <img class="optionIllustration" src="@/assets/flip_horizontal.png" alt="flipHorizontal"/>
-            <p>Inversion horizontale</p>
-            <input
-                type="checkbox"
-                id="flipHorizontal"
-                class="optionCheckbox"
-                value="FlipHorizontal"
-                v-model="checkedImageOptions">
-          </label>
-          <label class="optionSelect" for="flipVertical">
-            <img class="optionIllustration" src="@/assets/flip_vertical.png" alt="flipVertical"/>
-            <p>Inversion verticale</p>
-            <input
-                type="checkbox"
-                id="flipVertical"
-                class="optionCheckbox"
-                value="FlipVertical"
-                v-model="checkedImageOptions">
-          </label>
-          <label class="optionSelect" for="rotate">
-            <img class="optionIllustration" src="@/assets/rotate.png" alt="rotate"/>
-            <p>Rotation</p>
-            <input
-                type="checkbox"
-                id="rotate"
-                class="optionCheckbox"
-                value="Rotate-90"
-                v-model="checkedImageOptions">
-          </label>
-          <label class="optionSelect" for="upSize">
-            <img class="optionIllustration" src="@/assets/stonks.png" alt="upSize"/>
-            <p>Augmentation de la taille</p>
-            <input
-                type="checkbox"
-                id="upSize"
-                class="optionCheckbox"
-                value="Resize-200"
-                v-model="checkedImageOptions">
-          </label>
-          <label class="optionSelect" for="downSize">
-            <img class="optionIllustration" src="@/assets/stinks.jpg" alt="downSize"/>
-            <p>Diminution de la taille</p>
-            <input
-                type="checkbox"
-                id="downSize"
-                class="optionCheckbox"
-                value="Resize-050"
-                v-model="checkedImageOptions">
-          </label>
+      <div v-if="isPicture()" class="optionList">
+        <label class="optionSelect" for="grayscale">
+          <img alt="grayscale" class="optionIllustration" src="@/assets/grayscale.png"/>
+          <p>Noir et blanc</p>
+          <input
+              id="grayscale"
+              v-model="checkedImageOptions"
+              class="optionCheckbox"
+              type="checkbox"
+              value="Grayscale">
+        </label>
+        <label class="optionSelect" for="invert">
+          <img alt="invert" class="optionIllustration" src="@/assets/invert.png"/>
+          <p>Inversion des couleurs</p>
+          <input
+              id="invert"
+              v-model="checkedImageOptions"
+              class="optionCheckbox"
+              type="checkbox"
+              value="Invert">
+        </label>
+        <label class="optionSelect" for="blur">
+          <img alt="blur" class="optionIllustration" src="@/assets/blur.jpg"/>
+          <p>Flou</p>
+          <input
+              id="blur"
+              v-model="checkedImageOptions"
+              class="optionCheckbox"
+              type="checkbox"
+              value="Blur">
+        </label>
+        <label class="optionSelect" for="flipHorizontal">
+          <img alt="flipHorizontal" class="optionIllustration" src="@/assets/flip_horizontal.png"/>
+          <p>Inversion horizontale</p>
+          <input
+              id="flipHorizontal"
+              v-model="checkedImageOptions"
+              class="optionCheckbox"
+              type="checkbox"
+              value="FlipHorizontal">
+        </label>
+        <label class="optionSelect" for="flipVertical">
+          <img alt="flipVertical" class="optionIllustration" src="@/assets/flip_vertical.png"/>
+          <p>Inversion verticale</p>
+          <input
+              id="flipVertical"
+              v-model="checkedImageOptions"
+              class="optionCheckbox"
+              type="checkbox"
+              value="FlipVertical">
+        </label>
+        <label class="optionSelect" for="rotate">
+          <img alt="rotate" class="optionIllustration" src="@/assets/rotate.png"/>
+          <p>Rotation</p>
+          <input
+              id="rotate"
+              v-model="checkedImageOptions"
+              class="optionCheckbox"
+              type="checkbox"
+              value="Rotate-90">
+        </label>
+        <label class="optionSelect" for="upSize">
+          <img alt="upSize" class="optionIllustration" src="@/assets/stonks.png"/>
+          <p>Augmentation de la taille</p>
+          <input
+              id="upSize"
+              v-model="checkedImageOptions"
+              class="optionCheckbox"
+              type="checkbox"
+              value="Resize-200">
+        </label>
+        <label class="optionSelect" for="downSize">
+          <img alt="downSize" class="optionIllustration" src="@/assets/stinks.jpg"/>
+          <p>Diminution de la taille</p>
+          <input
+              id="downSize"
+              v-model="checkedImageOptions"
+              class="optionCheckbox"
+              type="checkbox"
+              value="Resize-050">
+        </label>
       </div>
-      <div class="optionList" v-if="isAudio()">
-          <label class="optionSelect" for="downPitch">
-            <img class="optionIllustration" src="@/assets/down-arrow.png" alt="downPitch"/>
-            <p>Diminuer le ton</p>
-            <input
-                type="checkbox"
-                id="downPitch"
-                class="optionCheckbox"
-                value="Pitch-0,75"
-                v-model="checkedAudioOptions">
-          </label>
-          <label class="optionSelect" for="upPitch">
-            <img class="optionIllustration" src="@/assets/down-arrow.png" alt="upPitch"/>
-            <p>Augmenter le ton</p>
-            <input
-                type="checkbox"
-                id="upPitch"
-                class="optionCheckbox"
-                value="Pitch-1,25"
-                v-model="checkedAudioOptions">
-          </label>
-          <label class="optionSelect" for="fadeIn">
-            <img class="optionIllustration" src="@/assets/down-arrow.png" alt="fadeIn"/>
-            <p>Augmentation progressive au début</p>
-            <input
-                type="checkbox"
-                id="fadeIn"
-                class="optionCheckbox"
-                value="FadeIn-3"
-                v-model="checkedAudioOptions">
-          </label>
-          <label class="optionSelect" for="fadeIn">
-            <img class="optionIllustration" src="@/assets/down-arrow.png" alt="fadeIn"/>
-            <p>Diminution progressive à la fin</p>
-            <input
-                type="checkbox"
-                id="fadeIn"
-                class="optionCheckbox"
-                value="FadeOut-3"
-                v-model="checkedAudioOptions">
-          </label>
+      <div v-if="isAudio()" class="optionList">
+        <label class="optionSelect" for="downPitch">
+          <img alt="downPitch" class="optionIllustration" src="@/assets/down-arrow.png"/>
+          <p>Diminuer le ton</p>
+          <input
+              id="downPitch"
+              v-model="checkedAudioOptions"
+              class="optionCheckbox"
+              type="checkbox"
+              value="Pitch-0,75">
+        </label>
+        <label class="optionSelect" for="upPitch">
+          <img alt="upPitch" class="optionIllustration" src="@/assets/down-arrow.png"/>
+          <p>Augmenter le ton</p>
+          <input
+              id="upPitch"
+              v-model="checkedAudioOptions"
+              class="optionCheckbox"
+              type="checkbox"
+              value="Pitch-1,25">
+        </label>
+        <label class="optionSelect" for="fadeIn">
+          <img alt="fadeIn" class="optionIllustration" src="@/assets/down-arrow.png"/>
+          <p>Augmentation progressive au début</p>
+          <input
+              id="fadeIn"
+              v-model="checkedAudioOptions"
+              class="optionCheckbox"
+              type="checkbox"
+              value="FadeIn-3">
+        </label>
+        <label class="optionSelect" for="fadeIn">
+          <img alt="fadeIn" class="optionIllustration" src="@/assets/down-arrow.png"/>
+          <p>Diminution progressive à la fin</p>
+          <input
+              id="fadeIn"
+              v-model="checkedAudioOptions"
+              class="optionCheckbox"
+              type="checkbox"
+              value="FadeOut-3">
+        </label>
       </div>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import {ref} from "vue";
 import Button from "primevue/button";
 import pipelineService from "@/api/services/PipelineService";
@@ -182,7 +182,7 @@ const getImage = () => {
 
 const onFileChanged = (event: Event) => {
   selectedFile.value = (event.target as HTMLInputElement).files[0];
-  if(isPicture()){
+  if (isPicture()) {
     getImage();
   }
   headingSentence.value = "Choisissez les options que vous souhaitez appliquer ou changez de fichier";
@@ -190,7 +190,7 @@ const onFileChanged = (event: Event) => {
   checkedAudioOptions = ref([])
 };
 
-const downloadPicture = async() => {
+const downloadPicture = async () => {
   if (selectedFile.value) {
     const formData = new FormData();
     formData.append('scripts', checkedImageOptions.value.join('.'));
@@ -202,7 +202,7 @@ const downloadPicture = async() => {
   }
 }
 
-const downloadAudio = async() => {
+const downloadAudio = async () => {
   if (selectedFile.value) {
     const formData = new FormData();
     formData.append('scripts', checkedAudioOptions.value.join('.'));
@@ -220,6 +220,7 @@ const downloadAudio = async() => {
 h1 {
   font-size: 2em;
 }
+
 #mainDiv {
   display: flex;
   flex-direction: column;
@@ -306,8 +307,8 @@ h1 {
   width: 100px;
   height: 100px;
 }
-input[type=checkbox]
-{
+
+input[type=checkbox] {
   /* Double-sized Checkboxes */
   -ms-transform: scale(2); /* IE */
   -moz-transform: scale(2); /* FF */

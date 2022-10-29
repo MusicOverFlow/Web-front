@@ -9,10 +9,11 @@
 <script lang="ts">
 import userStore from "@/store/user"
 import CodeInputComponent from "@/components/codeInput/CodeInputComponent.vue";
+
 export default {
   components: {CodeInputComponent},
-  setup(){
-    return(userStore)
+  setup() {
+    return (userStore)
   },
   props: {
     id: String,

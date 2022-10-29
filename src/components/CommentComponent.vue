@@ -2,10 +2,10 @@
   <div class="container">
     <Card>
       <template #content>
-       <!-- <div class="flex">
-          <UserIconComponent/>
-          <p>{{ comment.content }}</p>
-        </div> -->
+        <!-- <div class="flex">
+           <UserIconComponent/>
+           <p>{{ comment.content }}</p>
+         </div> -->
         <div class="flex">
           <div class="flex-1 flex flex-column gap-5">
             <Image
@@ -24,29 +24,28 @@
         </div>
       </template>
       <template #footer>
-        <Button icon="pi pi-heart" class="p-button-text" label="Like" @click="like"/>
+        <Button class="p-button-text" icon="pi pi-heart" label="Like" @click="like"/>
       </template>
     </Card>
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import Card from "primevue/card";
 import Button from "primevue/button";
-import Image from "primevue/image";
-
-</script>
+import Image from "primevue/image";</script>
 
 <script lang="ts">
 import accountService from "@/api/services/AccountService";
 import userStore from "@/store/user";
 import router from '@/router';
+
 export default {
   props: ['comment'],
   inheritAttrs: false,
-  methods:{
-    async like(){
-      const likeResponse = await accountService.like(this.$props.post.id,userStore.state.jwt)
+  methods: {
+    async like() {
+      const likeResponse = await accountService.like(this.$props.post.id, userStore.state.jwt)
       console.log(likeResponse)
     },
     goToProfile(mailAddress) {

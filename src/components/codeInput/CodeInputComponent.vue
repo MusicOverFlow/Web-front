@@ -5,11 +5,11 @@
       <div id="editor" class="flex-1">
         <v-ace-editor
             v-model:value="content"
-            @init="editorInit"
-            @change="editorChange"
             :lang=selectedLanguage
             :theme=selectedTheme
             style="height: 300px"
+            @change="editorChange"
+            @init="editorInit"
         />
       </div>
       <div id="run" class="flex-1 pr-10  flex-row flex-none mb-4">
@@ -18,12 +18,12 @@
         <Dropdown v-model="selectedTheme" :options="themes" optionLabel="name" optionValue="code"
                   placeholder="Select theme"/>
 
-        <Button label="Run" @click="run" icon="pi pi-play" class="p-button-info"/>
+        <Button class="p-button-info" icon="pi pi-play" label="Run" @click="run"/>
       </div>
       <div id="output" class="flex-1 flex-grow">
 
         <Panel header="Result">
-          <p>{{result }}</p>
+          <p>{{ result }}</p>
         </Panel>
         <!--        <v-ace-editor-->
         <!--            v-model:value="result"-->
@@ -36,10 +36,10 @@
       </div>
     </div>
   </div>
-  <Button label="Connect" @click="connect" icon="pi pi-play" class="p-button-info"/>
+  <Button class="p-button-info" icon="pi pi-play" label="Connect" @click="connect"/>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import Panel from 'primevue/panel';
 import Dropdown from 'primevue/dropdown';
 import {VAceEditor} from 'vue3-ace-editor';

@@ -4,7 +4,12 @@
       <slot></slot>
     </template>
     <template #fallback>
-      <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+      <div class="lds-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </template>
   </Suspense>
 </template>
@@ -23,6 +28,7 @@ export default {
   height: 80px;
   margin: 100%;
 }
+
 .lds-ring div {
   box-sizing: border-box;
   display: block;
@@ -35,15 +41,19 @@ export default {
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   border-color: #3b97ff transparent transparent transparent;
 }
+
 .lds-ring div:nth-child(1) {
   animation-delay: -0.45s;
 }
+
 .lds-ring div:nth-child(2) {
   animation-delay: -0.3s;
 }
+
 .lds-ring div:nth-child(3) {
   animation-delay: -0.15s;
 }
+
 @keyframes lds-ring {
   0% {
     transform: rotate(0deg);

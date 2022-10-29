@@ -1,6 +1,6 @@
 <template>
   <main>
-    <img src="@/assets/logo.png" id="login-logo" alt="MusicOverflow Logo">
+    <img id="login-logo" alt="MusicOverflow Logo" src="@/assets/logo.png">
     <h1>Bienvenue sur MusicOverflow</h1>
     <div id="container" class="flex">
       <div class="col-5 flex align-items-center justify-content-center">
@@ -19,17 +19,18 @@
 import RegisterComponent from "@/components/RegisterComponent.vue";
 import LoginComponent from "@/components/LoginComponent.vue";
 
-import { defineComponent } from "vue";
+import {defineComponent} from "vue";
 import userStore from "@/store/user"
-export default defineComponent( {
+
+export default defineComponent({
   name: 'LoginView',
   components: {
     RegisterComponent,
     LoginComponent,
     // Divider
   },
-  setup(){
-    return { userStore }
+  setup() {
+    return {userStore}
   }
 })
 </script>

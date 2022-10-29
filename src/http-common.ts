@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from "axios";
+import axios, {AxiosInstance} from "axios";
 
 const apiClient: AxiosInstance = axios.create({
     baseURL: "https://localhost:7143/api",// "https://musicoverflowapi.azurewebsites.net/api",

@@ -27,7 +27,7 @@
         </div>
       </template>
       <template #footer>
-        <Button icon="pi pi-heart" class="p-button-text" label="Like" @click="like"/>
+        <Button class="p-button-text" icon="pi pi-heart" label="Like" @click="like"/>
       </template>
     </Card>
   </div>
@@ -46,12 +46,12 @@ export default {
       console.log(likeResponse)
     },
     goToProfile(mailAddress) {
-      router.push({ name: "profile", params: { id: mailAddress } });
+      router.push({name: "profile", params: {id: mailAddress}});
     }
   }
 }
 </script>
-<script setup lang="ts">
+<script lang="ts" setup>
 import Card from "primevue/card";
 import Button from "primevue/button";
 import Image from "primevue/image";

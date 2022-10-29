@@ -3,8 +3,8 @@
     <ul class='tabs__header'>
       <li v-for='(tab, index) in tabs'
           :key='tab.title'
-          @click='selectTab(index)'
-          :class='{"tab__selected": (index === selectedIndex)}'>
+          :class='{"tab__selected": (index === selectedIndex)}'
+          @click='selectTab(index)'>
         {{ tab.title }}
       </li>
     </ul>
@@ -20,20 +20,20 @@ export default {
       default: 'light'
     }
   },
-  data () {
+  data() {
     return {
       selectedIndex: 0, // the index of the selected tab,
       tabs: []         // all of the tabs
     }
   },
-  created () {
+  created() {
     this.tabs = this.$children
   },
-  mounted () {
+  mounted() {
     this.selectTab(0)
   },
   methods: {
-    selectTab (i) {
+    selectTab(i) {
       this.selectedIndex = i
 
       // loop over all the tabs
@@ -78,7 +78,7 @@ ul.tabs__header > li.tab__selected {
   min-height: 400px;
 }
 
-.tabs__light .tab{
+.tabs__light .tab {
   background-color: #fff;
 }
 
@@ -92,7 +92,7 @@ ul.tabs__header > li.tab__selected {
   color: #83FFB3;
 }
 
-.tabs__dark .tab{
+.tabs__dark .tab {
   background-color: #555;
   color: #eee;
 }

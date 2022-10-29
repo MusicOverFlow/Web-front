@@ -5,10 +5,10 @@
         <div class="flex">
           <div class="mr-4 flex flex-column gap-1">
             <img
-                class="card_image"
-                @click="goToProfile(post.owner.mailAddress)"
                 :src="post.owner.picUrl"
                 alt="imgPost"
+                class="card_image"
+                @click="goToProfile(post.owner.mailAddress)"
             >
           </div>
           <div class="flex-1 flex flex-column">
@@ -16,7 +16,7 @@
             <small v-if="post.group">{{ post.group.name }}</small>
             <!-- <UserIconComponent/> -->
             <p>{{ post.content }}</p>
-            <Panel v-if="post.script" header="Code" :toggleable="true">
+            <Panel v-if="post.script" :toggleable="true" header="Code">
 
               <p>{{ post.script }}</p>
             </Panel>
@@ -28,7 +28,7 @@
       <template #footer>
         <div class="flex">
           <Button :icon="liked ? 'pi pi-heart-fill ':'pi pi-heart'" class="p-button-text" label="Like" @click="like"/>
-          <Button icon="pi pi-comment" class="p-button-text" label="Commenter" @click="comment"/>
+          <Button class="p-button-text" icon="pi pi-comment" label="Commenter" @click="comment"/>
           <div v-if="post.musicUrl">
             <AudioPlayer :option="{
                 src: post.musicUrl,
@@ -37,9 +37,9 @@
             />
           </div>
           <div v-else>
-            <input type="file" name="file" id="file" class="inputfile"
+            <input id="file" class="inputfile" name="file" type="file"
                    @change="onFileChanged($event);onUpload(post.id,post)">
-            <label for="file" class="p-button ">Add music</label>
+            <label class="p-button " for="file">Add music</label>
           </div>
 
         </div>
@@ -49,7 +49,7 @@
 </template>
 
 
-<script setup lang="ts">
+<script lang="ts" setup>
 
 
 import postService from "@/api/services/PostService";

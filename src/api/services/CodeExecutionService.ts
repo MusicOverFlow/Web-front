@@ -1,4 +1,3 @@
-
 // create new axios instance with base url "https://localhost:7143/api/"
 // const apiClient: AxiosInstance = axios.create({
 //     baseURL: "https://localhost:7143/api/",
@@ -7,14 +6,13 @@
 //         "Access-Control-Allow-Origin": "*",
 
 
-
 import axios from "axios";
 
 
 class CodeExecutionService {
-    async execute(code:string,language:string): Promise< any | undefined> {
+    async execute(code: string, language: string): Promise<any | undefined> {
         try {
-            const result = await axios.post("https://localhost:7143/api/execute/" + language, code,{
+            const result = await axios.post("https://musicoverflowapi.azurewebsites.net/api/execute/" + language, code, {
                 headers: {
                     "Content-type": "application/text",
                     "Access-Control-Allow-Origin": "*",

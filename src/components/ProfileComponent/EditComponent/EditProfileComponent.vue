@@ -1,20 +1,21 @@
 <template>
   <div>
-<!--    <Toast />
-    <div id="profil" style="background-color: #aaaaaa" class="flex-auto m-10 col-start-1">
-    </div>-->
+    <!--    <Toast />
+        <div id="profil" style="background-color: #aaaaaa" class="flex-auto m-10 col-start-1">
+        </div>-->
     <div id="main" class="flex">
       <div id="navbar">
         <NavbarComponent/>
       </div>
       <div id="profil">
         <div id="profilPic">
-          <Image :src="userInfos.picUrl" alt="Image" width="250"
-                 preview/>
+          <Image :src="userInfos.picUrl" alt="Image" preview
+                 width="250"/>
           <input type="file" @change="onFileChanged">
           <Button @click="onUpload">Upload</Button>
 
-          <Button type="button" v-if="userCurrentInfo.mailAddress !== userInfos.mailAddress" :label="isFollowing ? 'Follow' : 'Unfollow'"
+          <Button v-if="userCurrentInfo.mailAddress !== userInfos.mailAddress" :label="isFollowing ? 'Follow' : 'Unfollow'"
+                  type="button"
                   v-bind:class="isFollowing ? 'pi pi-user-plus p-button-help' : 'pi pi-user-minus p-button-danger '"
                   @click="follow_unfollow"/>
         </div>
@@ -45,8 +46,8 @@
               <InputText v-model="userInfos.pseudonym" placeholder="Pseudo"/>
             </div>
             <div id="confirmButtons">
-              <Button label="Sauvegarder" type="submit" :loading="isLoading"/>
-              <Button label="Annuler" class="p-button-text" @click="FuckGoBack"/>
+              <Button :loading="isLoading" label="Sauvegarder" type="submit"/>
+              <Button class="p-button-text" label="Annuler" @click="FuckGoBack"/>
             </div>
           </form>
         </div>
@@ -59,7 +60,7 @@
 
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import Image from "primevue/image";
 import InputText from "primevue/inputtext";
 import Button from "primevue/button";
@@ -80,7 +81,7 @@ const isLoading = ref(false);
 const selectedFile = ref<File>();
 
 const showSuccess = () => {
-  toast.add({severity:'success', summary: 'Success', detail:'Changes saved', life: 3000});
+  toast.add({severity: 'success', summary: 'Success', detail: 'Changes saved', life: 3000});
 }
 
 const onFileChanged = (event: Event) => {
@@ -187,7 +188,6 @@ const FuckGoBack = async () => {
 }
 
 
-
 /*
 const editPic = async () => {
   /*const res = await accountService.updatePic(userInfos.value.picUrl,userStore.state.jwt)
@@ -204,11 +204,13 @@ const editPic = async () => {
   height: 100vh;
   width: 100vw;
 }
-#navbar{
+
+#navbar {
   flex: 1;
   overflow: auto;
 }
-#profil{
+
+#profil {
   flex: 8;
   overflow: auto;
   align-items: center;
@@ -216,7 +218,8 @@ const editPic = async () => {
   justify-content: flex-start;
   flex-direction: column;
 }
-#profilPic{
+
+#profilPic {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -225,6 +228,7 @@ const editPic = async () => {
 
   margin-bottom: 2em;
 }
+
 #profilInfos > form {
   display: flex;
   flex-direction: column;
@@ -233,11 +237,13 @@ const editPic = async () => {
   gap: 1em;
   width: 30em;
 }
-#confirmButtons{
+
+#confirmButtons {
   display: flex;
   gap: 1em;
 }
-NavbarComponent{
+
+NavbarComponent {
   min-height: 100%;
   min-width: 100%;
 }

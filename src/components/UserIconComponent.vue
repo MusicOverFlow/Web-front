@@ -1,7 +1,7 @@
 <template>
-  <img src="https://soccerpointeclaire.com/wp-content/uploads/2021/06/default-profile-pic-e1513291410505.jpg"
-       id="userIcon"
-       alt="User Icon"/>
+  <img id="userIcon"
+       alt="User Icon"
+       src="https://soccerpointeclaire.com/wp-content/uploads/2021/06/default-profile-pic-e1513291410505.jpg"/>
 </template>
 
 <script>

@@ -2,51 +2,52 @@ import apiClient from "@/http-common";
 
 import {AccountWithPostsAndGroups} from "@/api/types/AccountWithPostsAndGroups";
 import {Account} from "../types/Account";
-import {Group, GroupWithMembers, GroupWithPosts} from "@/api/types/Group";
+import {Group, GroupWithMembers} from "@/api/types/Group";
 import {Post} from "@/api/types/Post";
 
 export interface RegisterProps {
-    Name:string;
-    Description:string
+    Name: string;
+    Description: string
 }
 
 export interface RegisterResponse {
     Id: string,
     Name: string,
-    Description : string,
-    CreatedAt : string,
-    Owner : Account,
+    Description: string,
+    CreatedAt: string,
+    Owner: Account,
 }
 
 class GroupService {
-   /* async create(groupDetails: RegisterProps,token:string): Promise<Group | undefined> {
-        try {
-            const result: Group = await apiClient.post("/groups",
-                JSON.stringify(groupDetails),{
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                })
-            console.log(result)
-            return result
-        } catch (e) {
-            console.log(e)
-        }
+    /* async create(groupDetails: RegisterProps,token:string): Promise<Group | undefined> {
+         try {
+             const result: Group = await apiClient.post("/groups",
+                 JSON.stringify(groupDetails),{
+                     headers: {
+                         'Authorization': `Bearer ${token}`
+                     }
+                 })
+             console.log(result)
+             return result
+         } catch (e) {
+             console.log(e)
+         }
 
-    }*/
+     }*/
 
-    async create(bodyFormData:any,token:string,name:string,description:string): Promise<number | undefined> {
+    async create(bodyFormData: any, token: string, name: string, description: string): Promise<number | undefined> {
         const formData = new FormData();
 
         formData.append('name', name);
         formData.append('description', description);
         formData.append('groupPic', bodyFormData);
         try {
-            const result = await apiClient.post("/groups",  formData,
+            const result = await apiClient.post("/groups", formData,
                 {
                     headers: {
                         'Authorization': `Bearer ${token}`,
-                        "Content-Type": "multipart/form-data" }
+                        "Content-Type": "multipart/form-data"
+                    }
                 })
 
             console.log(result)
@@ -57,13 +58,13 @@ class GroupService {
 
     }
 
-    async join(groupId:string,token:string): Promise< any | undefined> {
+    async join(groupId: string, token: string): Promise<any | undefined> {
         try {
-            const result = await apiClient.post("/groups/join",{},{
+            const result = await apiClient.post("/groups/join", {}, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 },
-                params : {groupId : groupId}
+                params: {groupId: groupId}
             })
             console.log(result)
             return result
@@ -73,9 +74,9 @@ class GroupService {
 
     }
 
-    async getAll(token:string): Promise<Group[] | undefined> {
+    async getAll(token: string): Promise<Group[] | undefined> {
         try {
-            const result = await apiClient.get("/groups",{
+            const result = await apiClient.get("/groups", {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -87,13 +88,15 @@ class GroupService {
         }
 
     }
-    async getById(token:string,id:string): Promise<GroupWithMembers | undefined> {
+
+    async getById(token: string, id: string): Promise<GroupWithMembers | undefined> {
         try {
-            const result = await apiClient.get("/groups",{
-                headers: {
-                    'Authorization': `Bearer ${token}`
+            const result = await apiClient.get("/groups", {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    },
+                    params: {id: id}
                 },
-                params: { id: id}},
             )
             console.log(result)
             return result.data[0]
@@ -104,13 +107,13 @@ class GroupService {
     }
 
 
-    async leave(groupId:string,token:string): Promise< AccountWithPostsAndGroups | undefined> {
+    async leave(groupId: string, token: string): Promise<AccountWithPostsAndGroups | undefined> {
         try {
-            const result = await apiClient.post("/groups/leave",{},{
+            const result = await apiClient.post("/groups/leave", {}, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 },
-                params : {groupId : groupId}
+                params: {groupId: groupId}
             })
             console.log(result)
             return result.data
@@ -120,13 +123,13 @@ class GroupService {
 
     }
 
-    async getPosts(groupId:string,token:string): Promise<Post[] | undefined> {
+    async getPosts(groupId: string, token: string): Promise<Post[] | undefined> {
         try {
-            const result = await apiClient.get("/groups/posts",{
+            const result = await apiClient.get("/groups/posts", {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 },
-                params : {groupId : groupId}
+                params: {groupId: groupId}
             })
             console.log(result)
             return result.data
@@ -136,9 +139,9 @@ class GroupService {
 
     }
 
-    async getHomePage(token:string): Promise<Post[] | undefined> {
+    async getHomePage(token: string): Promise<Post[] | undefined> {
         try {
-            const result = await apiClient.get("/groups/homepage",{
+            const result = await apiClient.get("/groups/homepage", {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

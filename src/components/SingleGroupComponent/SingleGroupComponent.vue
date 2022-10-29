@@ -1,17 +1,17 @@
 <template>
   <div class="flex">
     <div class=" flex 1">
-      <Image :src="refGroup.picUrl" alt="Image" width="250"
-             preview/>
+      <Image :src="refGroup.picUrl" alt="Image" preview
+             width="250"/>
     </div>
     <div class="flex-1 card">
-      <TabView class="tabview-custom" ref="tabview4">
+      <TabView ref="tabview4" class="tabview-custom">
         <TabPanel>
           <template #header>
             <i class="pi pi-calendar"></i>
             <span>About</span>
           </template>
-          <textarea class="form-control" v-model="refGroup.description"></textarea>
+          <textarea v-model="refGroup.description" class="form-control"></textarea>
         </TabPanel>
         <TabPanel>
           <template #header>
@@ -23,16 +23,16 @@
             <form id=createPost
                   @submit="publishPost">
 <span class="p-float-label">
-	<InputText id="title" type="text" v-model="title" required="true"/>
+	<InputText id="title" v-model="title" required="true" type="text"/>
 
 	<label for="title">Title</label>
 </span>
-              <Textarea id="content" v-model="content" :autoResize="true" rows="5" cols="50" maxlength="400"
-                        placeholder="Quoi de neuf ?" required="true"/>
+              <Textarea id="content" v-model="content" :autoResize="true" cols="50" maxlength="400" placeholder="Quoi de neuf ?"
+                        required="true" rows="5"/>
               <div class="col-start-1">
                 <Button icon="pi pi-check" label="Publish" type="submit"/>
 
-                <Button icon="pi pi-times" label="Cancel" class="p-button-secondary" style="margin-left: .5em"
+                <Button class="p-button-secondary" icon="pi pi-times" label="Cancel" style="margin-left: .5em"
                         @click="clearContent"
                 />
               </div>
@@ -40,22 +40,22 @@
           </div>
           <MainThread
               v-for="(item) in refPosts"
-              :post="item"
               :key="item.id"
+              :post="item"
           ></MainThread>
 
         </TabPanel>
       </TabView>
     </div>
     <div class="flex-1 ">
-      <Button label="join" icon="pi pi-user-plus" class="p-button-text" @click="join"/>
-      <Button label="leave" icon="pi pi-user-minus" class="p-button-text" @click="leave"/>
+      <Button class="p-button-text" icon="pi pi-user-plus" label="join" @click="join"/>
+      <Button class="p-button-text" icon="pi pi-user-minus" label="leave" @click="leave"/>
     </div>
 
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import Button from "primevue/button";
 import {ref} from "vue";
 import userStore from "@/store/user";
@@ -79,7 +79,10 @@ const title = ref("");
 const content = ref("");
 const publishPost = async () => {
 
-  const postPublished = await postService.create({Title: title.value, Content: content.value}, userStore.state.jwt,props.id);
+  const postPublished = await postService.create({
+    Title: title.value,
+    Content: content.value
+  }, userStore.state.jwt, props.id);
   refPosts.value.unshift(postPublished)
   await clearContent();
 }

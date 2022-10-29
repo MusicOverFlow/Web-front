@@ -5,16 +5,17 @@
 <script lang="ts">
 import userStore from "@/store/user"
 import {defineAsyncComponent} from "vue";
+
 export default {
-  setup(){
-    return(userStore)
+  setup() {
+    return (userStore)
   },
   props: {
     id: String,
   },
   inheritAttrs: false,
-  components:{
-    ProfileComponent:defineAsyncComponent(() => import('../../components/ProfileComponent') )
+  components: {
+    ProfileComponent: defineAsyncComponent(() => import('../../components/ProfileComponent'))
   }
 }
 </script>

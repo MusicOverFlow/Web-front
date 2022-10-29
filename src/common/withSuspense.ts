@@ -1,4 +1,4 @@
-import { h } from 'vue'
+import {h} from 'vue'
 import SuspenseComponent from '../components/SuspenseComponent.vue'
 
 const withSuspense = (component, propsComponent = []) => {
@@ -8,7 +8,7 @@ const withSuspense = (component, propsComponent = []) => {
             SuspenseComponent,
         },
         setup(props) {
-            return () => h(SuspenseComponent, [h(component, { ...props })])
+            return () => h(SuspenseComponent, [h(component, {...props})])
         },
     }
 }

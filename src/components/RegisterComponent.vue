@@ -1,25 +1,25 @@
 <template>
   <form @submit.prevent="onSubmit">
     <div class="grid p-fluid">
-      <Toast />
+      <Toast/>
       <div class="col-12">
         <h1>S'inscrire</h1>
       </div>
       <div class="col-12 md:col-6">
-        <InputText id="last_name" placeholder="Nom" type="text" v-model="form.lastname" required/>
+        <InputText id="last_name" v-model="form.lastname" placeholder="Nom" required type="text"/>
       </div>
       <div class="col-12 md:col-6">
-        <InputText id="first_name" placeholder="Prénom" type="text" v-model="form.firstname" required/>
+        <InputText id="first_name" v-model="form.firstname" placeholder="Prénom" required type="text"/>
 
       </div>
       <div class="col-12">
-        <InputText id="pseudo" placeholder="Pseudo" type="text" v-model="form.pseudonym" required/>
+        <InputText id="pseudo" v-model="form.pseudonym" placeholder="Pseudo" required type="text"/>
       </div>
       <div class="col-12 ">
-        <InputText id="email" placeholder="Adresse mail" type="text" v-model="form.email" required/>
+        <InputText id="email" v-model="form.email" placeholder="Adresse mail" required type="text"/>
       </div>
       <div class="col-12">
-        <Password id="password" placeholder="Mot de passe" v-model="form.password" required>
+        <Password id="password" v-model="form.password" placeholder="Mot de passe" required>
           <template>
             <h6>Saisissez un mot de passe</h6>
           </template>
@@ -35,9 +35,9 @@
                     </template>-->
         </Password>
       </div>
-      <input type="file" accept="image/x-png,image/gif,image/jpeg" @change="onFileChanged">
+      <input accept="image/x-png,image/gif,image/jpeg" type="file" @change="onFileChanged">
       <div class="col-12">
-        <Button label="S'inscrire" type="submit" :loading="isLoading"/>
+        <Button :loading="isLoading" label="S'inscrire" type="submit"/>
       </div>
     </div>
   </form>
@@ -88,7 +88,7 @@ export default defineComponent({
         picture: selectedFile.value
       });
 
-      if(result < 300){
+      if (result < 300) {
         showSuccess()
         // Auto connect after account register
         const loggedIn = await userStore.login({
@@ -96,17 +96,17 @@ export default defineComponent({
           password: form.password,
         })
         if (loggedIn) {
-          await router.push({name:"home"});
+          await router.push({name: "home"});
         }
       }
       isLoading.value = true;
     }
 
     const showSuccess = () => {
-      toast.add({severity:'success', summary: 'Success', detail:'Changes saved', life: 3000});
+      toast.add({severity: 'success', summary: 'Success', detail: 'Changes saved', life: 3000});
     }
 
-    return {form, userStore, onSubmit, onFileChanged, selectedFile, toast,Toast, isLoading}
+    return {form, userStore, onSubmit, onFileChanged, selectedFile, toast, Toast, isLoading}
   }
 })
 </script>

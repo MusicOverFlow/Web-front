@@ -4,11 +4,11 @@
     <div class="p-8"></div>
     <div class="flex-1"> Group search
       <div>List/Result of group
-        <Listbox v-model="selectedGroups" :options="allGroups" :multiple="false" :filter="true" optionLabel="name"
-                 listStyle="max-height:250px" style="width:15rem" filterPlaceholder="Search" @click="goToGroup">
+        <Listbox v-model="selectedGroups" :filter="true" :multiple="false" :options="allGroups" filterPlaceholder="Search"
+                 listStyle="max-height:250px" optionLabel="name" style="width:15rem" @click="goToGroup">
           <template #optiongroup="slotProps">
             <div class="flex align-items-center country-item">
-              <img src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" width="18" class="mr-2"/>
+              <img class="mr-2" src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" width="18"/>
               <div>{{ slotProps.option.label }}</div>
             </div>
           </template>
@@ -18,18 +18,18 @@
     <div class="flex-1">
       <div>
         <div class="MainView">
-        <MainThread
-            v-for="(item) in refPosts"
-            :post="item"
-            :key="item.id"
-        ></MainThread>
+          <MainThread
+              v-for="(item) in refPosts"
+              :key="item.id"
+              :post="item"
+          ></MainThread>
         </div>
       </div>
     </div>
     <div class="flex-1">
-      <Button label="create" icon="pi pi-plus" class="p-button-text" @click="openResponsiveCreate"/>
-      <Dialog header="Create group" v-model:visible="displayResponsiveCreate"
-              :breakpoints="{'960px': '75vw', '640px': '90vw'}" :style="{width: '50vw'}">
+      <Button class="p-button-text" icon="pi pi-plus" label="create" @click="openResponsiveCreate"/>
+      <Dialog v-model:visible="displayResponsiveCreate" :breakpoints="{'960px': '75vw', '640px': '90vw'}"
+              :style="{width: '50vw'}" header="Create group">
         <div class="flex flex flex-column gap-5 align-items-center">
           <div class="flex-1">
             <InputText v-model="groupCreateInfos.Name" placeholder="Group name"/>
@@ -41,9 +41,9 @@
             <input type="file" @change="onFileChanged">
           </div>
           <div class="flex-1">
-            <Button label="Create" icon="pi pi-check" class="p-button-text" @click="createGroup"/>
-            <Button label="Cancel" icon="pi pi-times" @click="closeResponsiveCreate" class="p-button-text"/>
-            <Toast />
+            <Button class="p-button-text" icon="pi pi-check" label="Create" @click="createGroup"/>
+            <Button class="p-button-text" icon="pi pi-times" label="Cancel" @click="closeResponsiveCreate"/>
+            <Toast/>
           </div>
         </div>
       </Dialog>
@@ -51,7 +51,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 
 import Button from "primevue/button";
 import Dialog from "primevue/dialog";
@@ -66,6 +66,7 @@ import {Post} from "@/api/types/Post";
 import MainThread from "@/components/MainThread/MainThread.vue";
 import {useToast} from "primevue/usetoast";
 import Toast from "primevue/toast";
+
 const groupCreateInfos = ref({
   Name: '',
   Description: ''
@@ -99,7 +100,7 @@ const onFileChanged = (event: Event) => {
 };
 
 const showSuccess = () => {
-  toast.add({severity:'success', summary: 'Success', detail:'Changes saved', life: 3000});
+  toast.add({severity: 'success', summary: 'Success', detail: 'Changes saved', life: 3000});
 }
 const getAllGroups = async () => {
   var groups = await GroupService.getAll(userStore.state.jwt);
@@ -130,7 +131,7 @@ const goToGroup = () => {
 const createGroup = async () => {
   console.log(groupCreateInfos.value);
   console.log(selectedFile.value.name)
-  var createdGroup = await GroupService.create(selectedFile.value, userStore.state.jwt,groupCreateInfos.value.Name, groupCreateInfos.value.Description);
+  var createdGroup = await GroupService.create(selectedFile.value, userStore.state.jwt, groupCreateInfos.value.Name, groupCreateInfos.value.Description);
   console.log(createdGroup);
   if (createdGroup < 300) {
     showSuccess();

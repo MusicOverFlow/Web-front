@@ -10,9 +10,8 @@ import 'primeicons/primeicons.css'
 import 'primeflex/primeflex.css'
 import ace from "ace-builds"
 import ToastService from 'primevue/toastservice';
-import {useSignalR, VueSignalR} from '@dreamonkey/vue-signalr';
-import {HubConnection, HubConnectionBuilder} from '@microsoft/signalr';
-import userStore from "@/store/user"
+import {VueSignalR} from '@dreamonkey/vue-signalr';
+import {HubConnectionBuilder} from '@microsoft/signalr';
 
 
 const signalR = require("@microsoft/signalr");

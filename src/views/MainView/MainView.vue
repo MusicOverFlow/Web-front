@@ -2,19 +2,19 @@
 
   <CreatePost @publishPost="publishPost"></CreatePost>
 
-  <div class="MainView" id="container">
+  <div id="container" class="MainView">
 
     <div class="MainView">
       <MainThread
           v-for="(item) in refPosts"
-          :post="item"
-          :key="item.id"/>
+          :key="item.id"
+          :post="item"/>
     </div>
   </div>
 
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import {onMounted, ref} from "vue";
 import postService from "@/api/services/PostService";
 import userStore from "@/store/user"
@@ -33,10 +33,13 @@ onMounted(async () => {
 })
 
 
-
-const publishPost = async (title,content,scriptLanguage,script) => {
-  console.log(scriptLanguage,script)
-  const postPublished = await postService.create({Content: content,ScriptLanguage:scriptLanguage,Script:script}, userStore.state.jwt);
+const publishPost = async (title, content, scriptLanguage, script) => {
+  console.log(scriptLanguage, script)
+  const postPublished = await postService.create({
+    Content: content,
+    ScriptLanguage: scriptLanguage,
+    Script: script
+  }, userStore.state.jwt);
   refPosts.value.unshift(postPublished)
 
 }

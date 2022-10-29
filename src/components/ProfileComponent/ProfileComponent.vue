@@ -1,8 +1,8 @@
 <template>
-<!--  <Toast />
-  <div id="profil" style="background-color: #aaaaaa" class="flex-auto m-10 col-start-1">
-  </div>-->
-  <div class="flex" id="main">
+  <!--  <Toast />
+    <div id="profil" style="background-color: #aaaaaa" class="flex-auto m-10 col-start-1">
+    </div>-->
+  <div id="main" class="flex">
     <div id="navbar">
       <NavbarComponent/>
     </div>
@@ -17,14 +17,14 @@
           </div>
           <router-link v-if="userCurrentInfo.mailAddress === userInfos.mailAddress"
                        to="/profile/edit">
-            <Button type="button"
-                    label="Éditer"/>
+            <Button label="Éditer"
+                    type="button"/>
           </router-link>
 
-          <Button type="button"
-                  v-if="userCurrentInfo.mailAddress !== userInfos.mailAddress"
-                  :label="isFollowing ? 'Follow' : 'Unfollow'"
+          <Button v-if="userCurrentInfo.mailAddress !== userInfos.mailAddress"
                   :class="isFollowing ? 'pi pi-user-plus p-button-help' : 'pi pi-user-minus p-button-danger '"
+                  :label="isFollowing ? 'Follow' : 'Unfollow'"
+                  type="button"
                   @click="follow_unfollow"/>
         </div>
         <div id="second_line">
@@ -32,20 +32,20 @@
             <TabPanel header="Publications">
               <MainThread
                   v-for="(item) in userInfos.ownedPosts"
-                  :post="item"
-                  :key="item.id"/>
+                  :key="item.id"
+                  :post="item"/>
             </TabPanel>
             <TabPanel header="Posts aimés">
               <MainThread
                   v-for="(item) in userInfos.likedPosts"
-                  :post="item"
-                  :key="item.id"/>
+                  :key="item.id"
+                  :post="item"/>
             </TabPanel>
             <TabPanel header="Commentaires aimés">
               <MainThread
                   v-for="(item) in userInfos.likedCommentaries"
-                  :post="item"
-                  :key="item.id"/>
+                  :key="item.id"
+                  :post="item"/>
             </TabPanel>
           </TabView>
         </div>
@@ -54,7 +54,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import Image from "primevue/image";
 import Button from "primevue/button";
 import userStore from "@/store/user"
@@ -157,14 +157,16 @@ Image {
   border-radius: 50%;
 }
 
-#navbar{
+#navbar {
   flex: 1;
   overflow: hidden;
 }
-#profil{
+
+#profil {
   flex: 8;
   overflow: auto;
 }
+
 #main {
   height: 100vh;
   width: 100vw;

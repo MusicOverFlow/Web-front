@@ -1,5 +1,5 @@
 <template>
-  <div class="flex" id="main">
+  <div id="main" class="flex">
     <div id="navbar">
       <NavbarComponent/>
     </div>
@@ -19,33 +19,37 @@
 import userStore from "@/store/user"
 import {defineAsyncComponent} from "vue";
 import CodeInputComponent from "@/components/codeInput/CodeInputComponent.vue";
+
 export default {
-  setup(){
-    return(userStore)
+  setup() {
+    return (userStore)
   },
 
   inheritAttrs: false,
-  components:{
+  components: {
     CodeInputComponent,
-    MainView:defineAsyncComponent(() => import('../views/MainView') ),
-    NavbarComponent:defineAsyncComponent(() => import('../components/Navbar') ),
+    MainView: defineAsyncComponent(() => import('../views/MainView')),
+    NavbarComponent: defineAsyncComponent(() => import('../components/Navbar')),
   }
 }
 </script>
 
 <style scoped>
-#navbar{
+#navbar {
   flex: 1;
   overflow: hidden;
 }
-#mainThread{
+
+#mainThread {
   flex: 4;
   overflow: auto;
 }
-#ide{
+
+#ide {
   flex: 4;
   overflow: hidden;
 }
+
 #main {
   height: 100vh;
   width: 100vw;
