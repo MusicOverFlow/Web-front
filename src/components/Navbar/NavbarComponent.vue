@@ -77,8 +77,8 @@
                   <p>Veuillez entrée l'id de la session que vous souhaitez rejoindre</p>
                   <InputText v-model="livecodingId" placeholder="Id de la session"/>
                   <template #footer>
-                    <Button class="p-button-text" icon="pi pi-times" label="Créer une session" @click="createSession"/>
-                    <Button autofocus icon="pi pi-check" label="Rejoindre une session"
+                    <Button class="p-button-text" label="Créer une session" @click="createSession"/>
+                    <Button autofocus label="Rejoindre une session"
                             @click="joinSession(livecodingId)"/>
                   </template>
                 </Dialog>
