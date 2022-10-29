@@ -4,6 +4,8 @@ import MainViewR from "@/views/MainViewR";
 import PostView from '@/views/PostView';
 import ProfileView from "@/views/ProfileView/ProfileView";
 import EditProfileView from "@/views/ProfileView/EditProfileView";
+import PipelineView from "@/views/PipelineView";
+
 const routes = [
   {
     path: '/',
@@ -51,9 +53,12 @@ const routes = [
     path: '/group/:id',
     name: 'group',
     component: SingleGroupView
+  },
+  {
+    path: '/pipeline',
+    name: 'pipeline',
+    component: PipelineView
   }
-
-
 ]
 
 const router = createRouter({
