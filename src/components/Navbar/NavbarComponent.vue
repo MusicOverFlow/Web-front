@@ -65,25 +65,27 @@
                 </div>
               </li>
             </router-link>
-            <li>
-              <div class="navButton">
-                <i class="pi pi-th-large"></i>
-                <span
-                    class="block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                    @click="openBasic">Livecoding</span>
-                <Dialog v-model:visible="displayBasic" :breakpoints="{'960px': '75vw', '640px': '90vw'}"
-                        :style="{width: '50vw'}"
-                        header="Livecoding">
-                  <p>Veuillez entrée l'id de la session que vous souhaitez rejoindre</p>
-                  <InputText v-model="livecodingId" placeholder="Id de la session"/>
-                  <template #footer>
-                    <Button class="p-button-text" label="Créer une session" @click="createSession"/>
-                    <Button autofocus label="Rejoindre une session"
-                            @click="joinSession(livecodingId)"/>
-                  </template>
-                </Dialog>
-              </div>
-            </li>
+            <router-link to>
+              <li>
+                <div class="navButton">
+                  <i class="pi pi-play"></i>
+                  <span
+                      class="block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                      @click="openBasic">Livecoding</span>
+                  <Dialog v-model:visible="displayBasic" :breakpoints="{'960px': '75vw', '640px': '90vw'}"
+                          :style="{width: '50vw'}"
+                          header="Livecoding">
+                    <p>Veuillez entrée l'id de la session que vous souhaitez rejoindre</p>
+                    <InputText v-model="livecodingId" placeholder="Id de la session"/>
+                    <template #footer>
+                      <Button class="p-button-text" label="Créer une session" @click="createSession"/>
+                      <Button autofocus label="Rejoindre une session"
+                              @click="joinSession(livecodingId)"/>
+                    </template>
+                  </Dialog>
+                </div>
+              </li>
+            </router-link>
           </ul>
         </div>
         <div>
