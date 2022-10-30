@@ -39,9 +39,9 @@ class PostService {
 
     }
 
-    async getById(token: string, id: string): Promise<Post[] | undefined> {
+    async getById(id: string, token: string): Promise<Post[] | undefined> {
         try {
-            const result = await apiClient.get("/posts/", {
+            const result = await apiClient.get("/posts", {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     },

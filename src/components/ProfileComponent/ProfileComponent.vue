@@ -59,6 +59,7 @@ import Button from "primevue/button";
 import userStore from "@/store/user"
 import {ref} from "vue";
 import accountService from "@/api/services/AccountService";
+import postService from "@/api/services/PostService";
 import NavbarComponent from "@/components/Navbar";
 import {AccountWithPostsAndGroups} from "@/api/types/AccountWithPostsAndGroups";
 import MainThread from "@/components/MainThread/MainThread.vue";
@@ -127,9 +128,22 @@ isFollowingIcon();
 const setOwnerPosts = async () => {
   userInfos.value.ownedPosts.forEach((post) => {
     post.owner = userInfos.value;
+    console.log(post.owner)
   });
+  for (const post of userInfos.value.likedPosts) {
+    post.owner = await postService.getById(post.id, userStore.state.jwt).then((post) => {
+      return post[0].owner;
+    });
+  }
+  for (const post of userInfos.value.likedCommentaries) {
+    post.owner = await postService.getById(post.id, userStore.state.jwt).then((post) => {
+      return post[0].owner;
+    });
+  }
+  console.log("pouet2")
 }
-setOwnerPosts();
+
+await setOwnerPosts();
 
 const follow_unfollow = async () => {
   const res = await accountService.follow(userStore.state.jwt, userInfos.value.mailAddress)
@@ -187,6 +201,7 @@ const editPic = async () => {
 
 #first_line > div {
   margin-right: 5em;
+  margin-left: 5em;
 }
 
 MainThread {
