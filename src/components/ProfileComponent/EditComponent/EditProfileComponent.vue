@@ -11,8 +11,9 @@
         <div id="profilPic">
           <Image :src="userInfos.picUrl" alt="Image" preview
                  width="250"/>
-          <input type="file" @change="onFileChanged">
-          <Button @click="onUpload">Upload</Button>
+          <input id="file" class="inputfile" name="file" type="file" accept="image/png, image/jpeg"
+                 @change="onFileChanged($event);onUpload()">
+          <label class="p-button" for="file">{{filename}}</label>
 
           <Button v-if="userCurrentInfo.mailAddress !== userInfos.mailAddress" :label="isFollowing ? 'Follow' : 'Unfollow'"
                   type="button"
@@ -80,6 +81,8 @@ const isLoading = ref(false);
 
 const selectedFile = ref<File>();
 
+const filename = ref<string>("Changer de photo de profil");
+
 const showSuccess = () => {
   toast.add({severity: 'success', summary: 'Success', detail: 'Changes saved', life: 3000});
 }
@@ -87,6 +90,7 @@ const showSuccess = () => {
 const onFileChanged = (event: Event) => {
   const file = (event.target as HTMLInputElement).files[0];
   selectedFile.value = file;
+  filename.value = file.name;
 };
 
 const onUpload = async () => {
@@ -241,6 +245,15 @@ const editPic = async () => {
 #confirmButtons {
   display: flex;
   gap: 1em;
+}
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
 }
 
 NavbarComponent {
