@@ -17,6 +17,9 @@
             <!-- <UserIconComponent/> -->
             <p>{{ post.content }}</p>
             <Panel v-if="post.script" :toggleable="true" header="Code">
+              <template #icons>
+                <button class="pi pi-copy mr-2" @click="copyToIDE(post)"/>
+              </template>
               <p>{{ post.script }}</p>
             </Panel>
           </div>
@@ -73,6 +76,10 @@ const onUpload = async (id: string, post: Post) => {
     post.musicUrl = music.musicUrl;
   }
 };
+
+const copyToIDE = (post) => {
+  userStore.state.codeInput = post.script;
+}
 
 </script>
 

@@ -36,7 +36,6 @@
       </div>
     </div>
   </div>
-  <Button class="p-button-info" icon="pi pi-play" label="Connect" @click="connect"/>
 </template>
 
 <script lang="ts" setup>
@@ -86,13 +85,8 @@ const editorChange = (e) => {
 }
 const languages = ref([
   {name: 'Python', code: 'python'},
-  {name: 'C     ', code: 'c'}
+  {name: 'C         ', code: 'c'}
 ]);
-//const signalr = useSignalR();
-
-const connect = () => {
-
-}
 
 const messageReceivedCallback = (message) => console.log(message.prop);
 console.log(messageReceivedCallback('test'));
