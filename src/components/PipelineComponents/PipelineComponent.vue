@@ -10,12 +10,14 @@
         <Button class="p-button"
                 icon="pi pi-download"
                 label="Télécharger l'image modifiée"
+                :disabled="checkedImageOptions.length === 0"
                 @click="downloadPicture"/>
       </div>
       <div v-if="isAudio()" class="contextuallyDisplayed">
         <Button class="p-button"
                 icon="pi pi-download"
                 label="Télécharger le son modifié"
+                :disabled="checkedAudioOptions.length === 0"
                 @click="downloadAudio"/>
       </div>
     </div>
@@ -29,7 +31,8 @@
               v-model="checkedImageOptions"
               class="optionCheckbox"
               type="checkbox"
-              value="Grayscale">
+              value="Grayscale"
+              @click="imageOptionChecked('Grayscale')">
         </label>
         <label class="optionSelect" for="invert">
           <img alt="invert" class="optionIllustration" src="@/assets/invert.png"/>
@@ -39,7 +42,8 @@
               v-model="checkedImageOptions"
               class="optionCheckbox"
               type="checkbox"
-              value="Invert">
+              value="Invert"
+              @click="imageOptionChecked('Invert')">
         </label>
         <label class="optionSelect" for="blur">
           <img alt="blur" class="optionIllustration" src="@/assets/blur.jpg"/>
@@ -49,7 +53,8 @@
               v-model="checkedImageOptions"
               class="optionCheckbox"
               type="checkbox"
-              value="Blur">
+              value="Blur"
+              @click="imageOptionChecked('Blur')">
         </label>
         <label class="optionSelect" for="flipHorizontal">
           <img alt="flipHorizontal" class="optionIllustration" src="@/assets/flip_horizontal.png"/>
@@ -59,7 +64,8 @@
               v-model="checkedImageOptions"
               class="optionCheckbox"
               type="checkbox"
-              value="FlipHorizontal">
+              value="FlipHorizontal"
+              @click="imageOptionChecked('FlipHorizontal')">
         </label>
         <label class="optionSelect" for="flipVertical">
           <img alt="flipVertical" class="optionIllustration" src="@/assets/flip_vertical.png"/>
@@ -69,7 +75,8 @@
               v-model="checkedImageOptions"
               class="optionCheckbox"
               type="checkbox"
-              value="FlipVertical">
+              value="FlipVertical"
+              @click="imageOptionChecked('FlipVertical')">
         </label>
         <label class="optionSelect" for="rotate">
           <img alt="rotate" class="optionIllustration" src="@/assets/rotate.png"/>
@@ -79,7 +86,8 @@
               v-model="checkedImageOptions"
               class="optionCheckbox"
               type="checkbox"
-              value="Rotate-90">
+              value="Rotate-90"
+              @click="imageOptionChecked('Rotate-90')">
         </label>
         <label class="optionSelect" for="upSize">
           <img alt="upSize" class="optionIllustration" src="@/assets/stonks.png"/>
@@ -89,7 +97,8 @@
               v-model="checkedImageOptions"
               class="optionCheckbox"
               type="checkbox"
-              value="Resize-200">
+              value="Resize-200"
+              @click="imageOptionChecked('Resize-200')">
         </label>
         <label class="optionSelect" for="downSize">
           <img alt="downSize" class="optionIllustration" src="@/assets/stinks.jpg"/>
@@ -99,7 +108,8 @@
               v-model="checkedImageOptions"
               class="optionCheckbox"
               type="checkbox"
-              value="Resize-050">
+              value="Resize-050"
+              @click="imageOptionChecked('Resize-050')">
         </label>
       </div>
       <div v-if="isAudio()" class="optionList">
@@ -111,7 +121,8 @@
               v-model="checkedAudioOptions"
               class="optionCheckbox"
               type="checkbox"
-              value="Pitch-0,75">
+              value="Pitch-0,75"
+              @click="audioOptionChecked('Pitch-0,75')">
         </label>
         <label class="optionSelect" for="upPitch">
           <img alt="upPitch" class="optionIllustration" src="@/assets/down-arrow.png"/>
@@ -121,7 +132,8 @@
               v-model="checkedAudioOptions"
               class="optionCheckbox"
               type="checkbox"
-              value="Pitch-1,25">
+              value="Pitch-1,25"
+              @click="audioOptionChecked('Pitch-1,25')">
         </label>
         <label class="optionSelect" for="fadeIn">
           <img alt="fadeIn" class="optionIllustration" src="@/assets/down-arrow.png"/>
@@ -131,7 +143,8 @@
               v-model="checkedAudioOptions"
               class="optionCheckbox"
               type="checkbox"
-              value="FadeIn-3">
+              value="FadeIn-3"
+              @click="audioOptionChecked('FadeIn-3')">
         </label>
         <label class="optionSelect" for="fadeIn">
           <img alt="fadeIn" class="optionIllustration" src="@/assets/down-arrow.png"/>
@@ -141,7 +154,8 @@
               v-model="checkedAudioOptions"
               class="optionCheckbox"
               type="checkbox"
-              value="FadeOut-3">
+              value="FadeOut-3"
+              @click="audioOptionChecked('FadeOut-3')">
         </label>
       </div>
     </div>
@@ -190,6 +204,22 @@ const onFileChanged = (event: Event) => {
   checkedAudioOptions = ref([])
 };
 
+const imageOptionChecked = (option: String) => {
+  if(checkedImageOptions.value.includes(option)) {
+    checkedImageOptions.value = checkedImageOptions.value.filter((value) => value !== option);
+  } else {
+    checkedImageOptions.value.push(option);
+  }
+}
+
+const audioOptionChecked = (option: String) => {
+  if(checkedAudioOptions.value.includes(option)) {
+    checkedAudioOptions.value = checkedAudioOptions.value.filter((value) => value !== option);
+  } else {
+    checkedAudioOptions.value.push(option);
+  }
+}
+
 const downloadPicture = async () => {
   if (selectedFile.value) {
     const formData = new FormData();
@@ -197,7 +227,7 @@ const downloadPicture = async () => {
     formData.append('fileInput', selectedFile.value);
     const response = await pipelineService.imagePipeline(formData, userStore.state.jwt);
     if (response.output) {
-      window.open(response.output);
+      window.open("data:image/jpg;base64," + response.output);
     }
   }
 }

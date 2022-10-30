@@ -1,10 +1,5 @@
 import apiClient from "@/http-common";
 
-export interface ScriptProps {
-    scripts: string,
-    fileInput: File
-}
-
 export interface ScriptResponse {
     output: string,
 }
