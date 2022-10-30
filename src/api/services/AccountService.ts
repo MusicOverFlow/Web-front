@@ -66,7 +66,7 @@ class AccountService {
 
     async like(postId: string, token: string): Promise<any | undefined> {
         try {
-            const result = await apiClient.put("/accounts/like", {}, {
+            const result = await apiClient.put("/posts/like", {}, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 },

@@ -115,7 +115,6 @@ export default {
       const likeResponse = await accountService.like(this.$props.post.id, userStore.state.jwt)
       this.liked = !this.liked
       console.log(likeResponse)
-
     },
     goToProfile(mailAddress) {
       router.push({name: "profile", params: {id: mailAddress}});
