@@ -125,7 +125,7 @@
               @click="audioOptionChecked('Pitch-0,75')">
         </label>
         <label class="optionSelect" for="upPitch">
-          <img alt="upPitch" class="optionIllustration" src="@/assets/down-arrow.png"/>
+          <img alt="upPitch" class="optionIllustration" src="@/assets/up-arrow.png"/>
           <p>Augmenter le ton</p>
           <input
               id="upPitch"
@@ -136,7 +136,7 @@
               @click="audioOptionChecked('Pitch-1,25')">
         </label>
         <label class="optionSelect" for="fadeIn">
-          <img alt="fadeIn" class="optionIllustration" src="@/assets/down-arrow.png"/>
+          <img alt="fadeIn" class="optionIllustration" src="@/assets/up-arrow.png"/>
           <p>Augmentation progressive au début</p>
           <input
               id="fadeIn"
@@ -146,11 +146,11 @@
               value="FadeIn-3"
               @click="audioOptionChecked('FadeIn-3')">
         </label>
-        <label class="optionSelect" for="fadeIn">
-          <img alt="fadeIn" class="optionIllustration" src="@/assets/down-arrow.png"/>
+        <label class="optionSelect" for="fadeOut">
+          <img alt="fadeOut" class="optionIllustration" src="@/assets/down-arrow.png"/>
           <p>Diminution progressive à la fin</p>
           <input
-              id="fadeIn"
+              id="fadeOut"
               v-model="checkedAudioOptions"
               class="optionCheckbox"
               type="checkbox"
@@ -238,9 +238,7 @@ const downloadAudio = async () => {
     formData.append('scripts', checkedAudioOptions.value.join('.'));
     formData.append('fileInput', selectedFile.value);
     const response = await pipelineService.audioPipeline(formData, userStore.state.jwt);
-    if (response.output) {
-      window.open(response.output);
-    }
+    console.log(response);
   }
 }
 
