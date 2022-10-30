@@ -14,7 +14,8 @@
 
 <script lang="ts" setup>
 import NavbarComponent from "@/components/Navbar";
-import PipelineComponent from "@/components/PipelineComponents/PipelineComponent.vue";</script>
+import PipelineComponent from "@/components/PipelineComponents/PipelineComponent.vue";
+</script>
 
 <style>
 #main {

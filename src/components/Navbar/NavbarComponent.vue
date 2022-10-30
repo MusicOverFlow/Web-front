@@ -126,7 +126,7 @@ let emptyAccount: AccountWithPostsAndGroups = {
   likedPosts: [],
   likedCommentaries: [],
   groups: [],
-  Pseudonym: "",
+  pseudonym: "",
   picUrl: "",
   follows: [],
 }

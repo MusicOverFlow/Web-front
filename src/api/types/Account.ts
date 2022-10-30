@@ -4,6 +4,6 @@ export interface Account {
     lastname: string,
     pseudonym: string,
     picUrl: string,
-    createdAt: string
+    createdAt: string,
     follows: Account[],
 }
