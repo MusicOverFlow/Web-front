@@ -24,7 +24,7 @@ class PipelineService {
 
     }
 
-    async audioPipeline(bodyFormData: any, token: string): Promise<string | undefined> {
+    async audioPipeline(bodyFormData: any, token: string): Promise<ScriptResponse | undefined> {
         try {
             const result = await apiClient.post("execute/soundpipeline",
                 bodyFormData,

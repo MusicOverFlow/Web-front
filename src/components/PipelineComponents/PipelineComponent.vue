@@ -239,6 +239,14 @@ const downloadAudio = async () => {
     formData.append('fileInput', selectedFile.value);
     const response = await pipelineService.audioPipeline(formData, userStore.state.jwt);
     console.log(response);
+    const fileURL = window.URL.createObjectURL(new Blob([response.output]));
+    const fileLink = document.createElement('a');
+
+    fileLink.href = fileURL;
+    fileLink.setAttribute('download', 'sound.mp3');
+    document.body.appendChild(fileLink);
+
+    fileLink.click();
   }
 }
 
