@@ -12,7 +12,7 @@
             <Button class="flex w-4" icon="pi pi-check" label="Publier" type="submit"/>
             <div class="field-checkbox">
               <Checkbox v-model="checked" :binary="true" inputId="binary"/>
-              <label for="binary">Envoyer le code</label>
+              <label for="binary">Envoyer le code de l'IDE</label>
             </div>
           </div>
         </div>
@@ -83,5 +83,11 @@ codeContent = userStore.state.codeInput
 
 #createPost {
   padding: 1em;
+}
+.field-checkbox {
+  display: flex;
+  align-items: center;
+  margin-left: 1em;
+  margin-bottom: 0 !important;
 }
 </style>

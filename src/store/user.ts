@@ -4,6 +4,7 @@ import {RegisterResponse} from "@/api/services/AccountService";
 
 const state = reactive({
     jwt: '',
+    loginProps: null,
     error: '',
     connection: '',
     codeInput: ref(),
@@ -24,6 +25,7 @@ const actions = {
         }
 
         state.jwt = user.jwt
+        state.loginProps = userDetails
         state.error = ''
         console.log(state)
         return true

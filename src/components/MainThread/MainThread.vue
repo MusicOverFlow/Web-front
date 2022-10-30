@@ -17,7 +17,6 @@
             <!-- <UserIconComponent/> -->
             <p>{{ post.content }}</p>
             <Panel v-if="post.script" :toggleable="true" header="Code">
-
               <p>{{ post.script }}</p>
             </Panel>
           </div>
@@ -141,6 +140,13 @@ export default {
 
       }
     }*/
+  },
+  beforeMount() {
+    this.$props.post.likes.forEach(like => {
+      if (like.mailAddress === userStore.state.loginProps.mailAddress) {
+        this.liked = true;
+      }
+    })
   }
 }
 
