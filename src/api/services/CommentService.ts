@@ -1,16 +1,19 @@
 import apiClient from "@/http-common";
 import {Post} from "@/api/types/Post";
+import {PostCreateProps} from "@/api/services/PostService";
 
 export interface CommentCreateProps {
-    Content: string
+    Content: string,
+    ScriptLanguage: string,
+    Script: string,
 }
 
 class CommentService {
 
 
-    async create(content: string, postId: string, token: string): Promise<Post | undefined> {
+    async create(createComment: CommentCreateProps, postId: string, token: string): Promise<Post | undefined> {
         try {
-            const result = await apiClient.post("/commentaries", {Content: content}, {
+            const result = await apiClient.post("/commentaries", JSON.stringify(createComment), {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 },

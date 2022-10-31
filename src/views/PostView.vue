@@ -64,6 +64,11 @@
   </div>
 </template>
 
+<script lang="ts">
+export default {
+  inheritAttrs: false,
+}
+</script>
 
 <script lang="ts" setup>
 import {defineProps, onMounted, ref} from 'vue'
@@ -103,29 +108,61 @@ const props = defineProps({
   id: String,
 });
 
-const value = ref(null)
+let propsCopy = JSON.parse(JSON.stringify(props))
+propsCopy.id = null
+
+//const value = ref(null)
+
 
 onMounted(async () => {
   console.log("prop : " + props.id)
   refPosts.value = await postService.getById(props.id, userStore.state.jwt);
+  console.log(refPosts.value[0].script)
+  if (refPosts.value[0].script === null) {
+    refPosts.value[0].script = ""
+  }
+  userStore.state.codeInput = refPosts.value[0].script
+
+  if (refPosts.value[0].scriptLanguage === null) {
+    refPosts.value[0].scriptLanguage = ""
+  }
+  userStore.state.codeType = refPosts.value[0].scriptLanguage
   console.log(refPosts.value)
   // refPosts.value = refPosts.value.
   console.log("pouet")
   console.log(refPosts.value[0].commentaries)
 })
 
-const publishComment = async (title, content) => {
-  console.log("publishComment")
-  console.log(value.value)
-  const comment = await commentService.create(content, props.id, userStore.state.jwt)
-  if (comment.id != null) {
-    refPosts.value[0].commentaries.push(comment.commentaries[comment.commentaries.length - 1])
-  }
+// const publishComment = async (title, content) => {
+//   console.log("publishComment")
+//   console.log(value.value)
+//   const comment = await commentService.create(content, props.id, userStore.state.jwt)
+//   if (comment.id != null) {
+//     refPosts.value[0].commentaries.push(comment.commentaries[comment.commentaries.length - 1])
+//   }
+//   console.log(comment)
+//
+// }
+const publishComment = async (title, content, scriptLanguage, script) => {
+  console.log(scriptLanguage, script)
+  const comment = await commentService.create({
+    Content: content,
+    ScriptLanguage: scriptLanguage,
+    Script: script
+  }, props.id, userStore.state.jwt);
   console.log(comment)
+  if (comment.id != null) {
+    //refPosts.value[0].commentaries.push(comment.commentaries[comment.commentaries.length - 1])
+    console.log(comment.commentaries)
+    refPosts.value[0].commentaries.unshift(comment.commentaries[0])
+  }
+
 
 }
 
 </script>
+
+
 <style scoped>
 #container {
   margin: 1em 20em 5em 20em;

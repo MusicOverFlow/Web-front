@@ -25,18 +25,18 @@
         <Panel header="Result">
           <p>{{ result }}</p>
         </Panel>
-        <!--        <v-ace-editor-->
-        <!--            v-model:value="result"-->
-        <!--            @init="editorInit"-->
-        <!--            :lang=selectedLanguage-->
-        <!--            :theme=selectedTheme-->
-        <!--            style="height: 300px"-->
-        <!--            readonly-->
-        <!--        />-->
+
       </div>
     </div>
   </div>
 </template>
+
+
+<script lang="ts">
+export default {
+  inheritAttrs: false,
+}
+</script>
 
 <script lang="ts" setup>
 import Panel from 'primevue/panel';
@@ -56,6 +56,8 @@ let selectedLanguage = ref();
 let content = ref();
 userStore.state.codeInput = content;
 userStore.state.codeType = selectedLanguage;
+console.log("twerk")
+
 const params = useRoute().params as { id: string };
 
 console.log(params.id)
@@ -63,19 +65,20 @@ if (params.id == "new") {
   params.id = null
 }
 
-connection.invoke("JoinGroup", params.id).then(r => {
-  if (params.id) {
-    userStore.state.connection = params.id
-    content.value = r
-  } else {
-    userStore.state.connection = r
-  }
-  console.log(r)
+if(useRoute().name != "post") {
+  connection.invoke("JoinGroup", params.id).then(r => {
+    if (params.id) {
+      userStore.state.connection = params.id
+      content.value = r
+    } else {
+      userStore.state.connection = r
+    }
+    console.log(r)
 
-}).catch(function (err) {
-  return console.error(err.toString());
-});
-
+  }).catch(function (err) {
+    return console.error(err.toString());
+  });
+}
 
 const editorChange = (e) => {
   console.log(e)
@@ -176,6 +179,8 @@ const editorInit = () => {
 
 
 </script>
+
+
 
 <style scoped>
 * {
