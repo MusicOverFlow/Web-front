@@ -3,6 +3,12 @@
 
     <div class="flex flex-col my-4">
       <div id="editor" class="flex-1">
+        <Panel v-if="isLiveCoding === true" :toggleable="true" header="Session ID">
+          <template #icons>
+            <button class="pi pi-copy mr-2" @click="copy"/>
+          </template>
+          <p>{{ userStore.state.connection }}</p>
+        </Panel>
         <v-ace-editor
             v-model:value="content"
             :lang=selectedLanguage
@@ -54,9 +60,19 @@ import {useRoute} from "vue-router";
 const result = ref('');
 let selectedLanguage = ref();
 let content = ref();
+
+let isLiveCoding = ref(false);
 userStore.state.codeInput = content;
 userStore.state.codeType = selectedLanguage;
 console.log("twerk")
+
+if(useRoute().name == "ide") {
+  isLiveCoding.value = true;
+}
+
+const copy = () => {
+  navigator.clipboard.writeText(userStore.state.connection);
+}
 
 const params = useRoute().params as { id: string };
 
@@ -64,8 +80,9 @@ console.log(params.id)
 if (params.id == "new") {
   params.id = null
 }
-
+console.log(isLiveCoding.value)
 if(useRoute().name != "post") {
+
   connection.invoke("JoinGroup", params.id).then(r => {
     if (params.id) {
       userStore.state.connection = params.id
