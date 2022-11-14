@@ -20,15 +20,15 @@
       </div>
       <div id="run" class="flex-1 pr-10  flex-row flex-none mb-4">
         <Dropdown v-model="selectedLanguage" :options="languages" optionLabel="name" optionValue="code"
-                  placeholder="Select language"/>
+                  placeholder="Langage"/>
         <Dropdown v-model="selectedTheme" :options="themes" optionLabel="name" optionValue="code"
                   placeholder="Select theme"/>
 
-        <Button class="p-button-info" icon="pi pi-play" label="Run" @click="run"/>
+        <Button class="p-button-info" icon="pi pi-play" label="Exécuter" @click="run"/>
       </div>
       <div id="output" class="flex-1 flex-grow">
 
-        <Panel header="Result">
+        <Panel header="Résultat">
           <p>{{ result }}</p>
         </Panel>
 
