@@ -21,6 +21,7 @@ import userStore from '@/store/user';
 import CodeInputView from "@/views/CodeInputView";
 import GroupsView from "@/views/GroupsView";
 import SingleGroupView from "@/views/SingleGroupView";
+import SearchViewR from "@/views/SearchViewR";
 
 const routes = [
     {
@@ -59,6 +60,11 @@ const routes = [
         path: '/codeInput',
         name: 'codeInput',
         component: CodeInputView
+    },
+    {
+        path: '/search',
+        name: 'search',
+        component: SearchViewR
     },
     {
         path: '/groups',
