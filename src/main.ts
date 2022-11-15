@@ -26,7 +26,7 @@ ace.config.set(
     .withUrl("/livecoding")//'https://musicoverflowapi.azurewebsites.net/livecoding')
     .build();*/
 
-const connection = new HubConnectionBuilder().withUrl("https://musicoverflowapi.azurewebsites.net/livecoding", {
+const connection = new HubConnectionBuilder().withUrl("http://45.155.170.199:5143/livecoding", {
     skipNegotiation: true,
     transport: signalR.HttpTransportType.WebSockets
 }).build()

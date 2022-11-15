@@ -12,7 +12,7 @@ import axios from "axios";
 class CodeExecutionService {
     async execute(code: string, language: string): Promise<any | undefined> {
         try {
-            const result = await axios.post("https://localhost:7143/api/execute/" + language, code, {
+            const result = await axios.post("http://45.155.170.199:5143/api/execute/" + language, code, {
                 headers: {
                     "Content-type": "application/text",
                     "Access-Control-Allow-Origin": "*",
