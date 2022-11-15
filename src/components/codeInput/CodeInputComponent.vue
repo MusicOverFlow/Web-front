@@ -64,7 +64,6 @@ let content = ref();
 let isLiveCoding = ref(false);
 userStore.state.codeInput = content;
 userStore.state.codeType = selectedLanguage;
-console.log("twerk")
 
 if(useRoute().name == "ide") {
   isLiveCoding.value = true;
@@ -76,11 +75,10 @@ const copy = () => {
 
 const params = useRoute().params as { id: string };
 
-console.log(params.id)
 if (params.id == "new") {
   params.id = null
 }
-console.log(isLiveCoding.value)
+
 if(useRoute().name != "post") {
 
   connection.invoke("JoinGroup", params.id).then(r => {
@@ -90,16 +88,12 @@ if(useRoute().name != "post") {
     } else {
       userStore.state.connection = r
     }
-    console.log(r)
-
   }).catch(function (err) {
     return console.error(err.toString());
   });
 }
 
 const editorChange = (e) => {
-  console.log(e)
-  console.log(content.value)
   onChangeSignalR();
   //content.value = e;
 }
