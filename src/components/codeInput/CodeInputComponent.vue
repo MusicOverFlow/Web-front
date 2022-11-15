@@ -108,40 +108,35 @@ const languages = ref([
   {name: 'C         ', code: 'c'}
 ]);
 
-const messageReceivedCallback = (message) => console.log(message.prop);
-console.log(messageReceivedCallback('test'));
 const onChangeSignalR = () => {
-  /*console.log(userStore.state.connection)
-  console.log("connected : " + signalr.connected.value)
- // signalr.invoke('UpdateContent', [userStore.state.connection,content]);*/
   console.log(userStore.state.connection)
   connection.invoke('UpdateContent', userStore.state.connection, content.value).then((res) => {
     console.log(res)
-
   }).catch((err) => {
     console.log(err)
   });
-
-
 }
 
-
 connection.on('ReceiveContent', (message) => {
-  /* do stuff */
   if (message != content.value) {
     content.value = message
   }
-
   console.log(message);
 });
 
+connection.on('Execute', () => runCommandFromServer())
+connection.on('ReceiveContent', (message) => content.value = message)
+
+// Does not call back the server to avoid the execution loop
+const runCommandFromServer = async () => {
+  const resultCode = await CodeExecutionService.execute(content.value, selectedLanguage.value);
+  result.value = resultCode.data.toString();
+}
 
 const run = async () => {
   const resultCode = await CodeExecutionService.execute(content.value, selectedLanguage.value);
-  console.log(resultCode);
-  console.log(resultCode.data);
   result.value = resultCode.data.toString();
-  console.log(result.value);
+  await connection.invoke('RunCode', userStore.state.connection)
 }
 
 const selectedTheme = ref('chrome');
