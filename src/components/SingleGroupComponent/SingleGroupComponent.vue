@@ -80,8 +80,9 @@ const content = ref("");
 const publishPost = async () => {
 
   const postPublished = await postService.create({
-    Title: title.value,
-    Content: content.value
+    Content: content.value,
+    Script: "",
+    ScriptLanguage: "",
   }, userStore.state.jwt, props.id);
   refPosts.value.unshift(postPublished)
   await clearContent();

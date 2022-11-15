@@ -4,7 +4,8 @@
     <div class="p-8"></div>
     <div class="flex-1"> Group search
       <div>List/Result of group
-        <Listbox v-model="selectedGroups" :filter="true" :multiple="false" :options="allGroups" filterPlaceholder="Search"
+        <Listbox v-model="selectedGroups" :filter="true" :multiple="false" :options="allGroups"
+                 filterPlaceholder="Search"
                  listStyle="max-height:250px" optionLabel="name" style="width:15rem" @click="goToGroup">
           <template #optiongroup="slotProps">
             <div class="flex align-items-center country-item">
@@ -105,9 +106,12 @@ const showSuccess = () => {
 const getAllGroups = async () => {
   var groups = await GroupService.getAll(userStore.state.jwt);
   allGroups.value = [];
-  groups.forEach(group => {
-    allGroups.value.push({name: group.name, code: group.id});
-  });
+  if (groups != undefined) {
+
+    groups.forEach(group => {
+      allGroups.value.push({name: group.name, code: group.id});
+    });
+  }
   console.log(groups);
   //allGroups.value = groups;
 }

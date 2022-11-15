@@ -1,6 +1,8 @@
 <template>
-  <div>
-    <NavbarComponent/>
+  <div id="main" class="flex">
+    <div id="navbar">
+      <NavbarComponent/>
+    </div>
     <GroupsComponent>
 
     </GroupsComponent>
@@ -9,7 +11,6 @@
 
 <script lang="ts">
 import userStore from "@/store/user"
-import NavbarComponent from "@/components/Navbar/NavbarComponent.vue";
 
 import {defineAsyncComponent} from "vue";
 
@@ -19,13 +20,32 @@ export default {
     return (userStore)
   }, components: {
     GroupsComponent: defineAsyncComponent(() => import('../components/GroupsComponent')),
-    NavbarComponent
+    NavbarComponent: defineAsyncComponent(() => import('../components/Navbar'))
   },
   inheritAttrs: false,
 
 }
 </script>
 
-<style scoped>
 
+<style scoped>
+#navbar {
+  flex: 1;
+  overflow: hidden;
+}
+
+#mainThread {
+  flex: 4;
+  overflow: auto;
+}
+
+#ide {
+  flex: 4;
+  overflow: hidden;
+}
+
+#main {
+  height: 100vh;
+  width: 100vw;
+}
 </style>
