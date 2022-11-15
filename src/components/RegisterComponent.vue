@@ -36,6 +36,9 @@
         </Password>
       </div>
       <input accept="image/x-png,image/gif,image/jpeg" type="file" @change="onFileChanged">
+      <div v-if="isError">
+        <p style="color: red">Une erreur est servenue</p>
+      </div>
       <div class="col-12">
         <Button :loading="isLoading" label="S'inscrire" type="submit"/>
       </div>
@@ -63,6 +66,7 @@ export default defineComponent({
   },
   setup() {
     const isLoading = ref(false);
+    const isError = ref(false);
     const form = reactive({
       firstname: '',
       lastname: '',
@@ -98,6 +102,9 @@ export default defineComponent({
         if (loggedIn) {
           await router.push({name: "home"});
         }
+        else {
+          isError.value = true;
+        }
       }
       isLoading.value = true;
     }
@@ -106,7 +113,7 @@ export default defineComponent({
       toast.add({severity: 'success', summary: 'Success', detail: 'Changes saved', life: 3000});
     }
 
-    return {form, userStore, onSubmit, onFileChanged, selectedFile, toast, Toast, isLoading}
+    return {form, userStore, onSubmit, onFileChanged, isError, selectedFile, toast, Toast, isLoading}
   }
 })
 </script>
